@@ -31,9 +31,14 @@ const currentYear = new Date().getFullYear();
     </nav>
   </div>
   <div class="footer-bottom">
-    <div class="footer-container">
-      <p>&copy; {currentYear} Basis. Designed and published with care.</p>
+  <div class="footer-container">
+    <div class="footer-contact">
+      <span class="footer-name">Crystal Belin</span>
+      <span class="footer-address">10001 Garners Ferry Rd, Eastover, SC 29044</span>
+      <a href="tel:2513650879" class="footer-phone">251-365-0879</a>
     </div>
+    <p class="footer-copy">&copy; {currentYear} Crystal Belin. Designed and published with care.</p>
+  </div>
   </div>
 </footer>
 
@@ -111,12 +116,49 @@ const currentYear = new Date().getFullYear();
 
   .footer-bottom .footer-container {
     padding: var(--spacing-md) var(--spacing-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-xl);
+    flex-wrap: wrap;
   }
 
-  .footer-bottom p {
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.75rem;
+  }
+
+  .footer-name {
+    font-family: var(--font-display);
+    color: var(--text-primary);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .footer-address {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .footer-phone {
+    color: var(--accent);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .footer-phone:hover {
+    color: var(--accent-dark);
+  }
+
+  .footer-copy {
     font-size: 0.75rem;
     color: var(--text-muted);
     font-family: var(--font-mono);
+    margin: 0;
   }
 
   @media (max-width: 768px) {
