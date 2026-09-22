@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'About — Basis';
+const description = 'About Basis — a design token workspace built by a software designer and publisher for people who design and publish software.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Nav />
+
+  <main>
+    <section class="about-hero section">
+      <div class="container">
+        <div class="about-hero-content">
+          <span class="label label-accent">About</span>
+          <h1>Built by someone who designs and publishes software</h1>
+          <p class="about-subtitle">Basis isn't a product from a design-tools company. It's a tool made by someone who ships software and needed a better way to keep their design language consistent across everything they publish.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text">
+            <h2>Why Basis exists</h2>
+            <p>When you design and publish software, your design language is part of the product. The colors, the type, the spacing, the shadows — they're not decoration. They're how the thing feels to use.</p>
+            <p>But keeping that language consistent is hard. What's in your design file drifts from what's in your code. What's in your code drifts from what you actually ship. Every project ends up with its own slightly different version of the same colors and sizes.</p>
+            <p>Basis is the tool I built for myself to solve this. A single workspace where I define my tokens once, see them applied to real components, and export them when I'm ready to use them in a project. No serialization surprises. No drift between what I see and what I ship.</p>
+            <div class="about-philosophy">
+              <h3>What I believe about design tokens</h3>
+              <ul>
+                <li><strong>Tokens are the foundation, not the finish.</strong> They're the values that everything else is built on. Treat them with the care you'd treat any foundation.</li>
+                <li><strong>The tool should stay out of the way.</strong> You're designing a system, not fighting an interface. Basis gets out of the way and lets you see what you're building.</li>
+                <li><strong>Preview matters.</strong> You can't reason about tokens in isolation. You need to see them on real components, in context, before you ship them.</li>
+                <li><strong>Export should be clean, not clever.</strong> The code you export should be readable, standard, and usable — not something that requires a custom parser to consume.</li>
+                <li><strong>Versions are part of the craft.</strong> Design changes. Alternatives get tried. Decisions get revisited. Versions let you track that without losing your work.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="about-side">
+            <div class="about-card">
+              <h3>The software</h3>
+              <p class="about-card-text">Basis is a design token workspace. Define colors, typography, spacing, motion, and shadows. See them applied to real components. Export in four formats. Version your sets.</p>
+              <a href="/software#demo" class="about-link">Try the tool →</a>
+            </div>
+            <div class="about-card">
+              <h3>The tools</h3>
+              <p class="about-card-text">Four small utilities extend the workspace — Palette, Type Pair, Token Convert, and Shadow Forge. Each one is a standalone HTML file. Use them with Basis or on their own.</p>
+              <a href="/tools" class="about-link">Browse the tools →</a>
+            </div>
+            <div class="about-card">
+              <h3>The site</h3>
+              <p class="about-card-text">This site is the home for Basis and its tools. It's built with the same care as the software — clean, intentional, and focused on the work rather than the noise around it.</p>
+              <a href="/" class="about-link">Back to home →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-header-centered">
+          <span class="label label-accent">Contact</span>
+          <h2>Get in touch</h2>
+          <p>If you use Basis, have ideas for it, or want to talk about design tokens and publishing software — I'd like to hear from you.</p>
+        </div>
+        <div class="contact-card">
+          <a href="mailto:basis@workspace.dev" class="contact-link">
+            <span class="contact-label mono">Email</span>
+            <span class="contact-value">basis@workspace.dev</span>
+          </a>
+          <a href="https://github.com/basis" class="contact-link">
+            <span class="contact-label mono">GitHub</span>
+            <span class="contact-value">github.com/basis</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .about-hero { padding: 80px 0; border-bottom: 1px solid var(--border-subtle); }
+  .about-hero-content { max-width: 640px; }
+  .about-hero-content h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 24px 0 32px; line-height: 1.15; }
+  .about-subtitle { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; }
+  .about-grid { display: grid; grid-template-columns: 1fr 320px; gap: 64px; align-items: start; }
+  .about-text h2 { font-size: 1.75rem; margin-bottom: 24px; }
+  .about-text p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-philosophy { margin-top: 48px; padding-top: 48px; border-top: 1px solid var(--border-subtle); }
+  .about-philosophy h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; color: var(--text-primary); margin-bottom: 24px; letter-spacing: -0.01em; }
+  .about-philosophy ul { list-style: none; padding: 0; margin: 0; }
+  .about-philosophy li { padding-left: 16px; position: relative; margin-bottom: 16px; color: var(--text-secondary); line-height: 1.6; font-size: 0.9375rem; }
+  .about-philosophy li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 500; }
+  .about-philosophy li strong { color: var(--text-primary); display: block; margin-bottom: 2px; font-weight: 500; }
+  .about-side { display: flex; flex-direction: column; gap: 24px; }
+  .about-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; }
+  .about-card h3 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 400; color: var(--text-primary); margin-bottom: 8px; letter-spacing: -0.01em; }
+  .about-card-text { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; }
+  .about-link { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(160,82,45,0.3); padding-bottom: 1px; transition: all 120ms var(--ease-default); }
+  .about-link:hover { color: var(--accent-dark); border-bottom-color: var(--accent-dark); }
+  .section-header-centered { text-align: center; max-width: 560px; margin: 0 auto 48px; }
+  .section-header-centered h2 { margin-top: 8px; }
+  .section-header-centered p { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; margin: 0 auto; }
+  .contact-card { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+  .contact-link { display: flex; flex-direction: column; gap: 4px; padding: 24px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: all 120ms var(--ease-default); min-width: 200px; }
+  .contact-link:hover { border-color: var(--accent-light); background: var(--accent-bg); color: var(--accent); transform: translateY(-1px); }
+  .contact-label { font-size: 0.6875rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .contact-value { font-family: var(--font-mono); font-size: 0.875rem; color: var(--text-primary); font-weight: 500; }
+  .contact-link:hover .contact-value { color: var(--accent-dark); }
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-card { flex-direction: column; align-items: stretch; }
+    .contact-link { min-width: 0; }
+  }
+</style>

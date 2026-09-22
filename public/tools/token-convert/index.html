@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Token Convert — Basis Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ef;
+    --surface: #ffffff;
+    --text-primary: #1c1a17;
+    --text-secondary: #6b655e;
+    --text-muted: #9c958c;
+    --border: #e3ddd4;
+    --border-subtle: #ede8e0;
+    --accent: #a0522d;
+    --accent-dark: #8b4519;
+    --accent-light: #c47a4a;
+    --accent-bg: #faf3ed;
+    --radius: 8px;
+    --radius-lg: 12px;
+    --shadow: 0 2px 8px rgba(28,26,23,0.06), 0 1px 2px rgba(28,26,23,0.04);
+    --shadow-lg: 0 8px 24px rgba(28,26,23,0.08), 0 2px 6px rgba(28,26,23,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.6; }
+  a { color: var(--accent); }
+  a:hover { color: var(--accent-dark); }
+  h1, h2, h3 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; color: var(--text-primary); letter-spacing: -0.01em; }
+  h1 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.1; margin-bottom: 4px; }
+  h2 { font-size: 1.375rem; line-height: 1.2; margin-bottom: 8px; }
+  p { line-height: 1.6; }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 64px 0; }
+  .section-alt { background: #fdfbf9; }
+  .label { font-family: 'JetBrains Mono', monospace; font-size: 0.6875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+  .label-accent { color: var(--accent); }
+  .btn { font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; padding: 10px 20px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--text-primary); cursor: pointer; transition: all 200ms; display: inline-flex; align-items: center; gap: 8px; }
+  .btn:hover { border-color: var(--accent-light); color: var(--accent); background: var(--accent-bg); transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+  .btn-ghost { background: transparent; border-color: transparent; color: var(--text-secondary); }
+  .btn-ghost:hover { background: var(--accent-bg); color: var(--accent); transform: none; }
+  .btn-sm { padding: 6px 14px; font-size: 0.8125rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow); }
+  .card-large { padding: 32px; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .code-block { background: var(--text-primary); border-radius: var(--radius); padding: 16px; overflow-x: auto; }
+  .code-block code { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; line-height: 1.6; color: #e8e2d8; white-space: pre; }
+  .badge { font-family: 'JetBrains Mono', monospace; font-size: 0.6875rem; font-weight: 500; padding: 3px 10px; border-radius: 999px; background: var(--accent-bg); color: var(--accent-dark); border: 1px solid rgba(160,82,45,0.2); }
+  .tool-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border-subtle); }
+  .tool-icon { width: 48px; height: 48px; border-radius: var(--radius); background: var(--accent-bg); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .tool-icon svg { width: 28px; height: 28px; }
+  .flex-between { display: flex; justify-content: space-between; align-items: center; }
+  .items-center { align-items: center; }
+  .gap-8 { gap: 8px; }
+  .gap-16 { gap: 16px; }
+  .gap-24 { gap: 24px; }
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .mt-24 { margin-top: 24px; }
+  .mb-8 { margin-bottom: 8px; }
+  .mb-16 { margin-bottom: 16px; }
+  .mb-24 { margin-bottom: 24px; }
+  .w-full { width: 100%; }
+  .flex-wrap { flex-wrap: wrap; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+  .input { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text-primary); width: 100%; resize: vertical; min-height: 120px; line-height: 1.6; font-family: 'JetBrains Mono', monospace; }
+  .input:focus { outline: none; border-color: var(--accent); }
+  .select { font-size: 0.875rem; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text-primary); cursor: pointer; font-family: 'Inter', system-ui, sans-serif; }
+  .select:focus { outline: none; border-color: var(--accent); }
+  .export-actions { display: flex; gap: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-subtle); flex-wrap: wrap; }
+  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--text-primary); color: var(--bg); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 8px 16px; border-radius: 4px; box-shadow: var(--shadow-lg); z-index: 100; opacity: 0; transform: translateY(8px); transition: all 200ms; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .section-header { margin-bottom: 32px; }
+  .section-intro { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; max-width: 560px; margin-bottom: 8px; }
+  .arrow { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border: 2px dashed var(--border); border-radius: 50%; color: var(--text-muted); margin: 0 auto; }
+  .arrow svg { width: 20px; height: 20px; }
+  .direction-label { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="section">
+      <div class="tool-header">
+        <div class="tool-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+            <path d="M12 15L7 20h10l-5-5z"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Token Convert</h1>
+          <p style="color:var(--text-secondary);font-size:0.875rem;margin:0">Convert token sets between formats — JSON, CSS custom properties, Tailwind config, and CSS-in-JS theme objects. Paste in, pick output, copy.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="card">
+        <div class="section-header">
+          <span class="label label-accent">Convert</span>
+          <h2>Paste tokens, get code</h2>
+        </div>
+        <p class="section-intro">Accepts JSON token objects and produces clean output in any of the four Basis export formats. Works with token sets from Basis or any compatible structure.</p>
+
+        <div class="grid-2">
+          <div>
+            <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Input — paste your token JSON</label>
+            <textarea class="input" id="inputTokens" placeholder='{"colors": {"accent": "#a0522d", "background": "#f5f3ef"}, "spacing": {"sm": "8px", "md": "16px", "lg": "24px"}, "typography": {"heading": "36px/1.2 \"Instrument Serif\", serif", "body": "16px/1.6 "Inter", sans-serif"}}'>{"colors": {"accent": "#a0522d", "background": "#f5f3ef", "surface": "#ffffff", "border": "#e3ddd4"}, "spacing": {"xs": "4px", "sm": "8px", "md": "16px", "lg": "24px", "xl": "40px"}, "typography": {"heading": "48px/1.15 "Instrument Serif", Georgia, serif", "body": "16px/1.6 "Inter", system-ui, sans-serif", "mono": "14px/1.6 "JetBrains Mono", monospace"}, "shadows": {"sm": "0 1px 3px rgba(28,26,23,0.08)", "md": "0 4px 12px rgba(28,26,23,0.10)", "lg": "0 8px 24px rgba(28,26,23,0.12)"}}</textarea>
+          </div>
+          <div>
+            <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Output — pick a format</label>
+            <select id="outputFormat" class="select w-full" onchange="convert()">
+              <option value="css">CSS Custom Properties</option>
+              <option value="json">JSON Object</option>
+              <option value="tailwind">Tailwind Config</option>
+              <option value="csj">CSS-in-JS Theme</option>
+            </select>
+            <div class="mt-16">
+              <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Output</label>
+              <textarea class="input" id="outputTokens" readonly></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="export-actions">
+          <button class="btn btn-primary" onclick="copyOutput()">Copy output</button>
+          <button class="btn" onclick="swapDirection()">&#8644; Swap input / output</button>
+          <button class="btn btn-ghost" onclick="clearAll()">Clear</button>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);align-self:center;margin-left:auto" id="stats"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <div class="section-header">
+        <span class="label label-accent">Examples</span>
+        <h2>Try a format</h2>
+      </div>
+      <p class="section-intro">Click any example to load it as input and see the conversion instantly.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn format-example" data-example="css">From CSS vars</button>
+        <button class="btn format-example" data-example="json">From JSON</button>
+        <button class="btn format-example" data-example="tailwind">From Tailwind</button>
+        <button class="btn format-example" data-example="csj">From CSS-in-JS</button>
+      </div>
+    </div>
+
+    <div class="section" style="text-align:center">
+      <span class="label label-accent">Basis Tools</span>
+      <h2 style="margin:8px 0 16px">More tools in the workspace</h2>
+      <p style="color:var(--text-secondary);font-size:1.0625rem;max-width:480px;margin:0 auto 32px">Each tool is a standalone HTML file. Open it, use it, close it.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="/tools/palette" class="btn" style="min-width:140px">Palette</a>
+        <a href="/tools/type-pair" class="btn" style="min-width:140px">Type Pair</a>
+        <a href="#" class="btn btn-ghost" style="min-width:140px">Shadow Forge</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const examples = {
+      css: `:root {
+  --color-accent: #a0522d;
+  --color-background: #f5f3ef;
+  --color-surface: #ffffff;
+  --color-border: #e3ddd4;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --typography-heading: 48px/1.15 "Instrument Serif", Georgia, serif;
+  --typography-body: 16px/1.6 "Inter", system-ui, sans-serif;
+  --shadow-sm: 0 1px 3px rgba(28,26,23,0.08);
+  --shadow-md: 0 4px 12px rgba(28,26,23,0.10);
+}`,
+      json: `{
+  "colors": {
+    "accent": "#a0522d",
+    "background": "#f5f3ef",
+    "surface": "#ffffff",
+    "border": "#e3ddd4"
+  },
+  "spacing": {
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px"
+  },
+  "typography": {
+    "heading": "48px/1.15 Instrument Serif, Georgia, serif",
+    "body": "16px/1.6 Inter, system-ui, sans-serif"
+  },
+  "shadows": {
+    "sm": "0 1px 3px rgba(28,26,23,0.08)",
+    "md": "0 4px 12px rgba(28,26,23,0.10)"
+  }
+}`,
+      tailwind: `module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        accent: "#a0522d",
+        background: "#f5f3ef",
+        surface: "#ffffff",
+        border: "#e3ddd4"
+      },
+      spacing: {
+        sm: "8px",
+        md: "16px",
+        lg: "24px"
+      },
+      fontFamily: {
+        heading: ["Instrument Serif", "Georgia", "serif"],
+        body: ["Inter", "system-ui", "sans-serif"]
+      },
+      boxShadow: {
+        sm: "0 1px 3px rgba(28,26,23,0.08)",
+        md: "0 4px 12px rgba(28,26,23,0.10)"
+      }
+    }
+  }
+};`,
+      csj: `const theme = {
+  colors: {
+    accent: "#a0522d",
+    background: "#f5f3ef",
+    surface: "#ffffff",
+    border: "#e3ddd4"
+  },
+  spacing: {
+    sm: "8px",
+    md: "16px",
+    lg: "24px"
+  },
+  typography: {
+    heading: "48px/1.15 Instrument Serif, Georgia, serif",
+    body: "16px/1.6 Inter, system-ui, sans-serif"
+  },
+  shadows: {
+    sm: "0 1px 3px rgba(28,26,23,0.08)",
+    md: "0 4px 12px rgba(28,26,23,0.10)"
+  }
+};
+
+export default theme;`
+    };
+
+    function loadExample(format) {
+      document.getElementById('inputTokens').value = examples[format];
+      convert();
+    }
+
+    function parseInput() {
+      const raw = document.getElementById('inputTokens').value.trim();
+      if (!raw) return null;
+      // Try JSON first
+      try {
+        return JSON.parse(raw);
+      } catch (e) {}
+
+      // Try CSS vars
+      const cssMatches = raw.match(/--([^:]+):\s*([^;]+);/g);
+      if (cssMatches) {
+        const obj = {};
+        cssMatches.forEach(line => {
+          const m = line.match(/--([^:]+):\s*(.+);/);
+          if (m) {
+            const key = m[1].trim();
+            const val = m[2].trim();
+            const parts = key.split('-');
+            let cat = obj;
+            for (let i = 0; i < parts.length - 1; i++) {
+              if (!cat[parts[i]]) cat[parts[i]] = {};
+              cat = cat[parts[i]];
+            }
+            cat[parts[parts.length-1]] = val;
+          }
+        });
+        return obj;
+      }
+
+      // Try Tailwind config
+      const twMatch = raw.match(/module\.exports\s*=\s*\{[^}]*theme:\s*\{[^}]*extend:\s*\{([^}]*)\}/s);
+      if (twMatch) {
+        try {
+          const extendBlock = '{\n' + twMatch[1] + '\n}';
+          return JSON.parse(extendBlock);
+        } catch (e) {}
+      }
+
+      // Try CSS-in-JS
+      const csjMatch = raw.match(/const\s+\w+\s*=\s*({.*?});/s);
+      if (csjMatch) {
+        try { return JSON.parse(csjMatch[1]); } catch (e) {}
+      }
+
+      return null;
+    }
+
+    function toCssTokens(obj) {
+      let css = ':root {\n';
+      for (const [category, props] of Object.entries(obj)) {
+        if (typeof props === 'object' && !Array.isArray(props)) {
+          for (const [name, value] of Object.entries(props)) {
+            css += `  --${category}-${name}: ${value};\n`;
+          }
+        } else {
+          css += `  --${category}: ${props};\n`;
+        }
+      }
+      css += '}';
+      return css;
+    }
+
+    function toJson(obj) {
+      // Flatten to category: { property: value }
+      const out = {};
+      for (const [category, props] of Object.entries(obj)) {
+        if (typeof props === 'object' && !Array.isArray(props)) {
+          out[category] = props;
+        } else {
+          out[category] = props;
+        }
+      }
+      return JSON.stringify(out, null, 2);
+    }
+
+    function toTailwind(obj) {
+      const theme = { theme: { extend: {} } };
+      for (const [category, props] of Object.entries(obj)) {
+        if (typeof props === 'object' && !Array.isArray(props)) {
+          const mapped = {};
+          for (const [name, value] of Object.entries(props)) {
+            if (category === 'typography') {
+              mapped[name] = value.split(',').map(s => s.trim().replace(/['"]/g, ''));
+            } else if (typeof value === 'string' && value.endsWith('px')) {
+              mapped[name] = value;
+            } else {
+              mapped[name] = value;
+            }
+          }
+          // Tailwind uses camelCase keys
+          const twCategory = {
+            colors: 'colors',
+            spacing: 'spacing',
+            typography: 'fontFamily',
+            shadows: 'boxShadow'
+          }[category] || category;
+          theme.theme.extend[twCategory] = mapped;
+        }
+      }
+      return 'module.exports = ' + JSON.stringify(theme, null, 2).replace(/"([^"]+)":/g, (m, key) => {
+        const twKey = {
+          colors: { accent: 'accent', background: 'background', surface: 'surface', border: 'border' },
+          spacing: { sm: 'sm', md: 'md', lg: 'lg', xl: 'xl', xs: 'xs' },
+          fontFamily: { heading: 'heading', body: 'body', mono: 'mono' },
+          boxShadow: { sm: 'sm', md: 'md', lg: 'lg' }
+        };
+        const parts = category.split('.');
+        let catMap = {};
+        if (parts[0] === 'colors') catMap = twKey.colors || {};
+        else if (parts[0] === 'spacing') catMap = twKey.spacing || {};
+        else if (parts[0] === 'fontFamily' || parts[0] === 'typography') catMap = twKey.fontFamily || {};
+        else if (parts[0] === 'boxShadow' || parts[0] === 'shadows') catMap = twKey.boxShadow || {};
+        const mappedKey = catMap[key] || key;
+        return `"${mappedKey}":`;
+      }) + '};';
+    }
+
+    function toCsj(obj) {
+      const lines = ['const theme = {'];
+      for (const [category, props] of Object.entries(obj)) {
+        lines.push(`  ${category}: {`);
+        if (typeof props === 'object' && !Array.isArray(props)) {
+          for (const [name, value] of Object.entries(props)) {
+            const isString = typeof value === 'string';
+            lines.push(`    ${name}: ${isString ? JSON.stringify(value) : value},`);
+          }
+        } else {
+          lines.push(`    ${JSON.stringify(props)},`);
+        }
+        lines.push('  },');
+      }
+      lines.push('};');
+      lines.push('');
+      lines.push('export default theme;');
+      return lines.join('\n');
+    }
+
+    function convert() {
+      const format = document.getElementById('outputFormat').value;
+      const obj = parseInput();
+      const output = document.getElementById('outputTokens');
+
+      if (!obj) {
+        output.value = '// Could not parse input. Try valid JSON, CSS custom properties, Tailwind config, or CSS-in-JS theme object.';
+        document.getElementById('stats').textContent = '';
+        return;
+      }
+
+      let result;
+      switch (format) {
+        case 'css': result = toCssTokens(obj); break;
+        case 'json': result = toJson(obj); break;
+        case 'tailwind': result = toTailwind(obj); break;
+        case 'csj': result = toCsj(obj); break;
+        default: result = JSON.stringify(obj, null, 2);
+      }
+      output.value = result;
+
+      const keys = Object.keys(obj).reduce((acc, k) => acc + (typeof obj[k] === 'object' ? Object.keys(obj[k]).length : 1), 0);
+      document.getElementById('stats').textContent = `${keys} token${keys !== 1 ? 's' : ''} — ${format.toUpperCase()} output`;
+    }
+
+    function copyOutput() {
+      const text = document.getElementById('outputTokens').value;
+      navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard')).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('Copied');
+      });
+    }
+
+    function swapDirection() {
+      const input = document.getElementById('inputTokens');
+      const output = document.getElementById('outputTokens');
+      const tmp = input.value;
+      input.value = output.value;
+      output.value = '';
+      document.getElementById('outputFormat').value = 'json';
+      convert();
+    }
+
+    function clearAll() {
+      document.getElementById('inputTokens').value = '';
+      document.getElementById('outputTokens').value = '';
+      document.getElementById('stats').textContent = '';
+    }
+
+    function showToast(msg) {
+      const t = document.querySelector('.toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    document.querySelectorAll('.format-example').forEach(btn => {
+      btn.addEventListener('click', () => loadExample(btn.dataset.example));
+    });
+
+    convert();
+  </script>
+</body>
+</html>

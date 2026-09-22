@@ -1,0 +1,2164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basis — Design Token Workspace</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ef;
+    --bg-panel: #ffffff;
+    --bg-elevated: #fdfbf9;
+    --text-primary: #1c1a17;
+    --text-secondary: #6b655e;
+    --text-muted: #9c958c;
+    --border: #e3ddd4;
+    --border-subtle: #ede8e0;
+    --accent: #a0522d;
+    --accent-dark: #8b4519;
+    --accent-light: #c47a4a;
+    --accent-bg: #faf3ed;
+    --success: #4a7c59;
+    --warning: #b8860b;
+    --error: #a13d3d;
+    --radius-sm: 4px;
+    --radius: 8px;
+    --radius-lg: 12px;
+    --shadow-sm: 0 1px 2px rgba(28,26,23,0.04);
+    --shadow: 0 2px 8px rgba(28,26,23,0.06), 0 1px 2px rgba(28,26,23,0.04);
+    --shadow-lg: 0 8px 24px rgba(28,26,23,0.08), 0 2px 6px rgba(28,26,23,0.04);
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+    --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --duration-fast: 120ms;
+    --duration: 200ms;
+    --duration-slow: 350ms;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* Layout */
+  .app {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .editor-panel {
+    width: 420px;
+    min-width: 420px;
+    background: var(--bg-panel);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .preview-panel {
+    flex: 1;
+    background: var(--bg);
+    overflow-y: auto;
+    padding: var(--spacing-2xl);
+  }
+
+  /* Header */
+  .app-header {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-panel);
+  }
+
+  .app-header h1 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .app-header .version {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    background: var(--accent-bg);
+    border: 1px solid rgba(160,82,45,0.15);
+    border-radius: 2px;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+  }
+
+  /* Buttons */
+  .btn {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--bg-panel);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-default);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .btn:hover {
+    border-color: var(--accent-light);
+    color: var(--accent);
+    background: var(--accent-bg);
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+    color: #fff;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .btn-ghost:hover {
+    background: var(--accent-bg);
+    border-color: transparent;
+  }
+
+  .btn-sm {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+
+  .btn-icon {
+    padding: 6px;
+    border-radius: var(--radius-sm);
+    line-height: 1;
+  }
+
+  /* Editor scroll area */
+  .editor-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-lg);
+  }
+
+  .editor-section {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .editor-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .section-title {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .section-action {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 2px;
+    transition: all var(--duration-fast) var(--ease-default);
+  }
+
+  .section-action:hover {
+    color: var(--accent);
+    background: var(--accent-bg);
+  }
+
+  /* Token groups */
+  .token-group {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .token-group-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .token-group-label::before {
+    content: '';
+    width: 3px;
+    height: 3px;
+    background: var(--border);
+    border-radius: 50%;
+  }
+
+  /* Color swatch row */
+  .color-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .color-row:last-child {
+    border-bottom: none;
+  }
+
+  .color-swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
+    transition: box-shadow var(--duration-fast) var(--ease-default);
+  }
+
+  .color-swatch:hover {
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+
+  .color-swatch-input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .color-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .color-name {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .color-value {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+
+  .color-hex-input {
+    width: 72px;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    padding: 2px 6px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--bg);
+    color: var(--text-secondary);
+    text-align: center;
+  }
+
+  .color-hex-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+
+  /* Contrast badge */
+  .contrast-badge {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    padding: 1px 5px;
+    border-radius: 2px;
+    background: var(--bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .contrast-badge.pass {
+    background: #e8f0e8;
+    color: var(--success);
+    border-color: rgba(74,124,89,0.2);
+  }
+
+  /* Typography editor */
+  .type-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .type-row:last-child {
+    border-bottom: none;
+  }
+
+  .type-preview {
+    width: 48px;
+    height: 24px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+  }
+
+  .type-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .type-row select,
+  .type-row input {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--bg);
+    color: var(--text-primary);
+  }
+
+  .type-row select:focus,
+  .type-row input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .type-row select {
+    width: 100px;
+    cursor: pointer;
+  }
+
+  .type-row input[type="number"] {
+    width: 52px;
+    text-align: center;
+  }
+
+  .type-row input[type="text"] {
+    width: 90px;
+  }
+
+  /* Spacing scale */
+  .spacing-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .spacing-row:last-child {
+    border-bottom: none;
+  }
+
+  .spacing-visual {
+    width: 80px;
+    height: 16px;
+    flex-shrink: 0;
+    background: var(--accent-bg);
+    border: 1px solid rgba(160,82,45,0.15);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--accent-dark);
+  }
+
+  .spacing-info {
+    flex: 1;
+  }
+
+  .spacing-row input {
+    width: 48px;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    padding: 2px 4px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--bg);
+    color: var(--text-primary);
+    text-align: center;
+  }
+
+  .spacing-row input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  /* Motion editor */
+  .motion-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .motion-row:last-child {
+    border-bottom: none;
+  }
+
+  .motion-info {
+    flex: 1;
+  }
+
+  .motion-row input,
+  .motion-row select {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--bg);
+    color: var(--text-primary);
+  }
+
+  .motion-row input:focus,
+  .motion-row select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .motion-row input[type="number"] {
+    width: 60px;
+    text-align: center;
+  }
+
+  .motion-row select {
+    width: 110px;
+    cursor: pointer;
+  }
+
+  /* Shadow editor */
+  .shadow-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .shadow-row:last-child {
+    border-bottom: none;
+  }
+
+  .shadow-preview-box {
+    width: 40px;
+    height: 40px;
+    background: var(--bg-panel);
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .shadow-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .shadow-row input {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    padding: 2px 6px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--bg);
+    color: var(--text-secondary);
+    width: 90px;
+  }
+
+  .shadow-row input:focus {
+    outline: none;
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+
+  .shadow-delete {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 2px;
+    font-size: 0.75rem;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .shadow-delete:hover {
+    color: var(--error);
+  }
+
+  .add-shadow-btn {
+    width: 100%;
+    margin-top: var(--spacing-sm);
+  }
+
+  /* Preview panel */
+  .preview-header {
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .preview-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .preview-header p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
+  .preview-section {
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .preview-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .section-label::before {
+    content: '';
+    width: 2px;
+    height: 2px;
+    background: var(--border);
+    border-radius: 50%;
+  }
+
+  /* Buttons preview */
+  .button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    align-items: center;
+  }
+
+  .preview-btn {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg-panel);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all var(--duration) var(--ease-default);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .preview-btn:hover {
+    border-color: var(--accent-light);
+    color: var(--accent);
+    background: var(--accent-bg);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .preview-btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .preview-btn-primary:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(160,82,45,0.25);
+  }
+
+  .preview-btn-ghost {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .preview-btn-ghost:hover {
+    background: var(--accent-bg);
+    border-color: transparent;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .preview-btn-sm {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+
+  .preview-btn-lg {
+    font-size: 1rem;
+    padding: 14px 28px;
+  }
+
+  /* Card preview */
+  .preview-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    max-width: 320px;
+  }
+
+  .card-image {
+    height: 140px;
+    background: linear-gradient(135deg, var(--accent-bg) 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-image-placeholder {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .card-body {
+    padding: var(--spacing-lg);
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+    letter-spacing: -0.01em;
+  }
+
+  .card-text {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .card-link {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(160,82,45,0.3);
+    padding-bottom: 1px;
+    transition: all var(--duration-fast) var(--ease-default);
+  }
+
+  .card-link:hover {
+    color: var(--accent-dark);
+    border-bottom-color: var(--accent-dark);
+  }
+
+  /* Form preview */
+  .form-preview {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    max-width: 400px;
+    box-shadow: var(--shadow);
+  }
+
+  .form-group {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .form-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .form-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .form-input {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--text-primary);
+    transition: all var(--duration-fast) var(--ease-default);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--bg-panel);
+    box-shadow: 0 0 0 3px rgba(160,82,45,0.08);
+  }
+
+  .form-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .form-select {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-panel);
+    color: var(--text-primary);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b655e' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+
+  .form-select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(160,82,45,0.08);
+  }
+
+  .form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+  }
+
+  .form-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+
+  .form-checkbox span {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+  }
+
+  /* Typography showcase */
+  .type-showcase h1, .type-showcase h2, .type-showcase h3,
+  .type-showcase h4, .type-showcase h5, .type-showcase h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .type-showcase h1 { font-size: 2.5rem; line-height: 1.1; }
+  .type-showcase h2 { font-size: 2rem; line-height: 1.15; }
+  .type-showcase h3 { font-size: 1.5rem; line-height: 1.2; }
+  .type-showcase h4 { font-size: 1.125rem; line-height: 1.3; }
+  .type-showcase h5 { font-size: 0.875rem; line-height: 1.4; }
+  .type-showcase h6 { font-size: 0.75rem; line-height: 1.5; }
+
+  .type-showcase .body-large { font-size: 1.125rem; line-height: 1.6; color: var(--text-primary); margin-bottom: var(--spacing-sm); }
+  .type-showcase .body { font-size: 0.875rem; line-height: 1.6; color: var(--text-primary); margin-bottom: var(--spacing-sm); }
+  .type-showcase .body-small { font-size: 0.8125rem; line-height: 1.6; color: var(--text-secondary); }
+
+  .type-tag {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+
+  /* Code block preview */
+  .code-block-preview {
+    background: var(--text-primary);
+    border-radius: var(--radius);
+    padding: var(--spacing-lg);
+    overflow-x: auto;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .code-block-preview code {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.7;
+    color: #e8e2d8;
+  }
+
+  .code-keyword { color: #c47a4a; }
+  .code-string { color: #a8c4a0; }
+  .code-comment { color: #6b655e; font-style: italic; }
+  .code-variable { color: #d4c8b8; }
+  .code-property { color: #a09080; }
+  .code-value { color: #d4a87a; }
+
+  /* Badge preview */
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    align-items: center;
+  }
+
+  .preview-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--accent-bg);
+    color: var(--accent-dark);
+    border: 1px solid rgba(160,82,45,0.2);
+  }
+
+  .preview-badge-neutral {
+    background: var(--bg);
+    color: var(--text-secondary);
+    border-color: var(--border);
+  }
+
+  .preview-badge-success {
+    background: #e8f0e8;
+    color: var(--success);
+    border-color: rgba(74,124,89,0.2);
+  }
+
+  .preview-badge-error {
+    background: #fce8e8;
+    color: var(--error);
+    border-color: rgba(161,61,61,0.2);
+  }
+
+  /* Navigation preview */
+  .nav-preview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .nav-brand {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .nav-link:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-cta {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: all var(--duration-fast) var(--ease-default);
+  }
+
+  .nav-cta:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+    color: #fff;
+  }
+
+  /* Version bar */
+  .version-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .version-bar .label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  .version-bar select {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--bg-panel);
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+
+  /* Export modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(28,26,23,0.5);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration) var(--ease-default);
+  }
+
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal {
+    background: var(--bg-panel);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 560px;
+    max-width: 90vw;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(8px);
+    transition: transform var(--duration) var(--ease-default);
+  }
+
+  .modal-overlay.open .modal {
+    transform: translateY(0);
+  }
+
+  .modal-header {
+    padding: var(--spacing-lg) var(--spacing-xl);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .modal-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 2px;
+    line-height: 1;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .modal-close:hover {
+    color: var(--text-primary);
+  }
+
+  .modal-body {
+    padding: var(--spacing-xl);
+    overflow-y: auto;
+  }
+
+  .export-format-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .export-format-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--spacing-md);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-default);
+    background: var(--bg);
+  }
+
+  .export-format-card:hover {
+    border-color: var(--accent-light);
+    background: var(--accent-bg);
+  }
+
+  .export-format-card.selected {
+    border-color: var(--accent);
+    background: var(--accent-bg);
+    box-shadow: 0 0 0 2px rgba(160,82,45,0.1);
+  }
+
+  .export-format-name {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+    letter-spacing: -0.01em;
+  }
+
+  .export-format-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .export-code-block {
+    background: var(--text-primary);
+    border-radius: var(--radius);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+  }
+
+  .export-code-block code {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: #e8e2d8;
+    white-space: pre;
+  }
+
+  .export-copy-btn {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    padding: 4px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-default);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .export-copy-btn:hover {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+  }
+
+  .export-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: flex-end;
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+    background: var(--text-primary);
+    color: var(--bg-panel);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    z-index: 200;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all var(--duration) var(--ease-default);
+    pointer-events: none;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Scrollbar */
+  .editor-scroll::-webkit-scrollbar,
+  .preview-panel::-webkit-scrollbar,
+  .modal-body::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .editor-scroll::-webkit-scrollbar-track,
+  .preview-panel::-webkit-scrollbar-track,
+  .modal-body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .editor-scroll::-webkit-scrollbar-thumb,
+  .preview-panel::-webkit-scrollbar-thumb,
+  .modal-body::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+
+  .editor-scroll::-webkit-scrollbar-thumb:hover,
+  .preview-panel::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .app {
+      flex-direction: column;
+      height: auto;
+      min-height: 100vh;
+    }
+
+    .editor-panel {
+      width: 100%;
+      min-width: 0;
+      max-height: 50vh;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .preview-panel {
+      padding: var(--spacing-lg);
+    }
+  }
+
+  /* Animation for preview updates */
+  .preview-component {
+    animation: fadeIn 300ms var(--ease-default);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Tooltip */
+  .tooltip {
+    position: relative;
+  }
+
+  .tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+    background: var(--text-primary);
+    color: var(--bg-panel);
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    padding: 3px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-fast) var(--ease-default);
+    margin-bottom: 4px;
+  }
+
+  .tooltip:hover::after {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- Editor Panel -->
+  <div class="editor-panel">
+    <div class="app-header">
+      <h1>Basis</h1>
+      <div style="display:flex;align-items:center;gap:var(--spacing-sm)">
+        <span class="version">v1.0</span>
+        <div class="header-actions">
+          <button class="btn btn-sm" onclick="saveVersion()" title="Save current token set">Save Set</button>
+          <button class="btn btn-sm btn-primary" onclick="openExport()" title="Export tokens">Export</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="editor-scroll" id="editorScroll">
+      <!-- Colors -->
+      <div class="editor-section" id="section-colors">
+        <div class="section-header">
+          <span class="section-title">Color Tokens</span>
+          <button class="section-action" onclick="addComponent('color')">+ Add</button>
+        </div>
+        <div id="colorTokens"></div>
+      </div>
+
+      <!-- Typography -->
+      <div class="editor-section" id="section-typography">
+        <div class="section-header">
+          <span class="section-title">Typography</span>
+        </div>
+        <div class="token-group">
+          <div class="token-group-label">Display Font</div>
+          <div class="type-row">
+            <div class="type-preview">Aa</div>
+            <select id="fontDisplay" onchange="updateToken('fontDisplay', this.value); renderPreview()">
+              <option value="'Instrument Serif', Georgia, serif">Instrument Serif</option>
+              <option value="'Playfair Display', Georgia, serif">Playfair Display</option>
+              <option value="'Fraunces', Georgia, serif">Fraunces</option>
+              <option value="'Libre Baskerville', Georgia, serif">Libre Baskerville</option>
+              <option value="'DM Serif Display', Georgia, serif">DM Serif Display</option>
+              <option value="'Inter', system-ui, sans-serif">Inter (sans)</option>
+              <option value="'DM Sans', system-ui, sans-serif">DM Sans</option>
+            </select>
+          </div>
+        </div>
+        <div class="token-group">
+          <div class="token-group-label">Body Font</div>
+          <div class="type-row">
+            <div class="type-preview">Aa</div>
+            <select id="fontBody" onchange="updateToken('fontBody', this.value); renderPreview()">
+              <option value="'Inter', system-ui, sans-serif">Inter</option>
+              <option value="'DM Sans', system-ui, sans-serif">DM Sans</option>
+              <option value="'Source Sans 3', system-ui, sans-serif">Source Sans 3</option>
+              <option value="'Instrument Serif', Georgia, serif">Instrument Serif</option>
+              <option value="'News Cycle', sans-serif">News Cycle</option>
+            </select>
+          </div>
+        </div>
+        <div class="token-group">
+          <div class="token-group-label">Mono Font</div>
+          <div class="type-row">
+            <div class="type-preview" style="font-family:var(--font-mono)">&lt;/&gt;</div>
+            <select id="fontMono" onchange="updateToken('fontMono', this.value); renderPreview()">
+              <option value="'JetBrains Mono', ui-monospace, monospace">JetBrains Mono</option>
+              <option value="'IBM Plex Mono', ui-monospace, monospace">IBM Plex Mono</option>
+              <option value="ui-monospace, 'SF Mono', Menlo, monospace">System Mono</option>
+              <option value="'Source Code Pro', ui-monospace, monospace">Source Code Pro</option>
+            </select>
+          </div>
+        </div>
+        <div class="token-group">
+          <div class="token-group-label">Type Scale</div>
+          <div id="typeScaleTokens"></div>
+        </div>
+      </div>
+
+      <!-- Spacing -->
+      <div class="editor-section" id="section-spacing">
+        <div class="section-header">
+          <span class="section-title">Spacing Scale</span>
+        </div>
+        <div id="spacingTokens"></div>
+      </div>
+
+      <!-- Motion -->
+      <div class="editor-section" id="section-motion">
+        <div class="section-header">
+          <span class="section-title">Motion</span>
+        </div>
+        <div class="token-group">
+          <div class="token-group-label">Durations</div>
+          <div id="durationTokens"></div>
+        </div>
+        <div class="token-group">
+          <div class="token-group-label">Easing Curves</div>
+          <div id="easingTokens"></div>
+        </div>
+      </div>
+
+      <!-- Shadows -->
+      <div class="editor-section" id="section-shadows">
+        <div class="section-header">
+          <span class="section-title">Shadow Stacks</span>
+          <button class="section-action" onclick="addShadow()">+ Add Shadow</button>
+        </div>
+        <div id="shadowTokens"></div>
+      </div>
+    </div>
+
+    <!-- Version bar -->
+    <div class="version-bar">
+      <span class="label">Active Set</span>
+      <select id="versionSelect" onchange="switchVersion(this.value)">
+        <option value="default">Default</option>
+      </select>
+      <span style="flex:1"></span>
+      <span class="label" id="tokenCount">0 tokens</span>
+    </div>
+  </div>
+
+  <!-- Preview Panel -->
+  <div class="preview-panel" id="previewPanel">
+    <div class="preview-header">
+      <h2>Live Preview</h2>
+      <p>Every component below reflects your current token set. Edit tokens on the left and watch the preview update in real time.</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="preview-section">
+      <div class="section-label">Navigation</div>
+      <nav class="nav-preview" id="previewNav">
+        <div class="nav-brand">Basis</div>
+        <div class="nav-links">
+          <a class="nav-link" href="#">Tokens</a>
+          <a class="nav-link" href="#">Components</a>
+          <a class="nav-link" href="#">Export</a>
+          <a class="nav-cta" href="#">Get Started</a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Buttons -->
+    <div class="preview-section">
+      <div class="section-label">Buttons</div>
+      <div class="button-row">
+        <button class="preview-btn preview-btn-primary">Primary Action</button>
+        <button class="preview-btn">Secondary</button>
+        <button class="preview-btn preview-btn-ghost">Ghost</button>
+        <button class="preview-btn preview-btn-primary preview-btn-sm">Small</button>
+        <button class="preview-btn preview-btn-primary preview-btn-lg">Large</button>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="preview-section">
+      <div class="section-label">Card</div>
+      <div class="preview-card">
+        <div class="card-image">
+          <span class="card-image-placeholder">Preview Image</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Token Workspace</div>
+          <div class="card-text">Define, visualize, and export your design tokens. Every component you see updates as you edit.</div>
+          <a class="card-link" href="#">Explore →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="preview-section">
+      <div class="section-label">Form Elements</div>
+      <div class="form-preview">
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" placeholder="you@domain.com" id="formEmail">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Role</label>
+          <select class="form-select" id="formRole">
+            <option>Designer</option>
+            <option>Developer</option>
+            <option>Publisher</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <div class="form-checkbox">
+            <input type="checkbox" id="formCheck" checked>
+            <span>Subscribe to updates</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typography showcase -->
+    <div class="preview-section">
+      <div class="section-label">Typography Showcase</div>
+      <div class="type-showcase">
+        <div class="type-tag">Heading 1 · 2.5rem</div>
+        <h1>The quick brown fox jumps over the lazy dog</h1>
+        <div class="type-tag" style="margin-top:16px">Heading 2 · 2rem</div>
+        <h2>Basis gives you a living design system</h2>
+        <div class="type-tag" style="margin-top:16px">Heading 3 · 1.5rem</div>
+        <h3>Tokens are the foundation of consistent design</h3>
+        <div class="type-tag" style="margin-top:16px">Body Large · 1.125rem</div>
+        <p class="body-large">This is body-large text — used for introductions and prominent body copy. It sits comfortably at 1.125rem with a relaxed 1.6 line height for readable paragraphs.</p>
+        <div class="type-tag" style="margin-top:16px">Body · 0.875rem</div>
+        <p class="body">Standard body text at 0.875rem. This is the workhorse size for most content. The line height is 1.6, giving paragraphs room to breathe without feeling sparse.</p>
+        <div class="type-tag" style="margin-top:16px">Small · 0.8125rem</div>
+        <p class="body-small">Secondary text at 0.8125rem — used for captions, metadata, and de-emphasized content that still needs to be readable.</p>
+        <div class="type-tag" style="margin-top:20px">Mono · 0.75rem</div>
+        <p style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-secondary);line-height:1.7">
+          <span style="color:var(--accent)">:root</span> {<br>
+          &nbsp;&nbsp;<span style="color:#a09080">--accent</span>: <span style="color:#d4a87a">#a0522d</span>;<br>
+          &nbsp;&nbsp;<span style="color:#a09080">--font-display</span>: <span style="color:#d4a87a">'Instrument Serif'</span>;<br>
+          &nbsp;&nbsp;<span style="color:#a09080">--spacing-lg</span>: <span style="color:#d4a87a">24px</span>;<br>
+          }
+        </p>
+      </div>
+    </div>
+
+    <!-- Code block -->
+    <div class="preview-section">
+      <div class="section-label">Code Block</div>
+      <div class="code-block-preview">
+        <code><span class="code-comment">// Basis token export</span><br>
+<span class="code-keyword">const</span> <span class="code-variable">tokens</span> = <span class="code-keyword">await</span> <span class="code-variable">basis</span>.<span class="code-property">export</span>({<br>
+&nbsp;&nbsp;<span class="code-value">format</span>: <span class="code-string">'css-variables'</span>,<br>
+&nbsp;&nbsp;<span class="code-value">set</span>: <span class="code-string">'default'</span><br>
+});<br><br>
+<span class="code-comment">/* Applies to every component in the preview */</span></code>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <div class="preview-section">
+      <div class="section-label">Badges</div>
+      <div class="badge-row">
+        <span class="preview-badge">Bronze</span>
+        <span class="preview-badge preview-badge-neutral">Neutral</span>
+        <span class="preview-badge preview-badge-success">Ready</span>
+        <span class="preview-badge preview-badge-error">Error</span>
+        <span class="preview-badge" style="background:var(--bg-panel);color:var(--text-primary);border-color:var(--border)">Default</span>
+      </div>
+    </div>
+
+    <!-- Spacing visual -->
+    <div class="preview-section">
+      <div class="section-label">Spacing in Context</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:8px;background:var(--accent-bg);border:1px solid rgba(160,82,45,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.625rem;color:var(--accent-dark)" id="spacingDemoXs">xs · 4px</div>
+        <div style="height:12px;background:var(--accent-bg);border:1px solid rgba(160,82,45,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.625rem;color:var(--accent-dark)" id="spacingDemoSm">sm · 8px</div>
+        <div style="height:16px;background:var(--accent-bg);border:1px solid rgba(160,82,45,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.625rem;color:var(--accent-dark)" id="spacingDemoMd">md · 16px</div>
+        <div style="height:24px;background:var(--accent-bg);border:1px solid rgba(160,82,45,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.625rem;color:var(--accent-dark)" id="spacingDemoLg">lg · 24px</div>
+        <div style="height:32px;background:var(--accent-bg);border:1px solid rgba(160,82,45,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.625rem;color:var(--accent-dark)" id="spacingDemoXl">xl · 32px</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Export Modal -->
+<div class="modal-overlay" id="exportModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Export Tokens</h3>
+      <button class="modal-close" onclick="closeExport()">×</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:0.875rem;color:var(--text-secondary);margin-bottom:var(--spacing-lg);line-height:1.6">
+        Choose a format and copy the generated token code. Each format reflects your current token set exactly.
+      </p>
+      <div class="export-format-grid">
+        <div class="export-format-card selected" data-format="css" onclick="selectFormat('css')">
+          <div class="export-format-name">CSS Custom Properties</div>
+          <div class="export-format-desc">Standard :root variables. Works in any stylesheet, any browser.</div>
+        </div>
+        <div class="export-format-card" data-format="json" onclick="selectFormat('json')">
+          <div class="export-format-name">JSON</div>
+          <div class="export-format-desc">Token object for JS consumers, design system tooling, or API use.</div>
+        </div>
+        <div class="export-format-card" data-format="tailwind" onclick="selectFormat('tailwind')">
+          <div class="export-format-name">Tailwind Config</div>
+          <div class="export-format-desc">Partial tailwind.config.js theme extension — colors, fonts, spacing.</div>
+        </div>
+        <div class="export-format-card" data-format="cssinjs" onclick="selectFormat('cssinjs')">
+          <div class="export-format-name">CSS-in-JS Theme</div>
+          <div class="export-format-desc">Theme object for Styled Components, Emotion, or vanilla JS.</div>
+        </div>
+      </div>
+      <div class="export-code-block" id="exportCodeBlock">
+        <code id="exportCode"></code>
+        <button class="export-copy-btn" onclick="copyExport()">Copy</button>
+      </div>
+      <div class="export-actions">
+        <button class="btn" onclick="closeExport()">Cancel</button>
+        <button class="btn btn-primary" onclick="copyExport()">Copy to Clipboard</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============ Basis State ============
+const defaultTokens = {
+  colors: [
+    { name: 'background', value: '#f5f3ef', role: 'canvas' },
+    { name: 'surface', value: '#ffffff', role: 'surface' },
+    { name: 'surface-elevated', value: '#fdfbf9', role: 'surface' },
+    { name: 'text-primary', value: '#1c1a17', role: 'text' },
+    { name: 'text-secondary', value: '#6b655e', role: 'text' },
+    { name: 'text-muted', value: '#9c958c', role: 'text' },
+    { name: 'border', value: '#e3ddd4', role: 'border' },
+    { name: 'border-subtle', value: '#ede8e0', role: 'border' },
+    { name: 'accent', value: '#a0522d', role: 'brand' },
+    { name: 'accent-dark', value: '#8b4519', role: 'brand' },
+    { name: 'accent-light', value: '#c47a4a', role: 'brand' },
+    { name: 'accent-bg', value: '#faf3ed', role: 'semantic' },
+    { name: 'success', value: '#4a7c59', role: 'semantic' },
+    { name: 'warning', value: '#b8860b', role: 'semantic' },
+    { name: 'error', value: '#a13d3d', role: 'semantic' },
+  ],
+  typography: {
+    fontDisplay: "'Instrument Serif', Georgia, serif",
+    fontBody: "'Inter', system-ui, sans-serif",
+    fontMono: "'JetBrains Mono', ui-monospace, monospace",
+    scale: [
+      { name: 'xs', size: '0.75rem', weight: 400 },
+      { name: 'sm', size: '0.8125rem', weight: 400 },
+      { name: 'body', size: '0.875rem', weight: 400 },
+      { name: 'body-large', size: '1.125rem', weight: 400 },
+      { name: 'h6', size: '0.75rem', weight: 500 },
+      { name: 'h5', size: '0.875rem', weight: 500 },
+      { name: 'h4', size: '1.125rem', weight: 400 },
+      { name: 'h3', size: '1.5rem', weight: 400 },
+      { name: 'h2', size: '2rem', weight: 400 },
+      { name: 'h1', size: '2.5rem', weight: 400 },
+      { name: 'display-lg', size: '3rem', weight: 400 },
+      { name: 'display-xl', size: '3.75rem', weight: 400 },
+    ]
+  },
+  spacing: [
+    { name: 'xs', value: 4 },
+    { name: 'sm', value: 8 },
+    { name: 'md', value: 16 },
+    { name: 'lg', value: 24 },
+    { name: 'xl', value: 32 },
+    { name: '2xl', value: 48 },
+    { name: '3xl', value: 64 },
+  ],
+  motion: {
+    durations: [
+      { name: 'fast', value: 120 },
+      { name: 'default', value: 200 },
+      { name: 'slow', value: 350 },
+    ],
+    easings: [
+      { name: 'default', value: 'cubic-bezier(0.4, 0, 0.2, 1)' },
+      { name: 'in', value: 'cubic-bezier(0.4, 0, 1, 1)' },
+      { name: 'out', value: 'cubic-bezier(0, 0, 0.2, 1)' },
+      { name: 'ease-in-out', value: 'cubic-bezier(0.4, 0, 0.2, 1)' },
+    ]
+  },
+  shadows: [
+    { name: 'sm', value: '0 1px 2px rgba(28,26,23,0.04)' },
+    { name: 'default', value: '0 2px 8px rgba(28,26,23,0.06), 0 1px 2px rgba(28,26,23,0.04)' },
+    { name: 'lg', value: '0 8px 24px rgba(28,26,23,0.08), 0 2px 6px rgba(28,26,23,0.04)' },
+  ]
+};
+
+let tokens = JSON.parse(JSON.stringify(defaultTokens));
+let versions = { default: JSON.parse(JSON.stringify(defaultTokens)) };
+let activeVersion = 'default';
+let selectedFormat = 'css';
+
+// ============ Rendering ============
+function renderEditor() {
+  renderColorTokens();
+  renderTypeScale();
+  renderSpacing();
+  renderMotion();
+  renderShadows();
+  updateTokenCount();
+  updateVersionSelect();
+}
+
+function renderColorTokens() {
+  const container = document.getElementById('colorTokens');
+  container.innerHTML = tokens.colors.map((c, i) => {
+    const contrast = getContrastRatio(c.value, '#ffffff');
+    const pass = contrast >= 4.5;
+    return `
+      <div class="color-row">
+        <div class="color-swatch" style="background:${c.value}">
+          <input type="color" class="color-swatch-input" value="${c.value}" onchange="updateColor(${i}, 'value', this.value)">
+        </div>
+        <div class="color-info">
+          <div class="color-name">${c.name}</div>
+          <div class="color-value">${c.role}</div>
+        </div>
+        <input class="color-hex-input" value="${c.value}" onchange="updateColor(${i}, 'value', this.value)">
+        <span class="contrast-badge ${pass ? 'pass' : ''}">${pass ? 'AA' : '—'}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderTypeScale() {
+  const container = document.getElementById('typeScaleTokens');
+  container.innerHTML = tokens.typography.scale.map((t, i) => `
+    <div class="type-row">
+      <div class="type-preview" style="font-size:${t.size};font-weight:${t.weight};color:var(--text-secondary)">Aa</div>
+      <div class="type-info">
+        <div class="color-name" style="font-size:0.75rem">${t.name}</div>
+        <div class="color-value" style="font-size:0.6875rem">${t.size} · weight ${t.weight}</div>
+      </div>
+      <input type="text" value="${t.size}" onchange="updateTypeScale(${i}, 'size', this.value)" placeholder="size">
+      <input type="number" value="${t.weight}" min="300" max="700" step="100" onchange="updateTypeScale(${i}, 'weight', parseInt(this.value))" placeholder="w">
+    </div>
+  `).join('');
+}
+
+function renderSpacing() {
+  const container = document.getElementById('spacingTokens');
+  container.innerHTML = tokens.spacing.map((s, i) => `
+    <div class="spacing-row">
+      <div class="spacing-visual" style="width:${Math.max(20, s.value)}px">
+        ${s.value}px
+      </div>
+      <div class="spacing-info">
+        <div class="color-name">${s.name}</div>
+      </div>
+      <input type="number" value="${s.value}" min="0" step="1" onchange="updateSpacing(${i}, this.value)">
+      <span class="color-value">px</span>
+    </div>
+  `).join('');
+}
+
+function renderMotion() {
+  const durContainer = document.getElementById('durationTokens');
+  durContainer.innerHTML = tokens.motion.durations.map((d, i) => `
+    <div class="motion-row">
+      <div class="type-preview" style="font-size:${d.value}ms;color:var(--text-muted)">${d.value}</div>
+      <div class="motion-info">
+        <div class="color-name">${d.name}</div>
+      </div>
+      <input type="number" value="${d.value}" min="0" step="10" onchange="updateDuration(${i}, this.value)">
+      <span class="color-value">ms</span>
+    </div>
+  `).join('');
+
+  const easeContainer = document.getElementById('easingTokens');
+  easeContainer.innerHTML = tokens.motion.easings.map((e, i) => `
+    <div class="motion-row">
+      <div class="type-preview" style="font-size:0.6875rem;color:var(--text-muted)">↗</div>
+      <div class="motion-info">
+        <div class="color-name">${e.name}</div>
+      </div>
+      <select onchange="updateEasing(${i}, this.value)">
+        <option value="cubic-bezier(0.4, 0, 0.2, 1)" ${e.value === 'cubic-bezier(0.4, 0, 0.2, 1)' ? 'selected' : ''}>ease-out</option>
+        <option value="cubic-bezier(0.4, 0, 1, 1)" ${e.value === 'cubic-bezier(0.4, 0, 1, 1)' ? 'selected' : ''}>ease-in</option>
+        <option value="cubic-bezier(0, 0, 0.2, 1)" ${e.value === 'cubic-bezier(0, 0, 0.2, 1)' ? 'selected' : ''}>ease-out</option>
+        <option value="cubic-bezier(0.4, 0, 0.2, 1)" ${e.value === 'cubic-bezier(0.4, 0, 0.2, 1)' ? 'selected' : ''}>ease-in-out</option>
+        <option value="linear" ${e.value === 'linear' ? 'selected' : ''}>linear</option>
+      </select>
+    </div>
+  `).join('');
+}
+
+function renderShadows() {
+  const container = document.getElementById('shadowTokens');
+  container.innerHTML = tokens.shadows.map((s, i) => `
+    <div class="shadow-row">
+      <div class="shadow-preview-box" style="box-shadow:${s.value}"></div>
+      <div class="shadow-info">
+        <div class="color-name">${s.name}</div>
+      </div>
+      <input type="text" value="${s.value}" onchange="updateShadow(${i}, this.value)" placeholder="box-shadow value">
+      <button class="shadow-delete" onclick="deleteShadow(${i})" title="Remove shadow">×</button>
+    </div>
+  `).join('');
+}
+
+function updateTokenCount() {
+  const count = tokens.colors.length + tokens.typography.scale.length + tokens.spacing.length + tokens.shadows.length;
+  document.getElementById('tokenCount').textContent = count + ' tokens';
+}
+
+function updateVersionSelect() {
+  const sel = document.getElementById('versionSelect');
+  sel.innerHTML = Object.keys(versions).map(v =>
+    `<option value="${v}" ${v === activeVersion ? 'selected' : ''}>${v}</option>`
+  ).join('');
+}
+
+// ============ Updates ============
+function updateColor(index, field, value) {
+  tokens.colors[index][field] = value;
+  renderColorTokens();
+  renderPreview();
+}
+
+function updateTypeScale(index, field, value) {
+  tokens.typography.scale[index][field] = value;
+  renderTypeScale();
+  renderPreview();
+}
+
+function updateSpacing(index, value) {
+  tokens.spacing[index].value = parseInt(value) || 0;
+  renderSpacing();
+  renderPreview();
+}
+
+function updateDuration(index, value) {
+  tokens.motion.durations[index].value = parseInt(value) || 0;
+  renderMotion();
+}
+
+function updateEasing(index, value) {
+  tokens.motion.easings[index].value = value;
+  renderMotion();
+}
+
+function updateShadow(index, value) {
+  tokens.shadows[index].value = value;
+  renderShadows();
+  renderPreview();
+}
+
+function deleteShadow(index) {
+  tokens.shadows.splice(index, 1);
+  renderShadows();
+  renderPreview();
+}
+
+function addShadow() {
+  tokens.shadows.push({ name: 'new-' + (tokens.shadows.length + 1), value: '0 2px 4px rgba(28,26,23,0.1)' });
+  renderShadows();
+  renderPreview();
+}
+
+function addComponent(type) {
+  if (type === 'color') {
+    tokens.colors.push({ name: 'new-color-' + (tokens.colors.length + 1), value: '#888888', role: 'custom' });
+    renderColorTokens();
+    renderPreview();
+    document.getElementById('editorScroll').scrollTop = document.getElementById('editorScroll').scrollHeight;
+  }
+}
+
+function updateToken(name, value) {
+  if (name === 'fontDisplay') tokens.typography.fontDisplay = value;
+  if (name === 'fontBody') tokens.typography.fontBody = value;
+  if (name === 'fontMono') tokens.typography.fontMono = value;
+  renderPreview();
+}
+
+function getContrastRatio(hex1, hex2) {
+  const lum1 = getLuminance(hex1);
+  const lum2 = getLuminance(hex2);
+  const lighter = Math.max(lum1, lum2);
+  const darker = Math.min(lum1, lum2);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+function getLuminance(hex) {
+  const rgb = parseInt(hex.slice(1), 16);
+  const r = (rgb >> 16) & 255;
+  const g = (rgb >> 8) & 255;
+  const b = rgb & 255;
+  const rs = r / 255, gs = g / 255, bs = b / 255;
+  const rl = rs <= 0.03948 ? rs / 12.92 : Math.pow((rs + 0.055) / 1.055, 2.4);
+  const gl = gs <= 0.03948 ? gs / 12.92 : Math.pow((gs + 0.055) / 1.055, 2.4);
+  const bl = bs <= 0.03948 ? bs / 12.92 : Math.pow((bs + 0.055) / 1.055, 2.4);
+  return 0.2126 * rl + 0.7152 * gl + 0.0722 * bl;
+}
+
+// ============ Preview ============
+function renderPreview() {
+  const root = document.documentElement;
+  root.style.setProperty('--bg', tokens.colors.find(c => c.name === 'background')?.value || '#f5f3ef');
+  root.style.setProperty('--bg-panel', tokens.colors.find(c => c.name === 'surface')?.value || '#ffffff');
+  root.style.setProperty('--bg-elevated', tokens.colors.find(c => c.name === 'surface-elevated')?.value || '#fdfbf9');
+  root.style.setProperty('--text-primary', tokens.colors.find(c => c.name === 'text-primary')?.value || '#1c1a17');
+  root.style.setProperty('--text-secondary', tokens.colors.find(c => c.name === 'text-secondary')?.value || '#6b655e');
+  root.style.setProperty('--text-muted', tokens.colors.find(c => c.name === 'text-muted')?.value || '#9c958c');
+  root.style.setProperty('--border', tokens.colors.find(c => c.name === 'border')?.value || '#e3ddd4');
+  root.style.setProperty('--border-subtle', tokens.colors.find(c => c.name === 'border-subtle')?.value || '#ede8e0');
+  root.style.setProperty('--accent', tokens.colors.find(c => c.name === 'accent')?.value || '#a0522d');
+  root.style.setProperty('--accent-dark', tokens.colors.find(c => c.name === 'accent-dark')?.value || '#8b4519');
+  root.style.setProperty('--accent-light', tokens.colors.find(c => c.name === 'accent-light')?.value || '#c47a4a');
+  root.style.setProperty('--accent-bg', tokens.colors.find(c => c.name === 'accent-bg')?.value || '#faf3ed');
+  root.style.setProperty('--success', tokens.colors.find(c => c.name === 'success')?.value || '#4a7c59');
+  root.style.setProperty('--warning', tokens.colors.find(c => c.name === 'warning')?.value || '#b8860b');
+  root.style.setProperty('--error', tokens.colors.find(c => c.name === 'error')?.value || '#a13d3d');
+
+  root.style.setProperty('--font-display', tokens.typography.fontDisplay);
+  root.style.setProperty('--font-body', tokens.typography.fontBody);
+  root.style.setProperty('--font-mono', tokens.typography.fontMono);
+
+  const spacingMap = {};
+  tokens.spacing.forEach(s => {
+    spacingMap['--spacing-' + s.name] = s.value + 'px';
+  });
+  Object.entries(spacingMap).forEach(([key, val]) => root.style.setProperty(key, val));
+
+  const durationMap = {};
+  tokens.motion.durations.forEach(d => {
+    durationMap['--duration-' + d.name] = d.value + 'ms';
+  });
+  Object.entries(durationMap).forEach(([key, val]) => root.style.setProperty(key, val));
+
+  tokens.motion.easings.forEach(e => {
+    root.style.setProperty('--ease-' + e.name, e.value);
+  });
+
+  // Update preview component styles that depend on dynamic values
+  updatePreviewComponents();
+}
+
+function updatePreviewComponents() {
+  // Update form input placeholder colors
+  const formInput = document.getElementById('formEmail');
+  if (formInput) {
+    formInput.style.setProperty('--accent', getComputedStyle(document.documentElement).getPropertyValue('--accent').trim());
+  }
+
+  // Update spacing demos
+  const spacing = tokens.spacing;
+  const demos = [
+    { id: 'spacingDemoXs', name: spacing.find(s => s.name === 'xs') },
+    { id: 'spacingDemoSm', name: spacing.find(s => s.name === 'sm') },
+    { id: 'spacingDemoMd', name: spacing.find(s => s.name === 'md') },
+    { id: 'spacingDemoLg', name: spacing.find(s => s.name === 'lg') },
+    { id: 'spacingDemoXl', name: spacing.find(s => s.name === 'xl') },
+  ];
+
+  demos.forEach(d => {
+    const el = document.getElementById(d.id);
+    if (el && d.name) {
+      el.textContent = d.name.name + ' · ' + d.name.value + 'px';
+      el.style.height = d.name.value + 'px';
+      el.style.width = Math.max(20, d.name.value) + 'px';
+    }
+  });
+
+  // Re-render color swatches to reflect changes
+  renderColorTokens();
+}
+
+// ============ Version Management ============
+function saveVersion() {
+  const name = prompt('Name this token set:', 'set-' + (Object.keys(versions).length + 1));
+  if (!name) return;
+  versions[name] = JSON.parse(JSON.stringify(tokens));
+  activeVersion = name;
+  updateVersionSelect();
+  showToast('Saved "' + name + '"');
+}
+
+function switchVersion(name) {
+  if (name === activeVersion) return;
+  activeVersion = name;
+  tokens = JSON.parse(JSON.stringify(versions[name]));
+  renderEditor();
+  renderPreview();
+  showToast('Loaded "' + name + '"');
+}
+
+function resetToDefault() {
+  tokens = JSON.parse(JSON.stringify(defaultTokens));
+  renderEditor();
+  renderPreview();
+  showToast('Reset to default tokens');
+}
+
+// Make reset available
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('.header-actions');
+  const resetBtn = document.createElement('button');
+  resetBtn.className = 'btn btn-sm btn-ghost';
+  resetBtn.textContent = 'Reset';
+  resetBtn.onclick = resetToDefault;
+  header.insertBefore(resetBtn, header.children[0]);
+});
+
+// ============ Export ============
+function openExport() {
+  selectedFormat = 'css';
+  document.querySelectorAll('.export-format-card').forEach(c => c.classList.remove('selected'));
+  document.querySelector('.export-format-card[data-format="css"]').classList.add('selected');
+  updateExportCode();
+  document.getElementById('exportModal').classList.add('open');
+}
+
+function closeExport() {
+  document.getElementById('exportModal').classList.remove('open');
+}
+
+function selectFormat(format) {
+  selectedFormat = format;
+  document.querySelectorAll('.export-format-card').forEach(c => {
+    c.classList.toggle('selected', c.dataset.format === format);
+  });
+  updateExportCode();
+}
+
+function updateExportCode() {
+  const code = document.getElementById('exportCode');
+  if (selectedFormat === 'css') {
+    code.textContent = generateCssExport();
+  } else if (selectedFormat === 'json') {
+    code.textContent = generateJsonExport();
+  } else if (selectedFormat === 'tailwind') {
+    code.textContent = generateTailwindExport();
+  } else if (selectedFormat === 'cssinjs') {
+    code.textContent = generateCssInJsExport();
+  }
+}
+
+function generateCssExport() {
+  const lines = [':root {'];
+  tokens.colors.forEach(c => {
+    lines.push(`  --color-${c.name}: ${c.value};`);
+  });
+  tokens.typography.scale.forEach(t => {
+    lines.push(`  --type-${t.name}-size: ${t.size};`);
+    lines.push(`  --type-${t.name}-weight: ${t.weight};`);
+  });
+  tokens.spacing.forEach(s => {
+    lines.push(`  --spacing-${s.name}: ${s.value}px;`);
+  });
+  tokens.motion.durations.forEach(d => {
+    lines.push(`  --duration-${d.name}: ${d.value}ms;`);
+  });
+  tokens.motion.easings.forEach(e => {
+    lines.push(`  --ease-${e.name}: ${e.value};`);
+  });
+  tokens.shadows.forEach(s => {
+    lines.push(`  --shadow-${s.name}: ${s.value};`);
+  });
+  lines.push('}');
+  return lines.join('\n');
+}
+
+function generateJsonExport() {
+  const obj = {
+    colors: tokens.colors.reduce((acc, c) => { acc[c.name] = c.value; return acc; }, {}),
+    typography: {
+      fontDisplay: tokens.typography.fontDisplay,
+      fontBody: tokens.typography.fontBody,
+      fontMono: tokens.typography.fontMono,
+      scale: tokens.typography.scale.reduce((acc, t) => {
+        acc[t.name] = { size: t.size, weight: t.weight };
+        return acc;
+      }, {})
+    },
+    spacing: tokens.spacing.reduce((acc, s) => { acc[s.name] = s.value + 'px'; return acc; }, {}),
+    motion: {
+      durations: tokens.motion.durations.reduce((acc, d) => { acc[d.name] = d.value + 'ms'; return acc; }, {}),
+      easings: tokens.motion.easings.reduce((acc, e) => { acc[e.name] = e.value; return acc; }, {})
+    },
+    shadows: tokens.shadows.reduce((acc, s) => { acc[s.name] = s.value; return acc; }, {})
+  };
+  return JSON.stringify(obj, null, 2);
+}
+
+function generateTailwindExport() {
+  const lines = [
+    '// basis-export: tailwind.config.js theme extension',
+    'module.exports = {',
+    '  theme: {',
+    '    extend: {'
+  ];
+  // Colors
+  lines.push('      colors: {');
+  tokens.colors.filter(c => c.role !== 'text').forEach(c => {
+    lines.push(`        '${c.name}': '${c.value}',`);
+  });
+  lines.push('      },');
+  // Fonts
+  lines.push('      fontFamily: {');
+  lines.push(`        'display': [${tokens.typography.fontDisplay.replace(/'/g, "'")}],`);
+  lines.push(`        'body': [${tokens.typography.fontBody.replace(/'/g, "'")}],`);
+  lines.push(`        'mono': [${tokens.typography.fontMono.replace(/'/g, "'")}],`);
+  lines.push('      },');
+  // Spacing
+  lines.push('      spacing: {');
+  tokens.spacing.forEach(s => {
+    lines.push(`        '${s.name}': '${s.value}px',`);
+  });
+  lines.push('      },');
+  // Shadows
+  lines.push('      boxShadow: {');
+  tokens.shadows.forEach(s => {
+    lines.push(`        '${s.name}': '${s.value}',`);
+  });
+  lines.push('      },');
+  lines.push('    },');
+  lines.push('  },');
+  lines.push('};');
+  return lines.join('\n');
+}
+
+function generateCssInJsExport() {
+  const lines = [
+    '// basis-export: theme object',
+    'const theme = {'
+  ];
+  lines.push('  colors: {');
+  tokens.colors.forEach(c => {
+    lines.push(`    '${c.name}': '${c.value}',`);
+  });
+  lines.push('  },');
+  lines.push('  fonts: {');
+  lines.push(`    display: ${tokens.typography.fontDisplay},`);
+  lines.push(`    body: ${tokens.typography.fontBody},`);
+  lines.push(`    mono: ${tokens.typography.fontMono},`);
+  lines.push('  },');
+  lines.push('  typeScale: {');
+  tokens.typography.scale.forEach(t => {
+    lines.push(`    '${t.name}': { size: '${t.size}', weight: ${t.weight} },`);
+  });
+  lines.push('  },');
+  lines.push('  spacing: {');
+  tokens.spacing.forEach(s => {
+    lines.push(`    '${s.name}': '${s.value}px',`);
+  });
+  lines.push('  },');
+  lines.push('  shadows: {');
+  tokens.shadows.forEach(s => {
+    lines.push(`    '${s.name}': '${s.value}',`);
+  });
+  lines.push('  },');
+  lines.push('};');
+  lines.push('');
+  lines.push('export default theme;');
+  return lines.join('\n');
+}
+
+function copyExport() {
+  const code = document.getElementById('exportCode').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    showToast('Copied ' + selectedFormat + ' export to clipboard');
+    closeExport();
+  }).catch(() => {
+    // Fallback
+    const textarea = document.createElement('textarea');
+    textarea.value = code;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    showToast('Copied to clipboard');
+    closeExport();
+  });
+}
+
+// Close modal on overlay click
+document.getElementById('exportModal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeExport();
+});
+
+// ============ Toast ============
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toast._timeout);
+  toast._timeout = setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+// ============ Init ============
+renderEditor();
+renderPreview();
+</script>
+</body>
+</html>

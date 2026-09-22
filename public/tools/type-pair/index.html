@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Type Pair — Basis Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ef;
+    --surface: #ffffff;
+    --text-primary: #1c1a17;
+    --text-secondary: #6b655e;
+    --text-muted: #9c958c;
+    --border: #e3ddd4;
+    --border-subtle: #ede8e0;
+    --accent: #a0522d;
+    --accent-dark: #8b4519;
+    --accent-light: #c47a4a;
+    --accent-bg: #faf3ed;
+    --radius: 8px;
+    --radius-lg: 12px;
+    --shadow: 0 2px 8px rgba(28,26,23,0.06), 0 1px 2px rgba(28,26,23,0.04);
+    --shadow-lg: 0 8px 24px rgba(28,26,23,0.08), 0 2px 6px rgba(28,26,23,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.6; }
+  a { color: var(--accent); }
+  a:hover { color: var(--accent-dark); }
+  h1, h2, h3 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; color: var(--text-primary); letter-spacing: -0.01em; }
+  h1 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.1; margin-bottom: 4px; }
+  h2 { font-size: 1.375rem; line-height: 1.2; margin-bottom: 8px; }
+  p { line-height: 1.6; }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 64px 0; }
+  .section-alt { background: #fdfbf9; }
+  .label { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.6875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+  .label-accent { color: var(--accent); }
+  .btn { font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; padding: 10px 20px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--text-primary); cursor: pointer; transition: all 200ms cubic-bezier(0.4,0,0.2,1); display: inline-flex; align-items: center; gap: 8px; }
+  .btn:hover { border-color: var(--accent-light); color: var(--accent); background: var(--accent-bg); transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+  .btn-ghost { background: transparent; border-color: transparent; color: var(--text-secondary); }
+  .btn-ghost:hover { background: var(--accent-bg); color: var(--accent); transform: none; }
+  .btn-sm { padding: 6px 14px; font-size: 0.8125rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow); }
+  .card-large { padding: 32px; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .code-block { background: var(--text-primary); border-radius: var(--radius); padding: 16px; overflow-x: auto; }
+  .code-block code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.8125rem; line-height: 1.6; color: #e8e2d8; }
+  .code-keyword { color: #c47a4a; }
+  .code-string { color: #a8c4a0; }
+  .code-property { color: #a09080; }
+  .code-value { color: #d4a87a; }
+  .code-comment { color: #6b655e; font-style: italic; }
+  .badge { font-family: 'JetBrains Mono', monospace; font-size: 0.6875rem; font-weight: 500; padding: 3px 10px; border-radius: 999px; background: var(--accent-bg); color: var(--accent-dark); border: 1px solid rgba(160,82,45,0.2); }
+  .tool-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border-subtle); }
+  .tool-icon { width: 48px; height: 48px; border-radius: var(--radius); background: var(--accent-bg); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .tool-icon svg { width: 28px; height: 28px; }
+  .tool-tag { display: inline-flex; gap: 8px; }
+  .flex-between { display: flex; justify-content: space-between; align-items: center; }
+  .items-center { align-items: center; }
+  .gap-8 { gap: 8px; }
+  .gap-16 { gap: 16px; }
+  .gap-24 { gap: 24px; }
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .mt-24 { margin-top: 24px; }
+  .mb-8 { margin-bottom: 8px; }
+  .mb-16 { margin-bottom: 16px; }
+  .mb-24 { margin-bottom: 24px; }
+  .w-full { width: 100%; }
+  .flex-wrap { flex-wrap: wrap; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+  .pair-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; cursor: pointer; transition: all 150ms; }
+  .pair-card:hover { border-color: var(--accent-light); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+  .pair-card.active { border-color: var(--accent); background: var(--accent-bg); box-shadow: 0 0 0 2px rgba(160,82,45,0.15); }
+  .pair-name { font-family: 'Instrument Serif', Georgia, serif; font-size: 1.125rem; color: var(--text-primary); margin-bottom: 2px; }
+  .pair-detail { font-size: 0.8125rem; color: var(--text-secondary); display: flex; gap: 12px; align-items: center; margin-bottom: 4px; }
+  .pair-detail .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.625rem; padding: 2px 6px; border-radius: 2px; background: var(--border-subtle); color: var(--text-muted); }
+  .pair-preview { min-height: 120px; padding: 20px; background: var(--bg); border-radius: var(--radius); border: 1px solid var(--border-subtle); }
+  .pair-preview h3 { margin-bottom: 8px; }
+  .pair-preview p { font-size: 0.9375rem; color: var(--text-secondary); }
+  .pair-font-size { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+  .pair-font-size label { font-family: 'JetBrains Mono', monospace; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+  .pair-font-size input { width: 80px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); text-align: center; }
+  .pair-font-size input:focus { outline: none; border-color: var(--accent); }
+  .input { font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text-primary); }
+  .input:focus { outline: none; border-color: var(--accent); }
+  .select { font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text-primary); cursor: pointer; }
+  .select:focus { outline: none; border-color: var(--accent); }
+  .radio-group { display: flex; gap: 16px; flex-wrap: wrap; }
+  .radio-group label { display: flex; align-items: center; gap: 6px; font-size: 0.875rem; cursor: pointer; color: var(--text-secondary); }
+  .radio-group label:hover { color: var(--text-primary); }
+  input[type="radio"] { accent-color: var(--accent); }
+  .export-actions { display: flex; gap: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-subtle); }
+  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--text-primary); color: var(--bg); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 8px 16px; border-radius: 4px; box-shadow: var(--shadow-lg); z-index: 100; opacity: 0; transform: translateY(8px); transition: all 200ms; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .section-header { margin-bottom: 32px; }
+  .section-intro { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; max-width: 560px; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="section">
+      <div class="tool-header">
+        <div class="tool-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 7V4h16v3"/>
+            <path d="M9 20h6"/>
+            <path d="M12 4v16"/>
+            <path d="M4 11h16"/>
+            <path d="M4 16h16"/>
+            <path d="M8 20v-4h2v4"/>
+            <path d="M14 20v-4h2v4"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Type Pair</h1>
+          <p style="color:var(--text-secondary);font-size:0.875rem;margin:0">Explore type pairings — display face + body + mono. Preview in context, export the stack.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="card">
+        <div class="section-header">
+          <span class="label label-accent">Choose your pairing</span>
+          <h2>Browse available pairings</h2>
+        </div>
+        <p class="section-intro">Click a card to preview. Each pairing includes a display face for headings, a body face for text, and a mono face for code and labels.</p>
+        <div id="pairList"></div>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <div class="card-large">
+        <div class="flex-between items-center mb-24">
+          <div>
+            <span class="label label-accent" id="activePairLabel">Pairing</span>
+            <h2 id="activePairName" style="margin-top:4px">Selected</h2>
+          </div>
+          <div class="tool-tag" id="activePairTags"></div>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <div class="mb-16">
+              <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Heading sample</label>
+              <div id="previewDisplay" class="pair-preview" style="background:var(--surface)">
+                <h3 style="font-size:1.75rem">The quick brown fox</h3>
+                <p style="font-size:1.125rem;color:var(--text-muted)">Jumps over the lazy dog. Basis builds design systems that hold together.</p>
+              </div>
+            </div>
+
+            <div class="mb-16">
+              <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Body sample</label>
+              <div id="previewBody" class="pair-preview" style="background:var(--surface)">
+                <h3 style="font-size:1.25rem;margin-bottom:6px">The quick brown fox jumps over the lazy dog</h3>
+                <p style="font-size:0.9375rem;color:var(--text-secondary);line-height:1.7">Basis is a living design token workspace for software designers and publishers. Define colors, type, spacing, motion, and shadows — see every component update in real time, then export clean code in four formats. No drift, no sync debt, no hand-typing.</p>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Mono sample</label>
+              <div id="previewMono" class="pair-preview" style="background:#1c1a17;color:#e8e2d8;font-size:0.8125rem;line-height:1.7">
+                <code><span style="color:#c47a4a">const</span> <span style="color:#a09080">theme</span> = <span style="color:#a8c4a0">{</span>\n  <span style="color:#a09080">colors</span>: <span style="color:#a8c4a0">{</span>\n    <span style="color:#d4a87a">'accent'</span>: <span style="color:#d4a87a">'#a0522d'</span>,\n    <span style="color:#d4a87a">'background'</span>: <span style="color:#d4a87a">'#f5f3ef'</span>\n  <span style="color:#a8c4a0">}</span>\n<span style="color:#a8c4a0">}</span>;</code>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="mb-16">
+              <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Heading size</label>
+              <div class="pair-font-size">
+                <input type="number" id="headingSize" value="36" min="16" max="72" onchange="updatePreview()">
+                <span style="font-size:0.8125rem;color:var(--text-muted)">px</span>
+              </div>
+            </div>
+            <div class="mb-16">
+              <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Body size</label>
+              <div class="pair-font-size">
+                <input type="number" id="bodySize" value="16" min="12" max="24" onchange="updatePreview()">
+                <span style="font-size:0.8125rem;color:var(--text-muted)">px</span>
+              </div>
+            </div>
+            <div class="mb-16">
+              <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Weight — display</label>
+              <select id="displayWeight" class="select w-full" onchange="updatePreview()">
+                <option value="300">Light (300)</option>
+                <option value="400" selected>Regular (400)</option>
+                <option value="500">Medium (500)</option>
+                <option value="600">Semi-bold (600)</option>
+              </select>
+            </div>
+            <div class="mb-16">
+              <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Weight — body</label>
+              <select id="bodyWeight" class="select w-full" onchange="updatePreview()">
+                <option value="300">Light (300)</option>
+                <option value="400" selected>Regular (400)</option>
+                <option value="500">Medium (500)</option>
+              </select>
+            </div>
+
+            <div class="mb-16">
+              <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Rich text</label>
+              <div class="radio-group">
+                <label><input type="radio" name="italic" value="none" checked onchange="updatePreview()"> No italics</label>
+                <label><input type="radio" name="italic" value="display" onchange="updatePreview()"> Display italic</label>
+                <label><input type="radio" name="italic" value="body" onchange="updatePreview()"> Body italic</label>
+              </div>
+            </div>
+
+            <div class="mb-16">
+              <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Custom sample text</label>
+              <input class="input w-full" type="text" id="customText" value="The quick brown fox jumps over the lazy dog. Basis builds design systems that hold together." onchange="updatePreview()">
+            </div>
+          </div>
+        </div>
+
+        <div class="export-actions">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);align-self:center">Recommended font stack:</span>
+          <code id="stackOutput" style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;background:var(--bg);padding:6px 10px;border-radius:4px;border:1px solid var(--border-subtle);margin-left:12px;display:block;word-break:break-all"></code>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-alt" style="text-align:center">
+      <span class="label label-accent">Basis Tools</span>
+      <h2 style="margin:8px 0 16px">More tools in the workspace</h2>
+      <p style="color:var(--text-secondary);font-size:1.0625rem;max-width:480px;margin:0 auto 32px">Each tool is a standalone HTML file. Open it, use it, close it.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="/tools/palette" class="btn" style="min-width:140px">Palette</a>
+        <a href="#" class="btn btn-ghost" style="min-width:140px">Token Convert</a>
+        <a href="#" class="btn btn-ghost" style="min-width:140px">Shadow Forge</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const pairings = [
+      {
+        id: 'serif-sans',
+        name: 'Instrument Serif + Inter',
+        display: "'Instrument Serif', Georgia, serif",
+        body: "'Inter', system-ui, sans-serif",
+        mono: "'JetBrains Mono', ui-monospace, monospace",
+        weightDisplay: 400,
+        weightBody: 400,
+        tags: ['Serif display', 'Sans body', 'Classic'],
+        desc: 'Warm display serif with a clean, neutral sans for body. The pairing that grounds a design system in tradition without feeling dated.'
+      },
+      {
+        id: 'geo-sans',
+        name: 'Geist Sans + Inter',
+        display: "'Geist Sans', system-ui, sans-serif",
+        body: "'Inter', system-ui, sans-serif",
+        mono: "'JetBrains Mono', ui-monospace, monospace",
+        weightDisplay: 500,
+        weightBody: 400,
+        tags: ['Geometric sans', 'Sans body', 'Contemporary'],
+        desc: 'A geometric display face paired with Inter for body. Clean, modern, reads as intentional without being loud.'
+      },
+      {
+        id: 'serif-sans-alt',
+        name: 'Playfair Display + Source Sans',
+        display: "'Playfair Display', Georgia, serif",
+        body: "'Source Sans 3', system-ui, sans-serif",
+        mono: "'JetBrains Mono', ui-monospace, monospace",
+        weightDisplay: 400,
+        weightBody: 400,
+        tags: ['High-contrast serif', 'Sans body', 'Editorial'],
+        desc: 'High-contrast serif for headings, Source Sans for body. Editorial clarity with enough weight to hold a page together.'
+      },
+      {
+        id: 'mono-focused',
+        name: 'JetBrains Mono + Inter',
+        display: "'JetBrains Mono', ui-monospace, monospace",
+        body: "'Inter', system-ui, sans-serif",
+        mono: "'JetBrains Mono', ui-monospace, monospace",
+        weightDisplay: 400,
+        weightBody: 400,
+        tags: ['Mono display', 'Sans body', 'Developer-forward'],
+        desc: 'Mono as display for a technical, code-forward aesthetic. Works well for tooling sites and documentation surfaces.'
+      },
+      {
+        id: 'serif-only',
+        name: 'Instrument Serif (display + body)',
+        display: "'Instrument Serif', Georgia, serif",
+        body: "'Instrument Serif', Georgia, serif",
+        mono: "'JetBrains Mono', ui-monospace, monospace",
+        weightDisplay: 400,
+        weightBody: 400,
+        tags: ['Serif only', 'Unified voice', 'Warm'],
+        desc: 'A single serif across display and body — unified voice, warm character. Good for long-form, editorial, or brand-forward sites.'
+      }
+    ];
+
+    let activePair = pairings[0];
+
+    function renderPairs() {
+      const list = document.getElementById('pairList');
+      list.innerHTML = pairings.map(p => `
+        <div class="pair-card ${p.id === activePair.id ? 'active' : ''}" onclick="selectPair('${p.id}')">
+          <div class="pair-name">${p.name}</div>
+          <div class="pair-detail">
+            ${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+          </div>
+          <p style="font-size:0.8125rem;color:var(--text-secondary);margin-top:6px">${p.desc}</p>
+          <div class="pair-preview mt-16" style="background:var(--bg)">
+            <h3 style="font-size:1.25rem;margin-bottom:4px">${p.name.split('+')[0].trim()}</h3>
+            <p style="font-size:0.875rem;color:var(--text-secondary)">${p.body.split(',')[0].replace(/'/g,'').trim()} — ${p.tags[p.tags.length-1]}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function selectPair(id) {
+      activePair = pairings.find(p => p.id === id);
+      document.getElementById('activePairLabel').textContent = 'Pairing';
+      document.getElementById('activePairName').textContent = activePair.name;
+      document.getElementById('activePairTags').innerHTML = activePair.tags.map(t => `<span class="badge">${t}</span>`).join(' ');
+      document.getElementById('displayWeight').value = activePair.weightDisplay;
+      document.getElementById('bodyWeight').value = activePair.weightBody;
+      renderPairs();
+      updatePreview();
+    }
+
+    function updatePreview() {
+      const italic = document.querySelector('input[name="italic"]:checked').value;
+      const displaySize = parseInt(document.getElementById('headingSize').value) || 36;
+      const bodySize = parseInt(document.getElementById('bodySize').value) || 16;
+      const displayWeight = parseInt(document.getElementById('displayWeight').value) || 400;
+      const bodyWeight = parseInt(document.getElementById('bodyWeight').value) || 400;
+      const text = document.getElementById('customText').value || activePair.desc;
+
+      const displayStyle = `font-family: ${activePair.display}; font-size: ${displaySize}px; font-weight: ${displayWeight}; line-height: 1.2; letter-spacing: -0.01em${italic === 'display' ? '; font-style: italic' : ''}`;
+      const bodyStyle = `font-family: ${activePair.body}; font-size: ${bodySize}px; font-weight: ${bodyWeight}; line-height: 1.7`;
+      const bodyItalic = italic === 'body' ? '; font-style: italic' : '';
+      const monoStyle = `font-family: ${activePair.mono}; font-size: 0.8125rem; line-height: 1.7`;
+
+      document.getElementById('previewDisplay').innerHTML = `<h3 style="${displayStyle}">The quick brown fox</h3><p style="${bodyStyle}${bodyItalic}">Jumps over the lazy dog. Basis builds design systems that hold together.</p>`;
+      document.getElementById('previewBody').innerHTML = `<h3 style="${displayStyle}">The quick brown fox jumps over the lazy dog</h3><p style="${bodyStyle}${bodyItalic}">${text}</p>`;
+      document.getElementById('previewMono').style.cssText = monoStyle + '; background:#1c1a17; color:#e8e2d8;';
+      document.getElementById('previewMono').innerHTML = `<code><span style="color:#c47a4a">const</span> <span style="color:#a09080">theme</span> = <span style="color:#a8c4a0">{</span>\n  <span style="color:#a09080">colors</span>: <span style="color:#a8c4a0">{</span>\n    <span style="color:#d4a87a">'accent'</span>: <span style="color:#d4a87a">'#a0522d'</span>\n  <span style="color:#a8c4a0">}</span>\n<span style="color:#a8c4a0">}</span>;</code>`;
+
+      // Stack output
+      document.getElementById('stackOutput').textContent =
+        `font-family: ${activePair.display};\nfont-family: ${activePair.body};\nfont-family: ${activePair.mono};`;
+    }
+
+    renderPairs();
+    selectPair('serif-sans');
+  </script>
+</body>
+</html>

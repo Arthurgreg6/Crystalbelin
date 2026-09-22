@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Tools — Basis';
+const description = 'Small, focused utilities that extend the Basis design token workspace. Palette generator, type pairing explorer, token format converter, and shadow stack builder — each downloadable and self-contained.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Nav />
+
+  <main>
+    <section class="tools-hero section">
+      <div class="container">
+        <div class="tools-hero-content">
+          <span class="label label-accent">Tools</span>
+          <h1>Small utilities, each on its own</h1>
+          <p class="tools-subtitle">Four focused tools that extend the Basis workspace. Each one solves a specific problem. Each one is downloadable as a standalone file — no install, no dependencies, runs in your browser.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header-centered">
+          <h2>The tools</h2>
+          <p>Each tool is a single HTML file. Open it, use it, close it. No framework, no runtime, no account.</p>
+        </div>
+        <div class="tools-grid stagger">
+          <div class="tool-card card">
+            <div class="tool-header">
+              <div class="tool-icon tool-icon-palette">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+              </div>
+              <span class="badge">Color</span>
+            </div>
+            <h3 class="tool-title">Palette</h3>
+            <p class="tool-desc">Build a color palette from a seed color, or extract one from an image you upload. Generate shades, tints, and complements. Export to CSS variables or JSON. Includes contrast checking against white and dark backgrounds.</p>
+            <div class="tool-features">
+              <div class="tool-feature"><span class="tool-feature-label mono">Seed from color</span><span class="tool-feature-desc">Pick any color and generate a full palette around it</span></div>
+              <div class="tool-feature"><span class="tool-feature-label mono">Image extraction</span><span class="tool-feature-desc">Upload an image and pull the dominant colors from it</span></div>
+              <div class="tool-feature"><span class="tool-feature-label mono">Export</span><span class="tool-feature-desc">CSS variables, JSON, or copy the hex values</span></div>
+            </div>
+            <div class="tool-actions">
+              <a href="/tools/palette" class="btn btn-primary">Try Palette</a>
+              <a href="/tools/palette/index.html" class="btn btn-ghost" download>Download</a>
+            </div>
+          </div>
+
+          <div class="tool-card card">
+            <div class="tool-header">
+              <div class="tool-icon tool-icon-type">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+              </div>
+              <span class="badge badge-neutral">Typography</span>
+            </div>
+            <h3 class="tool-title">Type Pair</h3>
+            <p class="tool-desc">Explore and preview type pairings — header + body + mono combinations. See them rendered in real content. Adjust sizes, weights, and line heights. Export the font stack recommendations for your project.</p>
+            <div class="tool-features">
+              <div class="tool-feature"><span class="tool-feature-label mono">Pair explorer</span><span class="tool-feature-desc">Browse header + body + mono combinations from a curated set</span></div>
+              <div class="tool-feature"><span class="tool-feature-label mono">Live preview</span><span class="tool-feature-desc">See every pairing rendered in headings, body text, and code</span></div>
+              <div class="tool-feature"><span class="tool-feature-label mono">Export</span><span class="tool-feature-desc">Font stack recommendations in CSS and JSON</span></div>
+            </div>
+            <div class="tool-actions">
+              <a href="/tools/type-pair" class="btn btn-primary">Try Type Pair</a>
+              <a href="/tools/type-pair/index.html" class="btn btn-ghost" download>Download</a>
+            </div>
+          </div>
+
+          <div class="tool-card card">
+            <div class="tool-header">
+              <div class="tool-icon tool-icon-convert">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+              </div>
+              <span class="badge badge-neutral">Conversion</span>
+            </div>
+            <h3 class="tool-title">Token Convert</h3>
+            <p class="tool-desc">Convert design tokens between formats. Paste tokens from Figma, Style Dictionary, or another tool — get them out as CSS variables, JSON, Tailwind config, or a CSS-in-JS theme object. Handles colors, spacing, typography, and shadows.</p>
+            <div class="tool-features">
+              <div class="tool-feature"><span class="tool-feature-label mono">Multi-format input</span><span class="tool-feature-desc">Accepts JSON, CSS custom properties, or Tailwind-style values</span></div>
+              <div class="tool-feature"><span class="tool-feature-label mono">Multi-format output</span><span class="tool-feature-desc">CSS variables, JSON, Tailwind config, CSS-in-JS theme</span></div>
+              <div class="tool-feature"><span class="tool-feature-label mono">Batch convert</span><span class="tool-feature-desc">Convert a whole token set at once, not one value at a time</span></div>
+            </div>
+            <div class="tool-actions">
+              <a href="/tools/token-convert" class="btn btn-primary">Try Token Convert</a>
+              <a href="/tools/token-convert/index.html" class="btn btn-ghost" download>Download</a>
+            </div>
+          </div>
+
+          <div class="tool-card card">
+            <div class="tool-header">
+              <div class="tool-icon tool-icon-shadow">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              </div>
+              <span class="badge badge-neutral">Shadows</span>
+            </div>
+            <h3 class="tool-title">Shadow Forge</h3>
+            <p class="tool-desc">Build and preview layered CSS shadow stacks visually. Add multiple shadow layers, adjust spread, blur, and offset, see the combined effect on a card in real time. Copy the full declaration when you're satisfied.</p>
+            <div class="tool-features">
+              <div class="tool-feature"><span class="tool-feature-label mono">Visual builder</span><span class="tool-feature-desc">Add layers, adjust values, see the shadow on a card in real time</span></div>
+              <div class="tool-feature"><span class="tool-feature-label mono">Presets</span><span class="tool-feature-desc">Start from common shadow patterns — sm, md, lg, xl, or layered depth</span></div>
+              <div class="tool-feature"><span class="tool-feature-label mono">Copy the stack</span><span class="tool-feature-desc">Export the full box-shadow declaration, ready to paste into your CSS</span></div>
+            </div>
+            <div class="tool-actions">
+              <a href="/tools/shadow-forge" class="btn btn-primary">Try Shadow Forge</a>
+              <a href="/tools/shadow-forge/index.html" class="btn btn-ghost" download>Download</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="all-tools-header">
+          <span class="label label-accent">Download all</span>
+          <h2>Get every tool at once</h2>
+          <p>Each tool is a standalone HTML file. Download them individually from the links above, or get the full set here. No installation — just open and use.</p>
+        </div>
+        <div class="all-tools-grid">
+          <a href="/tools/palette/index.html" class="all-tool-link"><span class="all-tool-name">Palette</span><span class="all-tool-size mono">~15 KB</span></a>
+          <a href="/tools/type-pair/index.html" class="all-tool-link"><span class="all-tool-name">Type Pair</span><span class="all-tool-size mono">~11 KB</span></a>
+          <a href="/tools/token-convert/index.html" class="all-tool-link"><span class="all-tool-name">Token Convert</span><span class="all-tool-size mono">~10 KB</span></a>
+          <a href="/tools/shadow-forge/index.html" class="all-tool-link"><span class="all-tool-name">Shadow Forge</span><span class="all-tool-size mono">~12 KB</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <span class="label label-accent">Start with the workspace</span>
+          <h1>Basis first, tools second</h1>
+          <p>The tools extend the Basis workspace. Define your tokens in Basis, then use these utilities to refine, convert, and export them. Or use them on their own — each one stands alone.</p>
+          <div class="cta-actions">
+            <a href="/software#demo" class="btn btn-primary btn-lg">Try Basis</a>
+            <a href="#palette" class="btn btn-ghost btn-lg">Browse the tools</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .tools-hero { padding: 80px 0; border-bottom: 1px solid var(--border-subtle); }
+  .tools-hero-content { max-width: 640px; }
+  .tools-hero-content h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); margin: 24px 0 32px; }
+  .tools-subtitle { font-size: 1.125rem; color: var(--text-secondary); line-height: 1.7; }
+  .section-header-centered { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+  .section-header-centered h2 { margin-top: 8px; }
+  .section-header-centered p { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; margin: 0 auto; }
+  .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; transition: transform 200ms var(--ease-default), box-shadow 200ms var(--ease-default), border-color 200ms var(--ease-default); display: flex; flex-direction: column; }
+  .tool-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); border-color: var(--accent-light); }
+  .tool-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+  .tool-icon { width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .tool-icon-palette { background: var(--accent-bg); color: var(--accent); }
+  .tool-icon-type { background: #e8e0f0; color: #7a5a9a; }
+  .tool-icon-convert { background: #e0e8f0; color: #3a6a8a; }
+  .tool-icon-shadow { background: #f0e8e0; color: #8a6a4a; }
+  .tool-title { font-family: var(--font-display); font-size: 1.375rem; font-weight: 400; color: var(--text-primary); margin-bottom: 8px; letter-spacing: -0.01em; }
+  .tool-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; flex: 1; margin-bottom: 24px; }
+  .tool-features { border-top: 1px solid var(--border-subtle); padding-top: 24px; display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+  .tool-feature { display: flex; flex-direction: column; gap: 2px; }
+  .tool-feature-label { font-size: 0.75rem; font-weight: 500; color: var(--text-primary); letter-spacing: -0.01em; }
+  .tool-feature-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+  .tool-actions { display: flex; gap: 8px; padding-top: 24px; border-top: 1px solid var(--border-subtle); }
+  .all-tools-header { text-align: center; max-width: 560px; margin: 0 auto 48px; }
+  .all-tools-header h2 { margin-top: 8px; }
+  .all-tools-header p { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; margin: 0 auto; }
+  .all-tools-grid { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; max-width: 560px; margin: 0 auto; }
+  .all-tool-link { display: flex; align-items: center; gap: 24px; padding: 24px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: all 120ms var(--ease-default); }
+  .all-tool-link:hover { border-color: var(--accent-light); color: var(--accent); background: var(--accent-bg); transform: translateY(-1px); }
+  .all-tool-name { font-family: var(--font-body); font-size: 0.9375rem; font-weight: 500; color: var(--text-primary); }
+  .all-tool-size { font-size: 0.75rem; color: var(--text-muted); }
+  .cta-section { background: var(--text-primary); color: var(--bg); text-align: center; }
+  .cta-section .label { color: var(--accent-light); }
+  .cta-section h1 { color: var(--bg); margin: 16px 0 32px; font-size: clamp(2rem, 4vw, 3rem); }
+  .cta-section p { color: rgba(245,243,239,0.7); font-size: 1.0625rem; max-width: 520px; margin: 0 auto 32px; line-height: 1.7; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .cta-section .btn-primary { background: var(--accent); border-color: var(--accent); }
+  .cta-section .btn-primary:hover { background: var(--accent-light); border-color: var(--accent-light); }
+  .cta-section .btn-ghost { color: rgba(245,243,239,0.7); border-color: rgba(245,243,239,0.15); }
+  .cta-section .btn-ghost:hover { background: rgba(245,243,239,0.08); color: var(--bg); border-color: rgba(245,243,239,0.3); }
+  @media (max-width: 768px) {
+    .tools-grid { grid-template-columns: 1fr; }
+    .tool-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+</style>

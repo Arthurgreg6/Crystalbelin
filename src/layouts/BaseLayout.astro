@@ -1,0 +1,24 @@
+---
+import '../styles/global.css';
+
+const { title, description, class: classNames = '' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={description || 'Basis — a design token workspace for software designers and publishers.'}>
+  <title>{title} — Basis</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content={`${title} — Basis`}>
+  <meta property="og:description" content={description || 'A design token workspace. Define, visualize, and export your design system.'}>
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+  <slot />
+</body>
+</html>

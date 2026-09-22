@@ -1,0 +1,313 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'The Software — Basis';
+const description = 'Basis is a design token workspace. Define colors, typography, spacing, motion, and shadows. See every component update in real time. Export clean code in four formats.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Nav />
+
+  <main>
+    <section class="software-hero section">
+      <div class="container">
+        <div class="software-hero-content">
+          <span class="label label-accent">The Software</span>
+          <h1>Basis</h1>
+          <p class="software-subtitle">A design token workspace for software designers and publishers. Define the tokens that hold your design language together. See them applied to real components. Export them when you're ready.</p>
+          <div class="software-actions">
+            <a href="#demo" class="btn btn-primary btn-lg">Try the live demo</a>
+            <a href="#how-it-works" class="btn btn-ghost btn-lg">How it works</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <div class="container">
+        <div class="section-header">
+          <span class="label label-accent">Live Demo</span>
+          <h2>Edit tokens. See everything update.</h2>
+        </div>
+        <p class="section-intro">The workspace is live below. Change a color, a font, a spacing value — every component in the preview reflects it instantly. This is the actual Basis tool, embedded here so you can try it before downloading.</p>
+        <div class="demo-container">
+          <iframe src="/basis/" title="Basis Design Token Workspace" class="demo-iframe"></iframe>
+        </div>
+        <div class="demo-note">
+          <span class="label">Self-contained</span>
+          <p>The tool runs entirely in your browser. No data leaves your machine. No account required. When you download it, it's the same file, ready to open.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="how-it-works">
+      <div class="container">
+        <div class="section-header-centered">
+          <span class="label label-accent">How it works</span>
+          <h2>Three things, always in sync</h2>
+        </div>
+        <div class="steps-grid stagger">
+          <div class="step-card">
+            <span class="step-number mono">01</span>
+            <h3>Define your tokens</h3>
+            <p>Colors with roles and contrast checks. A type scale with named sizes. A spacing scale. Motion durations and easing curves. Shadow stacks. Each one editable on its own, visible in the preview.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-number mono">02</span>
+            <h3>See them applied</h3>
+            <p>The preview shows real components — buttons, cards, navigation, forms, typography, code blocks, badges — all rendered with your current token set. Change a value on the left and watch the right side update.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-number mono">03</span>
+            <h3>Export when ready</h3>
+            <p>Four formats: CSS custom properties, JSON, Tailwind config, and CSS-in-JS theme objects. Each export reflects your exact current tokens. Copy to clipboard or save the file.</p>
+          </div>
+        </div>
+        <div class="workflow-visual">
+          <div class="workflow-arrow">
+            <div class="workflow-step">
+              <div class="workflow-icon workflow-icon-define">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </div>
+              <span>Define</span>
+            </div>
+            <div class="workflow-arrow-line"></div>
+            <div class="workflow-step">
+              <div class="workflow-icon workflow-icon-preview">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <span>Preview</span>
+            </div>
+            <div class="workflow-arrow-line"></div>
+            <div class="workflow-step">
+              <div class="workflow-icon workflow-icon-export">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </div>
+              <span>Export</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="components">
+      <div class="container">
+        <div class="section-header-centered">
+          <span class="label label-accent">Components</span>
+          <h2>What you see in the preview</h2>
+          <p>Every component reflects your current tokens. Here's what's included in the workspace.</p>
+        </div>
+        <div class="components-grid stagger">
+          <div class="component-card card">
+            <div class="component-preview">
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="comp-btn comp-btn-primary">Primary</button>
+                <button class="comp-btn">Secondary</button>
+                <button class="comp-btn comp-btn-ghost">Ghost</button>
+              </div>
+            </div>
+            <div class="component-body">
+              <h3>Buttons</h3>
+              <p>Primary, secondary, ghost — with small, default, and large sizes. All respect your color, spacing, and radius tokens.</p>
+            </div>
+          </div>
+          <div class="component-card card">
+            <div class="component-preview">
+              <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;box-shadow:var(--shadow)">
+                <div style="height:60px;background:linear-gradient(135deg,var(--accent-bg),var(--bg));display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border-subtle)"><span style="font-family:var(--font-mono);font-size:0.5625rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em">Image</span></div>
+                <div style="padding:12px"><div style="font-family:var(--font-display);font-size:0.875rem;color:var(--text-primary);margin-bottom:4px">Card Title</div><div style="font-size:0.6875rem;color:var(--text-muted);line-height:1.5;margin-bottom:6px">Card text goes here.</div><span style="font-family:var(--font-mono);font-size:0.5625rem;color:var(--accent)">Explore →</span></div>
+              </div>
+            </div>
+            <div class="component-body">
+              <h3>Cards</h3>
+              <p>Image header, title, description, and link — all reflecting your tokens. Border, shadow, and radius come from your system.</p>
+            </div>
+          </div>
+          <div class="component-card card">
+            <div class="component-preview">
+              <div style="display:flex;flex-direction:column;gap:8px;width:200px">
+                <div><div style="font-family:var(--font-mono);font-size:0.5625rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:4px">Label</div><input type="text" placeholder="Placeholder text" style="width:100%;font-family:var(--font-body);font-size:0.75rem;padding:6px 10px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text-primary)"></div>
+              </div>
+            </div>
+            <div class="component-body">
+              <h3>Form elements</h3>
+              <p>Inputs, selects, and checkboxes — styled with your border, spacing, and color tokens. Focus states use your accent.</p>
+            </div>
+          </div>
+          <div class="component-card card">
+            <div class="component-preview">
+              <div style="font-family:var(--font-display);font-size:1rem;color:var(--text-primary);margin-bottom:4px">Heading One</div>
+              <div style="font-family:var(--font-display);font-size:0.875rem;color:var(--text-primary);margin-bottom:4px">Heading Two</div>
+              <div style="font-family:var(--font-body);font-size:0.6875rem;color:var(--text-secondary);line-height:1.5">Body text at your defined size and color. This is what reading looks like with your tokens.</div>
+            </div>
+            <div class="component-body">
+              <h3>Typography</h3>
+              <p>Every heading level and body size from your type scale, rendered in context. See exactly what your type choices look like side by side.</p>
+            </div>
+          </div>
+          <div class="component-card card">
+            <div class="component-preview">
+              <div style="background:var(--text-primary);border-radius:4px;padding:8px;overflow-x:auto"><code><span style="color:#c47a4a">:root</span> &#123;<br>&nbsp;&nbsp;<span style="color:#a09080">--accent</span>: <span style="color:#d4a87a">#a0522d</span>;<br>&#125;</code></div>
+            </div>
+            <div class="component-body">
+              <h3>Code blocks</h3>
+              <p>Syntax-highlighted code blocks using your mono font and text colors. The editor shows your tokens applied to real code.</p>
+            </div>
+          </div>
+          <div class="component-card card">
+            <div class="component-preview">
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <span style="font-family:var(--font-mono);font-size:0.5625rem;padding:2px 8px;border-radius:999px;background:var(--accent-bg);color:var(--accent-dark);border:1px solid rgba(160,82,45,0.2)">Brand</span>
+                <span style="font-family:var(--font-mono);font-size:0.5625rem;padding:2px 8px;border-radius:999px;background:var(--bg);color:var(--text-secondary);border:1px solid var(--border)">Neutral</span>
+                <span style="font-family:var(--font-mono);font-size:0.5625rem;padding:2px 8px;border-radius:999px;background:#e8f0e8;color:#4a7c59;border:1px solid rgba(74,124,89,0.2)">Success</span>
+              </div>
+            </div>
+            <div class="component-body">
+              <h3>Badges</h3>
+              <p>Pill badges in brand, neutral, success, and error variants. All use your color tokens for background and text.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="export">
+      <div class="container">
+        <div class="section-header-centered">
+          <span class="label label-accent">Export formats</span>
+          <h2>Four formats, one source of truth</h2>
+        </div>
+        <div class="export-formats-grid">
+          <div class="export-format-detail">
+            <div class="export-format-header"><h3>CSS Custom Properties</h3><span class="badge">Universal</span></div>
+            <p class="export-format-desc">Standard <code>:root</code> variables. Works in any stylesheet, any browser, any framework. The escape hatch when you need tokens everywhere.</p>
+            <div class="export-code-block code-block"><code><span class="code-keyword">:root</span> &#123; <span class="code-property">--color-accent</span>: <span class="code-value">#a0522d</span>; <span class="code-property">--spacing-lg</span>: <span class="code-value">24px</span>; &#125;</code></div>
+          </div>
+          <div class="export-format-detail">
+            <div class="export-format-header"><h3>JSON</h3><span class="badge badge-neutral">Structured</span></div>
+            <p class="export-format-desc">A token object for JavaScript consumers, design system tooling, or API use. Easy to consume, easy to transform.</p>
+            <div class="export-code-block code-block"><code>&#123; <span class="code-property">"colors"</span>: &#123; <span class="code-value">"accent"</span>: <span class="code-string">"#a0522d"</span> &#125; &#125;</code></div>
+          </div>
+          <div class="export-format-detail">
+            <div class="export-format-header"><h3>Tailwind Config</h3><span class="badge badge-neutral">Framework</span></div>
+            <p class="export-format-desc">A partial <code>tailwind.config.js</code> theme extension. Colors, fonts, spacing, and shadows — ready to merge.</p>
+            <div class="export-code-block code-block"><code><span class="code-keyword">module.exports</span> = &#123; <span class="code-property">theme</span>: &#123; <span class="code-property">extend</span>: &#123; <span class="code-property">colors</span>: &#123; <span class="code-value">'accent'</span>: <span class="code-string">'#a0522d'</span> &#125; &#125; &#125; &#125;;</code></div>
+          </div>
+          <div class="export-format-detail">
+            <div class="export-format-header"><h3>CSS-in-JS Theme</h3><span class="badge badge-neutral">Component</span></div>
+            <p class="export-format-desc">A theme object for Styled Components, Emotion, or vanilla JS. Import it directly and access tokens via <code>theme.colors.accent</code>.</p>
+            <div class="export-code-block code-block"><code><span class="code-keyword">const</span> theme = &#123; <span class="code-property">colors</span>: &#123; <span class="code-value">accent</span>: <span class="code-string">'#a0522d'</span> &#125; &#125;; <span class="code-keyword">export default</span> theme;</code></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header-centered">
+          <span class="label label-accent">Features</span>
+          <h2>What Basis gives you</h2>
+        </div>
+        <div class="features-list-grid grid-2 stagger">
+          <div class="feature-list-item"><div class="feature-list-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><h3>Color editor with contrast</h3><p>Add, edit, and organize colors by role. See contrast ratios against white and dark surfaces as you edit.</p></div></div>
+          <div class="feature-list-item"><div class="feature-list-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><h3>Type scale builder</h3><p>Named sizes from xs to display-xl, with weights. See every level rendered in the preview.</p></div></div>
+          <div class="feature-list-item"><div class="feature-list-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><h3>Spacing scale</h3><p>Named values with visual previews. Consistent spacing across every component.</p></div></div>
+          <div class="feature-list-item"><div class="feature-list-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><h3>Motion tokens</h3><p>Durations and easing curves, named and reusable. Every component respects them.</p></div></div>
+          <div class="feature-list-item"><div class="feature-list-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><h3>Shadow stacks</h3><p>Named box-shadow values with live preview on cards and components.</p></div></div>
+          <div class="feature-list-item"><div class="feature-list-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><h3>Versioned sets</h3><p>Save named snapshots. Switch between them. Track changes over time.</p></div></div>
+          <div class="feature-list-item"><div class="feature-list-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><h3>Four export formats</h3><p>CSS variables, JSON, Tailwind config, CSS-in-JS theme. All reflect your current tokens.</p></div></div>
+          <div class="feature-list-item"><div class="feature-list-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><h3>Self-contained</h3><p>One HTML file. Runs offline. No framework lock-in. No backend. No account.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <span class="label label-accent">Download</span>
+          <h1>Get Basis</h1>
+          <p>The tool is a single HTML file. Open it in any browser. Edit your tokens. Export when you're ready. No installation, no setup, no dependencies.</p>
+          <div class="cta-actions">
+            <a href="/basis/" class="btn btn-primary btn-lg">Open the live tool</a>
+            <a href="#" class="btn btn-ghost btn-lg">Download basis.html</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .software-hero { padding: 80px 0; border-bottom: 1px solid var(--border-subtle); }
+  .software-hero-content { max-width: 640px; }
+  .software-hero-content h1 { font-size: clamp(3rem, 6vw, 4.5rem); margin: 24px 0 32px; }
+  .software-subtitle { font-size: 1.125rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 32px; }
+  .software-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .section-header { margin-bottom: 24px; }
+  .section-header h2 { margin-top: 8px; }
+  .section-intro { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; max-width: 560px; margin-bottom: 48px; }
+  .demo-container { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 16px 48px rgba(28,26,23,0.12), 0 4px 12px rgba(28,26,23,0.06); margin-bottom: 32px; }
+  .demo-iframe { width: 100%; height: 600px; border: none; display: block; }
+  .demo-note { padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+  .demo-note p { font-size: 0.875rem; color: var(--text-secondary); margin-top: 4px; }
+  .section-header-centered { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+  .section-header-centered p { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; margin: 0 auto; }
+  .steps-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-bottom: 48px; }
+  .step-card { padding: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-align: center; }
+  .step-number { font-size: 2.5rem; color: var(--border); line-height: 1; margin-bottom: 24px; font-weight: 300; }
+  .step-card h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .step-card p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+  .workflow-visual { display: flex; justify-content: center; align-items: center; }
+  .workflow-arrow { display: flex; align-items: center; gap: 24px; }
+  .workflow-step { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .workflow-step span { font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+  .workflow-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .workflow-icon-define { background: var(--accent-bg); color: var(--accent); }
+  .workflow-icon-preview { background: #e0e8f0; color: #3a6a8a; }
+  .workflow-icon-export { background: #e8e0f0; color: #7a5a9a; }
+  .workflow-arrow-line { width: 40px; height: 1px; background: var(--border); }
+  .components-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .component-card { transition: transform 200ms var(--ease-default), box-shadow 200ms var(--ease-default); }
+  .component-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .component-preview { background: var(--bg); border-bottom: 1px solid var(--border-subtle); padding: 24px; min-height: 100px; display: flex; align-items: center; }
+  .component-body { padding: 24px; }
+  .component-body h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 400; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -0.01em; }
+  .component-body p { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.6; }
+  .export-formats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .export-format-detail { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; }
+  .export-format-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .export-format-header h3 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 400; margin: 0; letter-spacing: -0.01em; }
+  .export-format-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px; }
+  .export-format-desc code { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); background: var(--accent-bg); padding: 1px 5px; border-radius: 2px; }
+  .features-list-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .feature-list-item { display: flex; gap: 24px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; transition: border-color 120ms var(--ease-default); }
+  .feature-list-item:hover { border-color: var(--accent-light); }
+  .feature-list-check { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--accent-bg); display: flex; align-items: center; justify-content: center; }
+  .feature-list-item h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 400; color: var(--text-primary); margin-bottom: 2px; letter-spacing: -0.01em; }
+  .feature-list-item p { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.5; }
+  .cta-section { background: var(--text-primary); color: var(--bg); text-align: center; }
+  .cta-section .label { color: var(--accent-light); }
+  .cta-section h1 { color: var(--bg); margin: 16px 0 32px; font-size: clamp(2rem, 4vw, 3rem); }
+  .cta-section p { color: rgba(245,243,239,0.7); font-size: 1.0625rem; max-width: 520px; margin: 0 auto 32px; line-height: 1.7; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .cta-section .btn-primary { background: var(--accent); border-color: var(--accent); }
+  .cta-section .btn-primary:hover { background: var(--accent-light); border-color: var(--accent-light); }
+  .cta-section .btn-ghost { color: rgba(245,243,239,0.7); border-color: rgba(245,243,239,0.15); }
+  .cta-section .btn-ghost:hover { background: rgba(245,243,239,0.08); color: var(--bg); border-color: rgba(245,243,239,0.3); }
+  @media (max-width: 900px) {
+    .steps-grid { grid-template-columns: 1fr; }
+    .components-grid { grid-template-columns: 1fr 1fr; }
+    .export-formats-grid { grid-template-columns: 1fr; }
+    .features-list-grid { grid-template-columns: 1fr; }
+    .workflow-visual { flex-direction: column; }
+    .workflow-arrow { flex-direction: column; gap: 32px; }
+    .workflow-arrow-line { width: 1px; height: 24px; }
+  }
+  @media (max-width: 600px) {
+    .components-grid { grid-template-columns: 1fr; }
+  }
+</style>

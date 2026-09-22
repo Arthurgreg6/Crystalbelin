@@ -1,0 +1,137 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">Basis</a>
+      <p class="footer-tagline">A design token workspace for software designers and publishers.</p>
+    </div>
+    <nav class="footer-links">
+      <div class="footer-col">
+        <span class="label">Product</span>
+        <a href="/software">The Software</a>
+        <a href="/software#demo">Live Demo</a>
+        <a href="/software#export">Export Formats</a>
+      </div>
+      <div class="footer-col">
+        <span class="label">Tools</span>
+        <a href="/tools">All Tools</a>
+        <a href="/tools#palette">Palette</a>
+        <a href="/tools#type-pair">Type Pair</a>
+        <a href="/tools#token-convert">Token Convert</a>
+        <a href="/tools#shadow-forge">Shadow Forge</a>
+      </div>
+      <div class="footer-col">
+        <span class="label">Company</span>
+        <a href="/about">About</a>
+        <a href="/docs">Documentation</a>
+      </div>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-container">
+      <p>&copy; {currentYear} Basis. Designed and published with care.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    margin-top: var(--spacing-4xl);
+  }
+
+  .footer-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--spacing-3xl) var(--spacing-xl);
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-3xl);
+  }
+
+  .footer-brand {
+    max-width: 280px;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    display: block;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .footer-logo:hover {
+    color: var(--accent);
+  }
+
+  .footer-tagline {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: var(--spacing-3xl);
+    flex-wrap: wrap;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .footer-col span.label {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .footer-col a {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .footer-col a:hover {
+    color: var(--accent);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .footer-bottom .footer-container {
+    padding: var(--spacing-md) var(--spacing-xl);
+  }
+
+  .footer-bottom p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .footer-brand {
+      max-width: 100%;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .footer-links {
+      gap: var(--spacing-xl);
+    }
+  }
+</style>

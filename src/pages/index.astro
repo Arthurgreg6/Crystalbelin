@@ -1,0 +1,462 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Basis — Design Token Workspace';
+const description = 'A living design token workspace for software designers and publishers. Define, visualize, and export your design system — colors, typography, spacing, motion, and shadows — all in one place, with real previews and clean exports.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Nav />
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content stagger">
+          <span class="hero-label label label-accent">Design Token Workspace</span>
+          <h1 class="hero-title">
+            Your design system,<br>
+            <em class="hero-title-italic">alive.</em>
+          </h1>
+          <p class="hero-body">
+            Basis is a workspace where you define, visualize, and export the tokens that hold your design language together — colors, type, spacing, motion, shadows. Edit on the left. See every component update on the right. Export clean code in four formats.
+          </p>
+          <div class="hero-actions">
+            <a href="/software#demo" class="btn btn-primary btn-lg">Try the demo</a>
+            <a href="/software" class="btn btn-ghost btn-lg">Read more</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="browser-frame">
+            <div class="browser-bar">
+              <span class="browser-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </span>
+              <span class="browser-url">
+                <span class="url-protocol">https://</span>
+                <span class="url-domain">basis.workspace</span>
+              </span>
+            </div>
+            <div class="browser-content">
+              <div class="mock-nav">
+                <span class="mock-brand">Basis</span>
+                <span class="mock-links">
+                  <span class="mock-link">Tokens</span>
+                  <span class="mock-link">Components</span>
+                  <span class="mock-link">Export</span>
+                </span>
+              </div>
+              <div class="mock-editor">
+                <div class="mock-section-header">
+                  <span class="mock-label">Color Tokens</span>
+                  <span class="mock-action">+ Add</span>
+                </div>
+                <div class="mock-rows">
+                  <div class="mock-row">
+                    <div class="mock-swatch" style="background:#f5f3ef"></div>
+                    <div class="mock-info">
+                      <div class="mock-name">background</div>
+                      <div class="mock-value">#f5f3ef</div>
+                    </div>
+                    <div class="mock-badge">canvas</div>
+                  </div>
+                  <div class="mock-row">
+                    <div class="mock-swatch" style="background:#ffffff"></div>
+                    <div class="mock-info">
+                      <div class="mock-name">surface</div>
+                      <div class="mock-value">#ffffff</div>
+                    </div>
+                    <div class="mock-badge">surface</div>
+                  </div>
+                  <div class="mock-row accent-row">
+                    <div class="mock-swatch" style="background:#a0522d"></div>
+                    <div class="mock-info">
+                      <div class="mock-name">accent</div>
+                      <div class="mock-value">#a0522d</div>
+                    </div>
+                    <div class="mock-badge accent-badge">brand</div>
+                  </div>
+                  <div class="mock-row">
+                    <div class="mock-swatch" style="background:#4a7c59"></div>
+                    <div class="mock-info">
+                      <div class="mock-name">success</div>
+                      <div class="mock-value">#4a7c59</div>
+                    </div>
+                    <div class="mock-badge">semantic</div>
+                  </div>
+                </div>
+              </div>
+              <div class="mock-preview">
+                <div class="mock-preview-header">
+                  <span class="mock-label">Live Preview</span>
+                </div>
+                <div class="mock-components">
+                  <button class="mock-btn mock-btn-primary">Primary Action</button>
+                  <button class="mock-btn">Secondary</button>
+                  <button class="mock-btn mock-btn-ghost">Ghost</button>
+                </div>
+                <div class="mock-card">
+                  <div class="mock-card-image">
+                    <span class="mock-card-placeholder">Preview Image</span>
+                  </div>
+                  <div class="mock-card-body">
+                    <div class="mock-card-title">Token Workspace</div>
+                    <div class="mock-card-text">Define, visualize, and export your design tokens. Every component updates as you edit.</div>
+                    <span class="mock-card-link">Explore →</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section problem-section">
+      <div class="container">
+        <div class="problem-grid">
+          <div class="problem-text">
+            <span class="label label-accent">The problem</span>
+            <h2>Design systems don't stay in sync</h2>
+            <p>What's in Figma drifts from what's in code. What's in code drifts from what's documented. The people writing components don't have the tokens. The people writing docs don't have the latest values. Everyone's working from a different version of the truth.</p>
+            <p>Most tools treat design tokens as configuration — something to serialize and forget. Basis treats them as a living system. Edit a color, watch every component reflect it. Save a named set. Export when you're ready.</p>
+          </div>
+          <div class="problem-visual">
+            <div class="drift-card">
+              <div class="drift-row">
+                <span class="drift-label">Figma</span>
+                <span class="drift-status drift-outdated">Out of sync</span>
+              </div>
+              <div class="drift-row">
+                <span class="drift-label">CSS</span>
+                <span class="drift-status drift-outdated">Out of sync</span>
+              </div>
+              <div class="drift-row">
+                <span class="drift-label">Documentation</span>
+                <span class="drift-status drift-outdated">Out of sync</span>
+              </div>
+              <div class="drift-row">
+                <span class="drift-label">Components</span>
+                <span class="drift-status drift-outdated">Out of sync</span>
+              </div>
+              <div class="drift-summary">Four versions of the same system. None of them agree.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header-centered">
+          <span class="label label-accent">What it does</span>
+          <h2>A workspace built around the tokens that matter</h2>
+          <p>Colors, typography, spacing, motion, and shadows — edit them all in one place, with live previews that show you exactly what you're building.</p>
+        </div>
+        <div class="features-grid stagger">
+          <div class="feature-card card">
+            <div class="feature-icon feature-icon-colors">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/>
+                <line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
+                <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
+              </svg>
+            </div>
+            <div class="feature-body">
+              <h3 class="feature-title">Color tokens</h3>
+              <p class="feature-text">Define your palette with color pickers, hex inputs, and role labels. See contrast ratios. Organize by role — canvas, surface, text, brand, semantic.</p>
+            </div>
+          </div>
+          <div class="feature-card card">
+            <div class="feature-icon feature-icon-type">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/>
+                <line x1="12" y1="4" x2="12" y2="20"/><line x1="8" y1="12" x2="16" y2="12"/>
+              </svg>
+            </div>
+            <div class="feature-body">
+              <h3 class="feature-title">Typography</h3>
+              <p class="feature-text">Choose your display, body, and mono fonts from a curated set. Build a type scale with named sizes and weights. See every heading and body size rendered in the preview.</p>
+            </div>
+          </div>
+          <div class="feature-card card">
+            <div class="feature-icon feature-icon-space">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/>
+                <line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/>
+              </svg>
+            </div>
+            <div class="feature-body">
+              <h3 class="feature-title">Spacing scale</h3>
+              <p class="feature-text">Define your spacing scale as named values. See each step visualized. Use them consistently across every component in the preview.</p>
+            </div>
+          </div>
+          <div class="feature-card card">
+            <div class="feature-icon feature-icon-motion">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div class="feature-body">
+              <h3 class="feature-title">Motion</h3>
+              <p class="feature-text">Set durations and easing curves for your interaction language. Name them and use them consistently. Every component in the preview respects them.</p>
+            </div>
+          </div>
+          <div class="feature-card card">
+            <div class="feature-icon feature-icon-shadow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="feature-body">
+              <h3 class="feature-title">Shadow stacks</h3>
+              <p class="feature-text">Define named shadow values as full box-shadow declarations. See them applied to cards and components. Build depth that feels intentional.</p>
+            </div>
+          </div>
+          <div class="feature-card card">
+            <div class="feature-icon feature-icon-version">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 20h9"/>
+                <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+            </div>
+            <div class="feature-body">
+              <h3 class="feature-title">Versioned sets</h3>
+              <p class="feature-text">Save named token sets as you go. Switch between them. Compare. Each set is a snapshot of your design language at a point in time.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="export">
+      <div class="container">
+        <div class="section-header-centered">
+          <span class="label label-accent">Export</span>
+          <h2>Clean code, in the format you need</h2>
+          <p>When you're ready, export your token set in four formats. Each one reflects your current tokens exactly — no hand-editing required.</p>
+        </div>
+        <div class="export-grid stagger">
+          <div class="export-card">
+            <div class="export-format-name">CSS Custom Properties</div>
+            <div class="export-format-desc">Standard :root variables. Works in any stylesheet, any browser.</div>
+            <div class="export-code-block code-block">
+              <code><span class="code-comment">/* Basis export */</span>
+<span class="code-keyword">:root</span> &#123;
+  <span class="code-property">--color-accent</span>: <span class="code-value">#a0522d</span>;
+  <span class="code-property">--spacing-lg</span>: <span class="code-value">24px</span>;
+&#125;</code>
+              <button class="export-copy-btn">Copy</button>
+            </div>
+          </div>
+          <div class="export-card">
+            <div class="export-format-name">JSON</div>
+            <div class="export-format-desc">Token object for JS consumers, tooling, or API use.</div>
+            <div class="export-code-block code-block">
+              <code>&#123;
+  <span class="code-property">"colors"</span>: &#123;
+    <span class="code-value">"accent"</span>: <span class="code-string">"#a0522d"</span>
+  &#125;
+&#125;</code>
+              <button class="export-copy-btn">Copy</button>
+            </div>
+          </div>
+          <div class="export-card">
+            <div class="export-format-name">Tailwind Config</div>
+            <div class="export-format-desc">Partial tailwind.config.js theme extension.</div>
+            <div class="export-code-block code-block">
+              <code><span class="code-keyword">module.exports</span> = &#123;
+  <span class="code-property">theme</span>: &#123; <span class="code-property">extend</span>: &#123;
+    <span class="code-property">colors</span>: &#123; <span class="code-value">'accent'</span>: <span class="code-string">'#a0522d'</span> &#125;
+  &#125;&#125;
+&#125;;</code>
+              <button class="export-copy-btn">Copy</button>
+            </div>
+          </div>
+          <div class="export-card">
+            <div class="export-format-name">CSS-in-JS Theme</div>
+            <div class="export-format-desc">Theme object for Styled Components, Emotion, or vanilla JS.</div>
+            <div class="export-code-block code-block">
+              <code><span class="code-keyword">const</span> theme = &#123;
+  <span class="code-property">colors</span>: &#123; <span class="code-value">accent</span>: <span class="code-string">'#a0522d'</span> &#125;
+&#125;;
+<span class="code-keyword">export default</span> theme;</code>
+              <button class="export-copy-btn">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header-centered">
+          <span class="label label-accent">Who it's for</span>
+          <h2>Built for people who publish software</h2>
+        </div>
+        <div class="audience-grid grid-2 stagger">
+          <div class="audience-card">
+            <span class="audience-number mono">01</span>
+            <h3>Software designers</h3>
+            <p>You design software and you publish it. You care about the consistency of your interfaces and the integrity of your design language. Basis gives you a single source of truth for the tokens that define it.</p>
+          </div>
+          <div class="audience-card">
+            <span class="audience-number mono">02</span>
+            <h3>Design system owners</h3>
+            <p>You maintain the tokens, the components, the documentation — and you're tired of them drifting out of sync. Basis keeps them together. Edit once, see everywhere, export when ready.</p>
+          </div>
+          <div class="audience-card">
+            <span class="audience-number mono">03</span>
+            <h3>Publishers and toolmakers</h3>
+            <p>You ship tools and platforms with a design language that needs to hold together across versions. Basis gives you versioned sets, clean exports, and previews that show you what you're building.</p>
+          </div>
+          <div class="audience-card">
+            <span class="audience-number mono">04</span>
+            <h3>Anyone tired of drift</h3>
+            <p>The Figma file doesn't match the code. The code doesn't match the docs. Basis is for people who want the whole system to agree on what a color, a size, a shadow actually is.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <span class="label label-accent">Get started</span>
+          <h2>Stop managing tokens in three places</h2>
+          <p>Basis is a single, self-contained workspace. Open it, define your tokens, watch the preview update, export when you're ready. No setup, no framework lock-in, no serialization surprises.</p>
+          <div class="cta-actions">
+            <a href="/software#demo" class="btn btn-primary btn-lg">Try the live demo</a>
+            <a href="/software" class="btn btn-ghost btn-lg">Read the full introduction</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero { padding: 80px 0 64px; overflow: hidden; }
+  .hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .hero-content { max-width: 540px; }
+  .hero-label { display: inline-block; margin-bottom: 24px; }
+  .hero-title { font-size: clamp(2.5rem, 5vw, 3.75rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 24px; }
+  .hero-title-italic { font-style: italic; color: var(--accent); }
+  .hero-body { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 32px; max-width: 440px; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .browser-frame { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 16px 48px rgba(28,26,23,0.12), 0 4px 12px rgba(28,26,23,0.06); overflow: hidden; transform: rotateY(-2deg) rotateX(1deg); transition: transform 350ms var(--ease-default); }
+  .browser-frame:hover { transform: rotateY(0) rotateX(0); }
+  .browser-bar { display: flex; align-items: center; padding: 8px 16px; background: var(--bg); border-bottom: 1px solid var(--border-subtle); gap: 8px; }
+  .browser-dots { display: flex; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-red { background: #ff5f57; } .dot-yellow { background: #ffbd2e; } .dot-green { background: #28c840; }
+  .browser-url { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-muted); margin-left: 8px; display: flex; align-items: center; gap: 4px; }
+  .url-protocol { color: var(--text-muted); } .url-domain { color: var(--text-secondary); }
+  .browser-content { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+  .mock-nav { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--border-subtle); }
+  .mock-brand { font-family: var(--font-display); font-size: 1rem; font-weight: 400; color: var(--text-primary); }
+  .mock-links { display: flex; gap: 24px; }
+  .mock-link { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .mock-section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .mock-label { font-family: var(--font-mono); font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+  .mock-action { font-family: var(--font-mono); font-size: 0.625rem; color: var(--accent); }
+  .mock-rows { display: flex; flex-direction: column; gap: 4px; }
+  .mock-row { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+  .mock-swatch { width: 20px; height: 20px; border-radius: 3px; border: 1px solid var(--border); flex-shrink: 0; }
+  .mock-row.accent-row .mock-swatch { box-shadow: 0 0 0 2px var(--accent-bg); }
+  .mock-info { flex: 1; }
+  .mock-name { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-primary); }
+  .mock-value { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-muted); }
+  .mock-badge { font-family: var(--font-mono); font-size: 0.5625rem; padding: 1px 5px; border-radius: 2px; background: var(--bg); color: var(--text-muted); border: 1px solid var(--border-subtle); text-transform: uppercase; letter-spacing: 0.04em; }
+  .accent-badge { background: var(--accent-bg); color: var(--accent-dark); border-color: rgba(160,82,45,0.2); }
+  .mock-preview-header { margin: 24px 0 8px; }
+  .mock-components { display: flex; gap: 8px; margin-bottom: 16px; }
+  .mock-btn { font-family: var(--font-body); font-size: 0.75rem; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--border); background: var(--surface); color: var(--text-primary); }
+  .mock-btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .mock-btn-ghost { background: transparent; border-color: transparent; color: var(--text-secondary); }
+  .mock-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); }
+  .mock-card-image { height: 80px; background: linear-gradient(135deg, var(--accent-bg) 0%, var(--bg) 100%); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-subtle); }
+  .mock-card-placeholder { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .mock-card-body { padding: 16px; }
+  .mock-card-title { font-family: var(--font-display); font-size: 0.875rem; color: var(--text-primary); margin-bottom: 4px; }
+  .mock-card-text { font-size: 0.6875rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 8px; }
+  .mock-card-link { font-family: var(--font-mono); font-size: 0.5625rem; color: var(--accent); }
+
+  .problem-section { background: var(--bg-alt); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .problem-text h2 { margin-bottom: 24px; }
+  .problem-text p { color: var(--text-secondary); margin-bottom: 16px; }
+  .problem-text p:last-child { margin-bottom: 0; }
+  .problem-visual { display: flex; justify-content: center; }
+  .drift-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; width: 100%; max-width: 320px; box-shadow: var(--shadow); }
+  .drift-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border-subtle); }
+  .drift-row:last-of-type { border-bottom: none; }
+  .drift-label { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary); }
+  .drift-status { font-family: var(--font-mono); font-size: 0.6875rem; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .drift-outdated { background: #fce8e8; color: var(--error); border: 1px solid rgba(161,61,61,0.2); }
+  .drift-summary { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-subtle); font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); font-style: italic; text-align: center; }
+
+  .section-header-centered { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+  .section-header-centered h2 { margin-bottom: 16px; }
+  .section-header-centered p { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; margin: 0 auto; }
+
+  .features-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .feature-card { transition: transform 200ms var(--ease-default), box-shadow 200ms var(--ease-default); }
+  .feature-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .feature-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+  .feature-icon-colors { background: var(--accent-bg); color: var(--accent); }
+  .feature-icon-type { background: #e8e0f0; color: #7a5a9a; }
+  .feature-icon-space { background: #f8f0e8; color: var(--accent-dark); }
+  .feature-icon-motion { background: #e0e8f0; color: #3a6a8a; }
+  .feature-icon-shadow { background: #f0e8e0; color: #8a6a4a; }
+  .feature-icon-version { background: #e8f0e0; color: #4a7c59; }
+  .feature-body { padding: 0 24px 24px; }
+  .feature-title { font-family: var(--font-display); font-size: 1.125rem; font-weight: 400; color: var(--text-primary); margin-bottom: 8px; letter-spacing: -0.01em; }
+  .feature-text { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .export-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .export-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; transition: border-color 200ms var(--ease-default), box-shadow 200ms var(--ease-default); }
+  .export-card:hover { border-color: var(--accent-light); box-shadow: var(--shadow); }
+  .export-format-name { font-family: var(--font-display); font-size: 1.125rem; font-weight: 400; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -0.01em; }
+  .export-format-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px; }
+  .export-format-desc code { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); background: var(--accent-bg); padding: 1px 5px; border-radius: 2px; }
+  .export-code-block { position: relative; margin-bottom: 16px; }
+  .export-copy-btn { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); font-family: var(--font-mono); font-size: 0.625rem; padding: 3px 8px; border-radius: 2px; cursor: pointer; transition: all 120ms var(--ease-default); text-transform: uppercase; letter-spacing: 0.06em; }
+  .export-copy-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+  .audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .audience-card { padding: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+  .audience-number { font-size: 2.5rem; color: var(--border); line-height: 1; margin-bottom: 24px; font-weight: 300; }
+  .audience-card h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; color: var(--text-primary); margin-bottom: 8px; letter-spacing: -0.01em; }
+  .audience-card p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .cta-section { background: var(--text-primary); color: var(--bg); text-align: center; }
+  .cta-section .label { color: var(--accent-light); }
+  .cta-section h2 { color: var(--bg); margin-bottom: 16px; }
+  .cta-section p { color: rgba(245,243,239,0.7); font-size: 1.0625rem; max-width: 520px; margin: 0 auto 32px; line-height: 1.7; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .cta-section .btn-primary { background: var(--accent); border-color: var(--accent); }
+  .cta-section .btn-primary:hover { background: var(--accent-light); border-color: var(--accent-light); }
+  .cta-section .btn-ghost { color: rgba(245,243,239,0.7); border-color: rgba(245,243,239,0.15); }
+  .cta-section .btn-ghost:hover { background: rgba(245,243,239,0.08); color: var(--bg); border-color: rgba(245,243,239,0.3); }
+
+  @media (max-width: 900px) {
+    .hero .container { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .export-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .audience-grid { grid-template-columns: 1fr; }
+  }
+</style>

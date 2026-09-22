@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Documentation — Basis';
+const description = 'Documentation for Basis — the design token workspace. Learn how to define tokens, use the preview, export in different formats, and manage versioned sets.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Nav />
+
+  <main>
+    <section class="docs-hero section">
+      <div class="container">
+        <div class="docs-hero-content">
+          <span class="label label-accent">Documentation</span>
+          <h1>Using Basis</h1>
+          <p class="docs-subtitle">Everything you need to use the Basis design token workspace — from opening the tool to exporting your tokens in any format.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="docs-grid">
+          <aside class="docs-sidebar">
+            <nav class="docs-nav">
+              <a href="#getting-started" class="docs-nav-item">Getting started</a>
+              <a href="#tokens" class="docs-nav-item">Tokens</a>
+              <a href="#colors" class="docs-nav-item">Color tokens</a>
+              <a href="#typography" class="docs-nav-item">Typography</a>
+              <a href="#spacing" class="docs-nav-item">Spacing</a>
+              <a href="#motion" class="docs-nav-item">Motion</a>
+              <a href="#shadows" class="docs-nav-item">Shadows</a>
+              <a href="#versions" class="docs-nav-item">Versioned sets</a>
+              <a href="#export" class="docs-nav-item">Export</a>
+              <a href="#tips" class="docs-nav-item">Tips & patterns</a>
+            </nav>
+          </aside>
+          <div class="docs-content">
+            <section id="getting-started">
+              <h2>Getting started</h2>
+              <p>Basis is a single HTML file. Download it from the software page, open it in any modern browser, and start editing. No installation, no dependencies, no account.</p>
+              <p>The tool is split into two panels: the editor on the left, where you define and edit tokens, and the preview on the right, where every component reflects your current token set in real time.</p>
+              <div class="docs-callout"><strong>Tip:</strong> Start with the default token set. It's a complete, working design system you can edit, extend, or replace entirely.</div>
+            </section>
+            <section id="tokens">
+              <h2>Tokens</h2>
+              <p>Tokens are the named values that define your design language. Basis organizes them into five categories: colors, typography, spacing, motion, and shadows. Each category has its own editor section.</p>
+              <p>Every token you edit is reflected immediately in the preview. There's no "apply" step — the preview is always in sync with the editor.</p>
+            </section>
+            <section id="colors">
+              <h2>Color tokens</h2>
+              <p>Colors are organized by role: canvas (background), surface, text (primary, secondary, muted), border, brand (accent and its variants), and semantic (success, warning, error).</p>
+              <p>Each color has a swatch, a hex input, and a role label. Click the swatch to open a color picker. Type a hex value directly. The contrast badge shows whether the color passes WCAG AA against white.</p>
+              <h3>Adding colors</h3>
+              <p>Click the "+ Add" button at the top of the Color Tokens section to add a new color. Give it a name, a value, and a role. It appears immediately in the preview.</p>
+            </section>
+            <section id="typography">
+              <h2>Typography</h2>
+              <p>Three font selections define your type system: display font (for headings), body font (for reading text), and mono font (for code and technical labels). Each is chosen from a curated set of Google Fonts.</p>
+              <p>The type scale defines named sizes — from xs through display-xl — each with a size value and a weight. Every heading and body size in the preview reflects your scale.</p>
+              <h3>Editing the scale</h3>
+              <p>Each scale entry has an editable size (e.g., "1.5rem") and weight (e.g., 400). Change either and the preview updates. Add new entries or remove existing ones to match your design needs.</p>
+            </section>
+            <section id="spacing">
+              <h2>Spacing</h2>
+              <p>The spacing scale defines named spacing values — xs, sm, md, lg, xl, 2xl, 3xl — each as a pixel value. These are the values that control padding, margins, gaps, and sizes throughout your components.</p>
+              <p>Each spacing value is shown as a visual bar whose width corresponds to the value. Edit the number directly. The preview components use these values for their internal spacing.</p>
+            </section>
+            <section id="motion">
+              <h2>Motion</h2>
+              <p>Motion tokens define your interaction language — durations (fast, default, slow) and easing curves (ease-out, ease-in, linear, and custom cubic-beziers). Named durations and easings are reusable across components.</p>
+              <p>The preview components use these tokens for their hover transitions and animations. Change a duration or easing and see the effect on the components.</p>
+            </section>
+            <section id="shadows">
+              <h2>Shadows</h2>
+              <p>Shadows are defined as full box-shadow declarations — named values like sm, default, and lg. Each is shown as a small square with the shadow applied, alongside an editable text field.</p>
+              <p>Add new shadows with the "+ Add Shadow" button. Delete shadows with the × button. The preview cards and components use your shadow tokens for their depth.</p>
+            </section>
+            <section id="versions">
+              <h2>Versioned sets</h2>
+              <p>Save named snapshots of your token set at any point. Click "Save Set" in the header, give it a name, and it's added to the version list. Switch between versions using the dropdown in the footer bar.</p>
+              <p>Versions are useful for exploring alternatives ("what if the accent were teal?"), tracking changes over time, or maintaining separate sets for different products or themes.</p>
+              <div class="docs-callout"><strong>Note:</strong> Switching versions replaces your current tokens with the saved version. You can always save your current work before switching.</div>
+            </section>
+            <section id="export">
+              <h2>Export</h2>
+              <p>When you're ready, export your tokens in one of four formats. Click "Export" in the header to open the export modal.</p>
+              <p>The four formats are:</p>
+              <ul>
+                <li><strong>CSS Custom Properties</strong> — Standard :root variables. Works everywhere.</li>
+                <li><strong>JSON</strong> — A structured token object for JavaScript, tooling, or APIs.</li>
+                <li><strong>Tailwind Config</strong> — A partial tailwind.config.js theme extension.</li>
+                <li><strong>CSS-in-JS Theme</strong> — A theme object for Styled Components, Emotion, or vanilla JS.</li>
+              </ul>
+              <p>Select a format, copy the code to your clipboard, or close the modal and try another format. Each export reflects your exact current tokens — no hand-editing, no drift.</p>
+            </section>
+            <section id="tips">
+              <h2>Tips & patterns</h2>
+              <h3>Start from the default set</h3>
+              <p>The default token set is a complete, working design system. Edit it, extend it, or replace it — but starting from a working baseline is faster than building from scratch.</p>
+              <h3>Name things intentionally</h3>
+              <p>Token names are how you'll refer to them in code. Use clear, consistent names — <code>color-accent</code>, not <code>color-brown-1</code>. The name should tell you what the token is for, not just what it looks like.</p>
+              <h3>Use versions for exploration</h3>
+              <p>Before committing to a new direction, save your current set, experiment, and compare. Versions let you try alternatives without losing your work.</p>
+              <h3>Export early, export often</h3>
+              <p>You don't have to wait until you're "done" to export. Exporting periodically gives you a record of your token set at different points and lets you use tokens in your projects as you build them.</p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .docs-hero { padding: 80px 0; border-bottom: 1px solid var(--border-subtle); }
+  .docs-hero-content { max-width: 640px; }
+  .docs-hero-content h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); margin: 24px 0 32px; }
+  .docs-subtitle { font-size: 1.125rem; color: var(--text-secondary); line-height: 1.7; }
+  .docs-grid { display: grid; grid-template-columns: 240px 1fr; gap: 64px; max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+  .docs-sidebar { position: sticky; top: calc(64px + 24px); align-self: start; }
+  .docs-nav { display: flex; flex-direction: column; gap: 4px; }
+  .docs-nav-item { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-muted); text-decoration: none; padding: 4px 0; border-bottom: 1px solid var(--border-subtle); transition: color 120ms var(--ease-default); display: block; }
+  .docs-nav-item:hover { color: var(--accent); }
+  .docs-content { padding-top: 24px; }
+  .docs-content > section { margin-bottom: 48px; }
+  .docs-content h2 { font-size: 1.75rem; margin-bottom: 24px; padding-bottom: 8px; border-bottom: 1px solid var(--border-subtle); }
+  .docs-content h3 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 400; color: var(--text-primary); margin: 24px 0 8px; letter-spacing: -0.01em; }
+  .docs-content p { color: var(--text-secondary); margin-bottom: 16px; line-height: 1.7; }
+  .docs-content p:last-child { margin-bottom: 0; }
+  .docs-content ul { margin: 16px 0; padding-left: 24px; list-style: none; }
+  .docs-content ul li { position: relative; padding-left: 16px; margin-bottom: 8px; color: var(--text-secondary); line-height: 1.6; }
+  .docs-content ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 500; }
+  .docs-callout { background: var(--accent-bg); border: 1px solid rgba(160,82,45,0.15); border-radius: 8px; padding: 16px 24px; margin: 24px 0; font-size: 0.875rem; color: var(--text-primary); line-height: 1.6; }
+  .docs-callout strong { color: var(--accent-dark); }
+  @media (max-width: 768px) {
+    .docs-grid { grid-template-columns: 1fr; }
+    .docs-sidebar { position: static; margin-bottom: 24px; }
+    .docs-nav { flex-direction: row; flex-wrap: wrap; gap: 4px; }
+    .docs-nav-item { border-bottom: none; padding: 4px 8px; border-radius: 4px; background: var(--bg); }
+    .docs-nav-item:hover { background: var(--accent-bg); }
+  }
+</style>

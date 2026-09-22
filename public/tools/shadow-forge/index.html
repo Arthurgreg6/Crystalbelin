@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shadow Forge — Basis Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ef;
+    --surface: #ffffff;
+    --text-primary: #1c1a17;
+    --text-secondary: #6b655e;
+    --text-muted: #9c958c;
+    --border: #e3ddd4;
+    --border-subtle: #ede8e0;
+    --accent: #a0522d;
+    --accent-dark: #8b4519;
+    --accent-light: #c47a4a;
+    --accent-bg: #faf3ed;
+    --radius: 8px;
+    --radius-lg: 12px;
+    --shadow: 0 2px 8px rgba(28,26,23,0.06), 0 1px 2px rgba(28,26,23,0.04);
+    --shadow-lg: 0 8px 24px rgba(28,26,23,0.08), 0 2px 6px rgba(28,26,23,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.6; }
+  a { color: var(--accent); }
+  a:hover { color: var(--accent-dark); }
+  h1, h2, h3 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; color: var(--text-primary); letter-spacing: -0.01em; }
+  h1 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.1; margin-bottom: 4px; }
+  h2 { font-size: 1.375rem; line-height: 1.2; margin-bottom: 8px; }
+  p { line-height: 1.6; }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 64px 0; }
+  .section-alt { background: #fdfbf9; }
+  .label { font-family: 'JetBrains Mono', monospace; font-size: 0.6875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+  .label-accent { color: var(--accent); }
+  .btn { font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; padding: 10px 20px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--text-primary); cursor: pointer; transition: all 200ms; display: inline-flex; align-items: center; gap: 8px; }
+  .btn:hover { border-color: var(--accent-light); color: var(--accent); background: var(--accent-bg); transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+  .btn-ghost { background: transparent; border-color: transparent; color: var(--text-secondary); }
+  .btn-ghost:hover { background: var(--accent-bg); color: var(--accent); transform: none; }
+  .btn-sm { padding: 6px 14px; font-size: 0.8125rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow); }
+  .card-large { padding: 32px; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .code-block { background: var(--text-primary); border-radius: var(--radius); padding: 16px; overflow-x: auto; }
+  .code-block code { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; line-height: 1.6; color: #e8e2d8; white-space: pre; }
+  .badge { font-family: 'JetBrains Mono', monospace; font-size: 0.6875rem; font-weight: 500; padding: 3px 10px; border-radius: 999px; background: var(--accent-bg); color: var(--accent-dark); border: 1px solid rgba(160,82,45,0.2); }
+  .tool-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border-subtle); }
+  .tool-icon { width: 48px; height: 48px; border-radius: var(--radius); background: var(--accent-bg); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .tool-icon svg { width: 28px; height: 28px; }
+  .flex-between { display: flex; justify-content: space-between; align-items: center; }
+  .items-center { align-items: center; }
+  .gap-8 { gap: 8px; }
+  .gap-16 { gap: 16px; }
+  .gap-24 { gap: 24px; }
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .mt-24 { margin-top: 24px; }
+  .mb-8 { margin-bottom: 8px; }
+  .mb-16 { margin-bottom: 16px; }
+  .mb-24 { margin-bottom: 24px; }
+  .w-full { width: 100%; }
+  .flex-wrap { flex-wrap: wrap; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+  .input { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text-primary); width: 100%; }
+  .input:focus { outline: none; border-color: var(--accent); }
+  .select { font-size: 0.875rem; padding: 6px 10px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text-primary); cursor: pointer; font-family: 'Inter', system-ui, sans-serif; }
+  .select:focus { outline: none; border-color: var(--accent); }
+  .range-row { display: flex; gap: 12px; align-items: center; margin-bottom: 8px; }
+  .range-row:last-child { margin-bottom: 0; }
+  .range-row label { font-family: 'JetBrains Mono', monospace; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); min-width: 60px; }
+  .range-row input[type="range"] { flex: 1; accent-color: var(--accent); }
+  .range-row .range-value { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-secondary); min-width: 48px; text-align: right; }
+  .range-row .range-input { width: 60px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 2px 4px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); text-align: center; }
+  .range-row .range-input:focus { outline: none; border-color: var(--accent); }
+  .export-actions { display: flex; gap: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-subtle); }
+  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--text-primary); color: var(--bg); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 8px 16px; border-radius: 4px; box-shadow: var(--shadow-lg); z-index: 100; opacity: 0; transform: translateY(8px); transition: all 200ms; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .section-header { margin-bottom: 32px; }
+  .section-intro { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; max-width: 560px; margin-bottom: 8px; }
+  .card-stack { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .layer-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--border-subtle); cursor: pointer; transition: background 150ms; }
+  .layer-item:last-child { border-bottom: none; }
+  .layer-item:hover { background: var(--accent-bg); }
+  .layer-item.active { background: var(--accent-bg); border-left: 3px solid var(--accent); padding-left: 13px; }
+  .layer-index { font-family: 'JetBrains Mono', monospace; font-size: 0.6875rem; color: var(--text-muted); min-width: 20px; }
+  .layer-preview { flex: 1; height: 32px; border-radius: 4px; position: relative; }
+  .layer-remove { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.25rem; line-height: 1; padding: 0 4px; }
+  .layer-remove:hover { color: #a13d3d; }
+  .preset-btn { font-family: 'JetBrains Mono', monospace; font-size: 0.6875rem; padding: 4px 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--text-secondary); cursor: pointer; transition: all 150ms; }
+  .preset-btn:hover { border-color: var(--accent-light); color: var(--accent); }
+  .preset-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="section">
+      <div class="tool-header">
+        <div class="tool-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="2"/>
+            <path d="M8 12l4-4 4 4-4 4-4-4z" opacity="0.4"/>
+            <path d="M10 14l2-2 2 2-2 2-2-2z" opacity="0.2"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Shadow Forge</h1>
+          <p style="color:var(--text-secondary);font-size:0.875rem;margin:0">Build layered CSS shadow stacks — one or more layers, each with offset, blur, spread, and color. Copy the declaration.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="grid-2">
+        <div class="card">
+          <div class="section-header">
+            <span class="label label-accent">Layers</span>
+            <h2>Build your stack</h2>
+          </div>
+          <p class="section-intro">Each layer is a box-shadow segment. Add layers, tune each one, reorder by dragging up or down. A single layer is a standard shadow; multiple layers give depth, lift, and realism.</p>
+
+          <div class="flex-between items-center mb-16">
+            <span class="label">Shadow layers — <span id="layerCount">1</span></span>
+            <button class="btn btn-sm" onclick="addLayer()">+ Add layer</button>
+          </div>
+
+          <div id="layers" class="card-stack"></div>
+
+          <div class="mt-24">
+            <span class="label" style="margin-bottom:12px;display:block">Quick presets</span>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="preset-btn" onclick="loadPreset('none')">No shadow</button>
+              <button class="preset-btn" onclick="loadPreset('sm')">Soft</button>
+              <button class="preset-btn" onclick="loadPreset('md')">Medium</button>
+              <button class="preset-btn" onclick="loadPreset('lg')">Deep</button>
+              <button class="preset-btn" onclick="loadPreset('lift')">Lift</button>
+              <button class="preset-btn" onclick="loadPreset('elevated')">Elevated</button>
+              <button class="preset-btn" onclick="loadPreset('sharp')">Sharp</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-header">
+            <span class="label label-accent">Preview</span>
+            <h2>See it on a surface</h2>
+          </div>
+          <div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap">
+            <div id="previewCard" style="width:200px;height:120px;background:var(--surface);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.8125rem;transition:box-shadow 100ms;font-family:'JetBrains Mono',monospace">
+              card
+            </div>
+            <div style="flex:1;min-width:160px">
+              <div class="mb-16">
+                <span class="label">Background</span>
+                <div style="display:flex;gap:8px;align-items:center">
+                  <input type="color" id="bgColor" value="#f5f3ef" onchange="updatePreview()" style="width:36px;height:36px;border:none;cursor:pointer;padding:0;border-radius:4px">
+                  <input class="input" type="text" id="bgHex" value="#f5f3ef" onchange="document.getElementById('bgColor').value=this.value;updatePreview()" style="width:100px">
+                </div>
+              </div>
+              <div class="mb-16">
+                <span class="label">Card color</span>
+                <div style="display:flex;gap:8px;align-items:center">
+                  <input type="color" id="cardColor" value="#ffffff" onchange="updatePreview()" style="width:36px;height:36px;border:none;cursor:pointer;padding:0;border-radius:4px">
+                  <input class="input" type="text" id="cardHex" value="#ffffff" onchange="document.getElementById('cardColor').value=this.value;updatePreview()" style="width:100px">
+                </div>
+              </div>
+              <div class="mb-16">
+                <span class="label">Border radius</span>
+                <div class="range-row">
+                  <input type="range" id="cardRadius" min="0" max="24" value="12" oninput="updatePreview()">
+                  <input class="range-input" type="number" id="cardRadiusNum" value="12" min="0" max="24" onchange="document.getElementById('cardRadius').value=this.value;updatePreview()">
+                  <span class="range-value mono">px</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <div class="section-header">
+        <span class="label label-accent">Export</span>
+        <h2>Copy the declaration</h2>
+      </div>
+      <div class="card">
+        <div class="flex-between items-center mb-16">
+          <span class="label">CSS declaration</span>
+          <span class="mono" style="font-size:0.75rem;color:var(--text-muted)" id="shadowStats"></span>
+        </div>
+        <div class="code-block" style="position:relative">
+          <code id="exportCode"></code>
+          <button class="btn btn-sm" style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.8)" onclick="copyExport()">Copy</button>
+        </div>
+        <div class="export-actions">
+          <button class="btn btn-primary" onclick="copyExport()">Copy to clipboard</button>
+          <button class="btn" onclick="resetAll()">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-alt" style="text-align:center">
+      <span class="label label-accent">Basis Tools</span>
+      <h2 style="margin:8px 0 16px">More tools in the workspace</h2>
+      <p style="color:var(--text-secondary);font-size:1.0625rem;max-width:480px;margin:0 auto 32px">Each tool is a standalone HTML file. Open it, use it, close it.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="/tools/palette" class="btn" style="min-width:140px">Palette</a>
+        <a href="/tools/type-pair" class="btn" style="min-width:140px">Type Pair</a>
+        <a href="/tools/token-convert" class="btn" style="min-width:140px">Token Convert</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let layers = [{ offsetX: 0, offsetY: 2, blur: 8, spread: 0, color: 'rgba(28,26,23,0.10)' }];
+    let activeLayer = 0;
+
+    const presets = {
+      none: [],
+      sm: [{ offsetX: 0, offsetY: 1, blur: 3, spread: 0, color: 'rgba(28,26,23,0.08)' }],
+      md: [{ offsetX: 0, offsetY: 2, blur: 8, spread: 0, color: 'rgba(28,26,23,0.10)' }],
+      lg: [{ offsetX: 0, offsetY: 4, blur: 16, spread: 0, color: 'rgba(28,26,23,0.12)' }],
+      lift: [{ offsetX: 0, offsetY: 4, blur: 12, spread: 0, color: 'rgba(28,26,23,0.12)' }, { offsetX: 0, offsetY: 1, blur: 4, spread: 0, color: 'rgba(255,255,255,0.6)' }],
+      elevated: [{ offsetX: 0, offsetY: 5, blur: 15, spread: 0, color: 'rgba(28,26,23,0.15)' }, { offsetX: 0, offsetY: 2, blur: 6, spread: 0, color: 'rgba(28,26,23,0.08)' }, { offsetX: 0, offsetY: 1, blur: 3, spread: 0, color: 'rgba(255,255,255,0.5)' }],
+      sharp: [{ offsetX: 2, offsetY: 2, blur: 0, spread: 0, color: 'rgba(28,26,23,0.15)' }]
+    };
+
+    function renderLayers() {
+      const container = document.getElementById('layers');
+      container.innerHTML = layers.map((l, i) => `
+        <div class="layer-item ${i === activeLayer ? 'active' : ''}" onclick="selectLayer(${i})">
+          <span class="layer-index">#${i + 1}</span>
+          <div class="layer-preview" style="background:${l.color.replace('rgba','rgba')}; box-shadow: ${i === activeLayer ? `inset 0 0 0 2px ${l.color}` : 'none'}"></div>
+          <div style="display:flex;gap:8px;align-items:center;flex-shrink:0">
+            <button class="layer-remove" onclick="event.stopPropagation();removeLayer(${i})" title="Remove layer">×</button>
+            ${i > 0 ? `<button class="layer-remove" style="font-size:0.875rem" onclick="event.stopPropagation();moveLayer(${i},-1)" title="Move up">↑</button>` : ''}
+            ${i < layers.length - 1 ? `<button class="layer-remove" style="font-size:0.875rem" onclick="event.stopPropagation();moveLayer(${i},1)" title="Move down">↓</button>` : ''}
+          </div>
+        </div>
+      `).join('');
+      document.getElementById('layerCount').textContent = layers.length;
+    }
+
+    function selectLayer(i) {
+      activeLayer = i;
+      renderLayers();
+      syncSliders();
+    }
+
+    function syncSliders() {
+      if (!layers[activeLayer]) return;
+      const l = layers[activeLayer];
+      document.getElementById('offsetX').value = l.offsetX;
+      document.getElementById('offsetXVal').textContent = l.offsetX;
+      document.getElementById('offsetY').value = l.offsetY;
+      document.getElementById('offsetYVal').textContent = l.offsetY;
+      document.getElementById('blur').value = l.blur;
+      document.getElementById('blurVal').textContent = l.blur;
+      document.getElementById('spread').value = l.spread;
+      document.getElementById('spreadVal').textContent = l.spread;
+      document.getElementById('colorPicker').value = rgbToHex(l.color);
+      document.getElementById('colorHex').value = rgbToHex(l.color);
+    }
+
+    function addLayer() {
+      layers.push({ offsetX: 0, offsetY: 2, blur: 6, spread: 0, color: 'rgba(28,26,23,0.08)' });
+      activeLayer = layers.length - 1;
+      renderLayers();
+      syncSliders();
+      updateExport();
+    }
+
+    function removeLayer(i) {
+      if (layers.length <= 1) return;
+      layers.splice(i, 1);
+      if (activeLayer >= layers.length) activeLayer = layers.length - 1;
+      renderLayers();
+      syncSliders();
+      updateExport();
+    }
+
+    function moveLayer(i, dir) {
+      const j = i + dir;
+      if (j < 0 || j >= layers.length) return;
+      [layers[i], layers[j]] = [layers[j], layers[i]];
+      if (activeLayer === i) activeLayer = j;
+      else if (activeLayer === j) activeLayer = i;
+      renderLayers();
+      updateExport();
+    }
+
+    function loadPreset(name) {
+      layers = cloneArray(presets[name]);
+      activeLayer = 0;
+      // Add slider controls if they don't exist
+      setupSliders();
+      renderLayers();
+      syncSliders();
+      updateExport();
+      updatePreview();
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.toggle('active', b.textContent.trim() === presets[name] ? '':''));
+    }
+
+    function cloneArray(a) { return a.map(l => ({...l})); }
+
+    function setupSliders() {
+      const layersEl = document.getElementById('layers');
+      if (!document.getElementById('sliderControls')) {
+        const controls = document.createElement('div');
+        controls.id = 'sliderControls';
+        controls.innerHTML = `
+          <div class="mt-24 pt-16" style="border-top:1px solid var(--border-subtle)">
+            <div class="flex-between items-center mb-16">
+              <span class="label">Layer ${activeLayer + 1} — tune</span>
+              <span class="mono" style="font-size:0.75rem;color:var(--text-muted)">Active layer</span>
+            </div>
+            <div class="range-row">
+              <label>X offset</label>
+              <input type="range" id="offsetX" min="-20" max="20" value="0" oninput="updateLayer()">
+              <input class="range-input" type="number" id="offsetXNum" value="0" min="-20" max="20" onchange="document.getElementById('offsetX').value=this.value;updateLayer()">
+              <span class="range-value mono">px</span>
+            </div>
+            <div class="range-row">
+              <label>Y offset</label>
+              <input type="range" id="offsetY" min="-20" max="20" value="2" oninput="updateLayer()">
+              <input class="range-input" type="number" id="offsetYNum" value="2" min="-20" max="20" onchange="document.getElementById('offsetY').value=this.value;updateLayer()">
+              <span class="range-value mono">px</span>
+            </div>
+            <div class="range-row">
+              <label>Blur</label>
+              <input type="range" id="blur" min="0" max="40" value="8" oninput="updateLayer()">
+              <input class="range-input" type="number" id="blurNum" value="8" min="0" max="40" onchange="document.getElementById('blur').value=this.value;updateLayer()">
+              <span class="range-value mono">px</span>
+            </div>
+            <div class="range-row">
+              <label>Spread</label>
+              <input type="range" id="spread" min="-10" max="20" value="0" oninput="updateLayer()">
+              <input class="range-input" type="number" id="spreadNum" value="0" min="-10" max="20" onchange="document.getElementById('spread').value=this.value;updateLayer()">
+              <span class="range-value mono">px</span>
+            </div>
+            <div class="range-row">
+              <label>Color</label>
+              <input type="color" id="colorPicker" value="#a0522d" onchange="updateLayer()" style="width:36px;height:36px;border:none;cursor:pointer;padding:0;border-radius:4px">
+              <input class="input" type="text" id="colorHex" value="#a0522d" onchange="document.getElementById('colorPicker').value=this.value;updateLayer()" style="width:120px">
+            </div>
+          </div>
+        `;
+        // Insert into layers container after the list
+        const listEl = document.getElementById('layers');
+        if (listEl.nextSibling) {
+          listEl.parentNode.insertBefore(controls, listEl.nextSibling);
+        } else {
+          listEl.parentNode.appendChild(controls);
+        }
+      }
+    }
+
+    function updateLayer() {
+      if (!layers[activeLayer]) return;
+      layers[activeLayer] = {
+        offsetX: parseInt(document.getElementById('offsetX').value) || 0,
+        offsetY: parseInt(document.getElementById('offsetY').value) || 0,
+        blur: parseInt(document.getElementById('blur').value) || 0,
+        spread: parseInt(document.getElementById('spread').value) || 0,
+        color: hexToRgba(document.getElementById('colorPicker').value)
+      };
+      renderLayers();
+      updateExport();
+      updatePreview();
+    }
+
+    function updateExport() {
+      if (layers.length === 0) {
+        document.getElementById('exportCode').textContent = '/* no shadow */';
+        document.getElementById('shadowStats').textContent = '0 layers';
+        return;
+      }
+      const shadow = layers.map(l => `${l.offsetX}px ${l.offsetY}px ${l.blur}px ${l.spread}px ${l.color}`).join(', ');
+      document.getElementById('exportCode').textContent = `box-shadow: ${shadow};`;
+      document.getElementById('shadowStats').textContent = `${layers.length} layer${layers.length !== 1 ? 's' : ''} — ${shadow.length} chars`;
+    }
+
+    function updatePreview() {
+      const shadow = layers.length > 0 ? layers.map(l => `${l.offsetX}px ${l.offsetY}px ${l.blur}px ${l.spread}px ${l.color}`).join(', ') : 'none';
+      const card = document.getElementById('previewCard');
+      card.style.boxShadow = shadow;
+      card.style.background = document.getElementById('cardColor').value;
+      card.style.borderRadius = document.getElementById('cardRadius').value + 'px';
+    }
+
+    function copyExport() {
+      const text = document.getElementById('exportCode').textContent;
+      navigator.clipboard.writeText(text).then(() => showToast('Copied box-shadow')).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('Copied');
+      });
+    }
+
+    function resetAll() {
+      loadPreset('md');
+    }
+
+    function showToast(msg) {
+      const t = document.querySelector('.toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    function hexToRgba(hex) {
+      hex = hex.replace('#', '');
+      if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+      const r = parseInt(hex.substring(0, 2), 16);
+      const g = parseInt(hex.substring(2, 4), 16);
+      const b = parseInt(hex.substring(4, 6), 16);
+      return `rgba(${r},${g},${b},0.2)`;
+    }
+
+    function rgbToHex(rgba) {
+      rgba = rgba.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+      if (!rgba) return '#a0522d';
+      const r = parseInt(rgba[1]), g = parseInt(rgba[2]), b = parseInt(rgba[3]);
+      return '#' + [r, g, b].map(c => c.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Init
+    setupSliders();
+    renderLayers();
+    syncSliders();
+    updateExport();
+    updatePreview();
+  </script>
+</body>
+</html>
