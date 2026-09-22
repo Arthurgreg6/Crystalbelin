@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Palette — Basis Tools</title>
+<title>Chromis — Basis Tools</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -125,15 +125,12 @@
         <div class="tool-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <circle cx="12" cy="12" r="10"/>
-            <circle cx="12" cy="12" r="4"/>
-            <line x1="12" y1="2" x2="12" y2="6"/>
-            <line x1="12" y1="18" x2="12" y2="22"/>
-            <line x1="2" y1="12" x2="6" y2="12"/>
-            <line x1="18" y1="12" x2="22" y2="12"/>
+            <circle cx="12" cy="12" r="6" opacity="0.5"/>
+            <circle cx="12" cy="12" r="3" opacity="0.25"/>
           </svg>
         </div>
         <div>
-          <h1>Palette</h1>
+          <h1>Chromis</h1>
           <p style="color:var(--text-secondary);font-size:0.875rem">Build color palettes from a seed or extract from images. Export to CSS or JSON.</p>
         </div>
       </div>
@@ -207,10 +204,10 @@
           <div class="upload-area" id="uploadArea" onclick="document.getElementById('imageUpload').click()">
             <div class="upload-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                <polyline points="17 8 12 3 7 8"/>
-                <line x1="12" y1="3" x2="12" y2="15"/>
-              </svg>
+                          <circle cx="12" cy="12" r="10"/>
+                          <circle cx="12" cy="12" r="6" opacity="0.5"/>
+                          <circle cx="12" cy="12" r="3" opacity="0.25"/>
+                        </svg>
             </div>
             <p style="font-size:0.875rem;color:var(--text-secondary);margin:0">Drop an image here or click to browse</p>
             <p style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">JPG, PNG, WebP — extracts dominant colors</p>

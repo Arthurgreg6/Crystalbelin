@@ -30,12 +30,12 @@ const description = 'Small, focused utilities that extend the Basis design token
         <div class="tools-grid stagger">
           <div class="tool-card card">
             <div class="tool-header">
-              <div class="tool-icon tool-icon-palette">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+              <div class="tool-icon tool-icon-chroma">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
               </div>
               <span class="badge">Color</span>
             </div>
-            <h3 class="tool-title">Palette</h3>
+            <h3 class="tool-title">Chromis</h3>
             <p class="tool-desc">Build a color palette from a seed color, or extract one from an image you upload. Generate shades, tints, and complements. Export to CSS variables or JSON. Includes contrast checking against white and dark backgrounds.</p>
             <div class="tool-features">
               <div class="tool-feature"><span class="tool-feature-label mono">Seed from color</span><span class="tool-feature-desc">Pick any color and generate a full palette around it</span></div>
@@ -50,12 +50,12 @@ const description = 'Small, focused utilities that extend the Basis design token
 
           <div class="tool-card card">
             <div class="tool-header">
-              <div class="tool-icon tool-icon-type">
+              <div class="tool-icon tool-icon-glyph">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
               </div>
               <span class="badge badge-neutral">Typography</span>
             </div>
-            <h3 class="tool-title">Type Pair</h3>
+            <h3 class="tool-title">Glyphic</h3>
             <p class="tool-desc">Explore and preview type pairings — header + body + mono combinations. See them rendered in real content. Adjust sizes, weights, and line heights. Export the font stack recommendations for your project.</p>
             <div class="tool-features">
               <div class="tool-feature"><span class="tool-feature-label mono">Pair explorer</span><span class="tool-feature-desc">Browse header + body + mono combinations from a curated set</span></div>
@@ -70,12 +70,12 @@ const description = 'Small, focused utilities that extend the Basis design token
 
           <div class="tool-card card">
             <div class="tool-header">
-              <div class="tool-icon tool-icon-convert">
+              <div class="tool-icon tool-icon-flux">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
               </div>
               <span class="badge badge-neutral">Conversion</span>
             </div>
-            <h3 class="tool-title">Token Convert</h3>
+            <h3 class="tool-title">Forma</h3>
             <p class="tool-desc">Convert design tokens between formats. Paste tokens from Figma, Style Dictionary, or another tool — get them out as CSS variables, JSON, Tailwind config, or a CSS-in-JS theme object. Handles colors, spacing, typography, and shadows.</p>
             <div class="tool-features">
               <div class="tool-feature"><span class="tool-feature-label mono">Multi-format input</span><span class="tool-feature-desc">Accepts JSON, CSS custom properties, or Tailwind-style values</span></div>
@@ -83,19 +83,19 @@ const description = 'Small, focused utilities that extend the Basis design token
               <div class="tool-feature"><span class="tool-feature-label mono">Batch convert</span><span class="tool-feature-desc">Convert a whole token set at once, not one value at a time</span></div>
             </div>
             <div class="tool-actions">
-              <a href="/tools/token-convert" class="btn btn-primary">Try Token Convert</a>
+              <a href="/tools/token-convert" class="btn btn-primary">Try Forma</a>
               <a href="/tools/token-convert/index.html" class="btn btn-ghost" download>Download</a>
             </div>
           </div>
 
           <div class="tool-card card">
             <div class="tool-header">
-              <div class="tool-icon tool-icon-shadow">
+              <div class="tool-icon tool-icon-depth">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
               </div>
               <span class="badge badge-neutral">Shadows</span>
             </div>
-            <h3 class="tool-title">Shadow Forge</h3>
+            <h3 class="tool-title">Depth</h3>
             <p class="tool-desc">Build and preview layered CSS shadow stacks visually. Add multiple shadow layers, adjust spread, blur, and offset, see the combined effect on a card in real time. Copy the full declaration when you're satisfied.</p>
             <div class="tool-features">
               <div class="tool-feature"><span class="tool-feature-label mono">Visual builder</span><span class="tool-feature-desc">Add layers, adjust values, see the shadow on a card in real time</span></div>
@@ -103,7 +103,7 @@ const description = 'Small, focused utilities that extend the Basis design token
               <div class="tool-feature"><span class="tool-feature-label mono">Copy the stack</span><span class="tool-feature-desc">Export the full box-shadow declaration, ready to paste into your CSS</span></div>
             </div>
             <div class="tool-actions">
-              <a href="/tools/shadow-forge" class="btn btn-primary">Try Shadow Forge</a>
+              <a href="/tools/shadow-forge" class="btn btn-primary">Try Umbra</a>
               <a href="/tools/shadow-forge/index.html" class="btn btn-ghost" download>Download</a>
             </div>
           </div>
@@ -119,10 +119,10 @@ const description = 'Small, focused utilities that extend the Basis design token
           <p>Each tool is a standalone HTML file. Download them individually from the links above, or get the full set here. No installation — just open and use.</p>
         </div>
         <div class="all-tools-grid">
-          <a href="/tools/palette/index.html" class="all-tool-link"><span class="all-tool-name">Palette</span><span class="all-tool-size mono">~15 KB</span></a>
-          <a href="/tools/type-pair/index.html" class="all-tool-link"><span class="all-tool-name">Type Pair</span><span class="all-tool-size mono">~11 KB</span></a>
-          <a href="/tools/token-convert/index.html" class="all-tool-link"><span class="all-tool-name">Token Convert</span><span class="all-tool-size mono">~10 KB</span></a>
-          <a href="/tools/shadow-forge/index.html" class="all-tool-link"><span class="all-tool-name">Shadow Forge</span><span class="all-tool-size mono">~12 KB</span></a>
+          <a href="/tools/palette/index.html" class="all-tool-link"><span class="all-tool-name">Chromis</span><span class="all-tool-size mono">~15 KB</span></a>
+          <a href="/tools/type-pair/index.html" class="all-tool-link"><span class="all-tool-name">Glyphic</span><span class="all-tool-size mono">~15 KB</span></a>
+          <a href="/tools/token-convert/index.html" class="all-tool-link"><span class="all-tool-name">Forma</span><span class="all-tool-size mono">~15 KB</span></a>
+          <a href="/tools/shadow-forge/index.html" class="all-tool-link"><span class="all-tool-name">Umbra</span><span class="all-tool-size mono">~15 KB</span></a>
         </div>
       </div>
     </section>
@@ -158,10 +158,10 @@ const description = 'Small, focused utilities that extend the Basis design token
   .tool-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); border-color: var(--accent-light); }
   .tool-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
   .tool-icon { width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-  .tool-icon-palette { background: var(--accent-bg); color: var(--accent); }
-  .tool-icon-type { background: #e8e0f0; color: #7a5a9a; }
-  .tool-icon-convert { background: #e0e8f0; color: #3a6a8a; }
-  .tool-icon-shadow { background: #f0e8e0; color: #8a6a4a; }
+  .tool-icon-chroma { background: var(--accent-bg); color: var(--accent); }
+  .tool-icon-glyph { background: #ede6f5; color: #6b4a8a; }
+  .tool-icon-flux { background: #e0ecf5; color: #3a6a8a; }
+  .tool-icon-depth { background: #f0e8e0; color: #8a6a4a; }
   .tool-title { font-family: var(--font-display); font-size: 1.375rem; font-weight: 400; color: var(--text-primary); margin-bottom: 8px; letter-spacing: -0.01em; }
   .tool-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; flex: 1; margin-bottom: 24px; }
   .tool-features { border-top: 1px solid var(--border-subtle); padding-top: 24px; display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
