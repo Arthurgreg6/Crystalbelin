@@ -1,0 +1,19 @@
+{
+  "rewrites": [
+    {
+      "source": "/download-basis",
+      "destination": "/basis/"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/download-basis",
+      "headers": [
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"basis.html\""
+        }
+      ]
+    }
+  ]
+}
