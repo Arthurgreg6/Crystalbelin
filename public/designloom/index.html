@@ -1507,7 +1507,7 @@
       <div class="section-label">Code Block</div>
       <div class="code-block-preview">
         <code><span class="code-comment">// DesignLoom token export</span><br>
-<span class="code-keyword">const</span> <span class="code-variable">tokens</span> = <span class="code-keyword">await</span> <span class="code-variable">basis</span>.<span class="code-property">export</span>({<br>
+<span class="code-keyword">const</span> <span class="code-variable">tokens</span> = <span class="code-keyword">await</span> <span class="code-variable">designloom</span>.<span class="code-property">export</span>({<br>
 &nbsp;&nbsp;<span class="code-value">format</span>: <span class="code-string">'css-variables'</span>,<br>
 &nbsp;&nbsp;<span class="code-value">set</span>: <span class="code-string">'default'</span><br>
 });<br><br>
@@ -2053,7 +2053,7 @@ function generateJsonExport() {
 
 function generateTailwindExport() {
   const lines = [
-    '// basis-export: tailwind.config.js theme extension',
+    '// designloom-export: tailwind.config.js theme extension',
     'module.exports = {',
     '  theme: {',
     '    extend: {'
@@ -2090,7 +2090,7 @@ function generateTailwindExport() {
 
 function generateCssInJsExport() {
   const lines = [
-    '// basis-export: theme object',
+    '// designloom-export: theme object',
     'const theme = {'
   ];
   lines.push('  colors: {');
