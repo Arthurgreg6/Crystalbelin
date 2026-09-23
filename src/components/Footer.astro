@@ -18,10 +18,10 @@ const currentYear = new Date().getFullYear();
       <div class="footer-col">
         <span class="label">Tools</span>
         <a href="/tools">All Tools</a>
-        <a href="/tools#palette">ChromaBloom</a>
-        <a href="/tools#type-pair">GlyphSmith</a>
-        <a href="/tools#token-convert">TokenMeld</a>
-        <a href="/tools#shadow-forge">ShadeFold</a>
+        <a href="/tools#chromabloom">ChromaBloom</a>
+        <a href="/tools#glyphsmith">GlyphSmith</a>
+        <a href="/tools#tokelmeld">TokenMeld</a>
+        <a href="/tools#shadefold">ShadeFold</a>
       </div>
       <div class="footer-col">
         <span class="label">Company</span>
@@ -35,6 +35,7 @@ const currentYear = new Date().getFullYear();
     <div class="footer-contact">
       <span class="footer-name">Crystal Belin</span>
       <span class="footer-address">10001 Garners Ferry Rd, Eastover, SC 29044</span>
+      <a href="mailto:contact@crystalbelin.com" class="footer-email">contact@crystalbelin.com</a>
       <a href="tel:2513650879" class="footer-phone">251-365-0879</a>
     </div>
     <p class="footer-copy">&copy; {currentYear} Crystal Belin.</p>
@@ -140,6 +141,18 @@ const currentYear = new Date().getFullYear();
   .footer-address {
     color: var(--text-muted);
     line-height: 1.5;
+  }
+
+  .footer-email {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .footer-email:hover {
+    color: var(--accent);
   }
 
   .footer-phone {
