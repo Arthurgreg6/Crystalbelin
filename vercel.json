@@ -1,17 +1,17 @@
 {
   "rewrites": [
     {
-      "source": "/download-basis",
-      "destination": "/basis/"
+      "source": "/designloom",
+      "destination": "/designloom/"
     }
   ],
   "headers": [
     {
-      "source": "/download-basis",
+      "source": "/designloom",
       "headers": [
         {
           "key": "Content-Disposition",
-          "value": "attachment; filename=\"basis.html\""
+          "value": "attachment; filename=\"designloom.html\""
         }
       ]
     }
