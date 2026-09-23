@@ -27,7 +27,7 @@
 ### Write comprehensive README for the repo
 - [ ] Replace the Astro starter default README entirely
 - [ ] Add a project header: "DesignTerra — Design Token Workspace" with one-sentence description
-- [ ] Add a "Five Products" section listing all brand names and their roles: DesignTerra (main workspace), HueForge (palette tool), GlyphSmith (type-pair tool), TokenMeld (token convert tool), ShadeCraft (shadow forge tool)
+- [ ] Add a "Five Products" section listing all brand names and their roles: DesignTerra (main workspace), ChromaBloom (palette tool), GlyphSmith (type-pair tool), TokenMeld (token convert tool), ShadeFold (shadow stack tool)
 - [ ] Add a "Live Site" section with the crystalbelin.com URL
 - [ ] Add a "Development" section: `npm install`, `npm run dev`, `npm run build`, `npm run preview`
 - [ ] Add a "Project Structure" section noting pages (index, software, tools, docs, about), components (Nav, Footer), layout (BaseLayout), and the public/tools/ and public/designterra/ directories
@@ -82,14 +82,14 @@
 - [x] Debug live preview iframe on /software — CSS variable leakage + scroll bug identified and fixed
 - [x] Name collision audit for all 5 product names — HueForge and ShadeCraft collided; renamed to ChromaBloom and ShadeFold
 - [x] Rename implementation: patch all Astro pages, components, tool HTML files, vercel.json; rebuild + deploy
-- [ ] Quality pass on all 5 pages (visual polish, favicon, 404, SEO, mobile nav, OG images, README)
+- [x] Eliminate all stale Basis/DesignLoom/Chromis/Glyphic/Forma/Umbra refs across src and public
 
 ## Done
 - [x] Deploy site to Vercel with custom domain crystalbelin.com
 - [x] Disable Vercel auth wall
 - [x] Set up GitHub repo + auto-deploy
 - [x] Add Crystal Belin contact details (footer + about page)
-- [x] Rename all products: Basis→DesignTerra, Palette→HueForge, Type Pair→GlyphSmith, Token Convert→TokenMeld, Shadow Forge→ShadeCraft
+- [x] Rename all products: Basis→DesignTerra, Palette→ChromaBloom, Type Pair→GlyphSmith, Token Convert→TokenMeld, Shadow Forge→ShadeFold
 - [x] Fix download button to actually download designterra.html
 - [x] Fix about page text ("team of South Carolina software engineers...")
 - [x] Create vercel.json for download endpoint
