@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="basis-workspace">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DesignTerra — Design Token Workspace</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
+  .basis-workspace {
     --bg: #f5f3ef;
     --bg-panel: #ffffff;
     --bg-elevated: #fdfbf9;
@@ -1830,7 +1830,6 @@ function addComponent(type) {
     tokens.colors.push({ name: 'new-color-' + (tokens.colors.length + 1), value: '#888888', role: 'custom' });
     renderColorTokens();
     renderPreview();
-    document.getElementById('editorScroll').scrollTop = document.getElementById('editorScroll').scrollHeight;
   }
 }
 
