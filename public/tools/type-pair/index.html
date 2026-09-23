@@ -116,7 +116,7 @@
           </svg>
         </div>
         <div>
-          <h1>Glyphic</h1>
+          <h1>GlyphSmith</h1>
           <p style="color:var(--text-secondary);font-size:0.875rem;margin:0">Explore type pairings — display face + body + mono. Preview in context, export the stack.</p>
         </div>
       </div>
@@ -149,7 +149,7 @@
               <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Heading sample</label>
               <div id="previewDisplay" class="pair-preview" style="background:var(--surface)">
                 <h3 style="font-size:1.75rem">The quick brown fox</h3>
-                <p style="font-size:1.125rem;color:var(--text-muted)">Jumps over the lazy dog. Basis builds design systems that hold together.</p>
+                <p style="font-size:1.25rem;margin-bottom:6px;color:var(--text-muted)">Jumps over the lazy dog. DesignTerra builds design systems that hold together.</p>
               </div>
             </div>
 
@@ -157,7 +157,7 @@
               <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Body sample</label>
               <div id="previewBody" class="pair-preview" style="background:var(--surface)">
                 <h3 style="font-size:1.25rem;margin-bottom:6px">The quick brown fox jumps over the lazy dog</h3>
-                <p style="font-size:0.9375rem;color:var(--text-secondary);line-height:1.7">Basis is a living design token workspace for software designers and publishers. Define colors, type, spacing, motion, and shadows — see every component update in real time, then export clean code in four formats. No drift, no sync debt, no hand-typing.</p>
+                <p style="font-size:0.9375rem;color:var(--text-secondary);line-height:1.7">DesignTerra is a living design token workspace for software designers and publishers. Define colors, type, spacing, motion, and shadows — see every component update in real time, then export clean code in four formats. No drift, no sync debt, no hand-typing.</p>
               </div>
             </div>
 
@@ -213,7 +213,7 @@
 
             <div class="mb-16">
               <label style="font-family:'JetBrains Mono',monospace;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);display:block;margin-bottom:8px">Custom sample text</label>
-              <input class="input w-full" type="text" id="customText" value="The quick brown fox jumps over the lazy dog. Basis builds design systems that hold together." onchange="updatePreview()">
+              <input class="input w-full" type="text" id="customText" value="The quick brown fox jumps over the lazy dog. DesignTerra builds design systems that hold together." onchange="updatePreview()">
             </div>
           </div>
         </div>
@@ -226,13 +226,13 @@
     </div>
 
     <div class="section section-alt" style="text-align:center">
-      <span class="label label-accent">Basis Tools</span>
+      <span class="label label-accent">DesignTerra Tools</span>
       <h2 style="margin:8px 0 16px">More tools in the workspace</h2>
       <p style="color:var(--text-secondary);font-size:1.0625rem;max-width:480px;margin:0 auto 32px">Each tool is a standalone HTML file. Open it, use it, close it.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="/tools/palette" class="btn" style="min-width:140px">Palette</a>
-        <a href="#" class="btn btn-ghost" style="min-width:140px">Token Convert</a>
-        <a href="#" class="btn btn-ghost" style="min-width:140px">Shadow Forge</a>
+        <a href="/tools/palette" class="btn" style="min-width:140px">ChromaBloom</a>
+        <a href="/tools/token-convert" class="btn" style="min-width:140px">TokenMeld</a>
+        <a href="/tools/shadow-forge" class="btn" style="min-width:140px">ShadeFold</a>
       </div>
     </div>
   </div>
@@ -339,7 +339,7 @@
       const bodyItalic = italic === 'body' ? '; font-style: italic' : '';
       const monoStyle = `font-family: ${activePair.mono}; font-size: 0.8125rem; line-height: 1.7`;
 
-      document.getElementById('previewDisplay').innerHTML = `<h3 style="${displayStyle}">The quick brown fox</h3><p style="${bodyStyle}${bodyItalic}">Jumps over the lazy dog. Basis builds design systems that hold together.</p>`;
+      document.getElementById('previewDisplay').innerHTML = `<h3 style="${displayStyle}">The quick brown fox</h3><p style="${bodyStyle}${bodyItalic}">Jumps over the lazy dog. DesignTerra builds design systems that hold together.</p>`;
       document.getElementById('previewBody').innerHTML = `<h3 style="${displayStyle}">The quick brown fox jumps over the lazy dog</h3><p style="${bodyStyle}${bodyItalic}">${text}</p>`;
       document.getElementById('previewMono').style.cssText = monoStyle + '; background:#1c1a17; color:#e8e2d8;';
       document.getElementById('previewMono').innerHTML = `<code><span style="color:#c47a4a">const</span> <span style="color:#a09080">theme</span> = <span style="color:#a8c4a0">{</span>\n  <span style="color:#a09080">colors</span>: <span style="color:#a8c4a0">{</span>\n    <span style="color:#d4a87a">'accent'</span>: <span style="color:#d4a87a">'#a0522d'</span>\n  <span style="color:#a8c4a0">}</span>\n<span style="color:#a8c4a0">}</span>;</code>`;
