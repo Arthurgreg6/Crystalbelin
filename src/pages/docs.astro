@@ -47,26 +47,23 @@ const description = 'Documentation for DesignTerra — the design token workspac
             </section>
             <section id="tokens">
               <h2>Tokens</h2>
-              <p>Tokens are the named values that define your design language. DesignTerra organizes them into five categories: colors, typography, spacing, motion, and shadows. Each category has its own editor section, its own export behaviour, and its own role in the system. Each token you edit is reflected immediately in the preview. There's no "apply" step — the preview is always in sync with the editor.</p>
+              <p>Tokens are the named values that define your design language. DesignTerra organizes them into five categories: colors, typography, spacing, motion, and shadows. Each has its own editor section, its own export behavior, and a clear role in the system. Change any token and the preview updates immediately — there's no apply step, the preview is always in sync with the editor.</p>
             </section>
             <section id="colors">
               <h2>Color tokens</h2>
-              <p>Colors are organized by role: canvas (background), surface, text (primary, secondary, muted), border, brand (accent and its variants), and semantic (success, warning, error).</p>
-              <p>Each color has a swatch, a hex input, and a role label. Click the swatch to open a color picker. Type a hex value directly. The contrast badge shows whether the color passes WCAG AA against white.</p>
+              <p>Colors are organized by role — canvas (background), surface, text (primary, secondary, muted), border, brand (accent and its variants), and semantic (success, warning, error). Each color shows a swatch, a hex input, and a role label. Click the swatch for a color picker, or type a hex directly. A contrast badge tells you whether the color passes WCAG AA against white.</p>
               <h3>Adding colors</h3>
               <p>Click the "+ Add" button at the top of the Color Tokens section to add a new color. Give it a name, a value, and a role. It appears immediately in the preview.</p>
             </section>
             <section id="typography">
               <h2>Typography</h2>
-              <p>Three font selections define your type system: display font (for headings), body font (for reading text), and mono font (for code and technical labels). Each is chosen from a curated set of Google Fonts.</p>
-              <p>The type scale defines named sizes — from xs through display-xl — each with a size value and a weight. Every heading and body size in the preview reflects your scale.</p>
+              <p>Three font selections define your type system — display (headings), body (reading text), and mono (code and technical labels). Each comes from a curated set of Google Fonts. The type scale gives every size a name, from xs through display-xl, each with its own size and weight. Every heading and body size in the preview reflects your scale.</p>
               <h3>Editing the scale</h3>
               <p>Each scale entry has an editable size (e.g., "1.5rem") and weight (e.g., 400). Change either and the preview updates. Add new entries or remove existing ones to match your design needs.</p>
             </section>
             <section id="spacing">
               <h2>Spacing</h2>
-              <p>The spacing scale defines named spacing values — xs, sm, md, lg, xl, 2xl, 3xl — each as a pixel value. These are the values that control padding, margins, gaps, and sizes throughout your components.</p>
-              <p>Each spacing value is shown as a visual bar whose width corresponds to the value. Edit the number directly. The preview components use these values for their internal spacing.</p>
+              <p>The spacing scale gives every gap a name: xs, sm, md, lg, xl, 2xl, 3xl. Each one is a pixel value that controls padding, margins, gaps, and sizes across every component. Each value appears as a visual bar whose width matches the number. Edit the number directly.</p>
             </section>
             <section id="motion">
               <h2>Motion</h2>
@@ -75,13 +72,12 @@ const description = 'Documentation for DesignTerra — the design token workspac
             </section>
             <section id="shadows">
               <h2>Shadows</h2>
-              <p>Shadows are defined as full box-shadow declarations — named values like sm, default, and lg. Each is shown as a small square with the shadow applied, alongside an editable text field.</p>
-              <p>Add new shadows with the "+ Add Shadow" button. Delete shadows with the × button. The preview cards and components use your shadow tokens for their depth.</p>
+              <p>Shadows are defined as full box-shadow declarations — named values like sm, default, and lg. Each is shown as a small square with the shadow applied, alongside an editable text field. Add new shadows with the "+ Add Shadow" button. Remove shadows with the × button. Your shadow tokens give every card and component its depth.</p>
             </section>
             <section id="versions">
               <h2>Versioned sets</h2>
               <p>Save named snapshots of your token set at any point. Click "Save Set" in the header, give it a name, and it's added to the version list. Switch between versions using the dropdown in the footer bar.</p>
-              <p>Versions are useful for exploring alternatives ("what if the accent were teal?"), tracking changes over time, or maintaining separate sets for different products or themes.</p>
+              <p>Versions are useful for exploring alternatives ("what if the accent were teal?"), tracking changes over time, or keeping separate sets for different products or themes.</p>
               <div class="docs-callout"><strong>Note:</strong> Switching versions replaces your current tokens with the saved version. You can always save your current work before switching.</div>
             </section>
             <section id="export">
@@ -105,7 +101,7 @@ const description = 'Documentation for DesignTerra — the design token workspac
               <h3>Use versions for exploration</h3>
               <p>Before committing to a new direction, save your current set, experiment, and compare. Versions let you try alternatives without losing your work.</p>
               <h3>Export early, export often</h3>
-              <p>You don't have to wait until you're "done" to export. Exporting periodically gives you a record of your token set at different points and lets you use tokens in your projects as you build them.</p>
+              <p>You don't have to wait until you're "done" to export. Doing it regularly captures your token set at different points, so you can use tokens in your projects as you build them.</p>
             </section>
           </div>
         </div>
