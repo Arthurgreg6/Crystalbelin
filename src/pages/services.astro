@@ -1,0 +1,125 @@
+---
+// Services page — Staycee Fluharty Cleaning Services
+// Uses copy from services-page-copy.md
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout>
+  <Nav />
+
+  <section class="hero">
+    <div class="hero__content">
+      <h1 class="hero__title">Services</h1>
+      <p class="hero__subhead">Every cleaning is executed to a precise, repeatable standard. Pick the service that fits your space, and we'll quote you in hours.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Residential services</h2>
+
+      <div class="card card--tall">
+        <h3 class="card__title">Standard residential cleaning</h3>
+        <p><strong>Duration:</strong> 60–90 minutes &nbsp;|&nbsp; <strong>Price:</strong> ~$120–$250 (placeholder — confirmed at booking)</p>
+        <ul class="card__list">
+          <li>Dusting all surfaces</li>
+          <li>Vacuuming floors and upholstery</li>
+          <li>Mopping hard floors</li>
+          <li>Kitchen cleaning (appliances, counters, sink)</li>
+          <li>Bathroom cleaning (toilet, sink, shower, mirror)</li>
+          <li>Trash removal</li>
+        </ul>
+        <p class="card__note"><em>Prices are placeholders — confirm exact figures at booking.</em></p>
+      </div>
+
+      <div class="card card--tall">
+        <h3 class="card__title">Move-in / move-out cleaning</h3>
+        <p><strong>Duration:</strong> 2–6 hours &nbsp;|&nbsp; <strong>Price:</strong> ~$150–$400 (placeholder — confirmed at booking)</p>
+        <ul class="card__list">
+          <li>Inside cabinets, drawers, and closets</li>
+          <li>Appliance exteriors and interiors (ovens, fridges)</li>
+          <li>Baseboards and trim</li>
+          <li>Inside window tracks and sills</li>
+          <li>Extra attention to high-touch surfaces</li>
+        </ul>
+      </div>
+
+      <div class="card card--tall">
+        <h3 class="card__title">Deep cleaning</h3>
+        <p><strong>Duration:</strong> 4–8 hours &nbsp;|&nbsp; <strong>Price:</strong> ~$250–$450 (placeholder — confirmed at booking)</p>
+        <ul class="card__list">
+          <li>Inside appliances (ovens, fridge, dishwasher)</li>
+          <li>Behind and under furniture and appliances</li>
+          <li>Ceiling fans, light fixtures, and vents</li>
+          <li>Inside window tracks and sills</li>
+          <li>Baseboards and door frames</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--light">
+    <div class="container">
+      <h2 class="section__title">Commercial services</h2>
+
+      <div class="card card--tall">
+        <h3 class="card__title">Office &amp; commercial cleaning</h3>
+        <p><strong>Duration:</strong> 1–3 hours (small office) to 4–8 hours (full sites) &nbsp;|&nbsp; <strong>Price:</strong> ~$150–$400 (small) / $500–$1,200+ (large) (placeholder — confirmed at booking)</p>
+        <ul class="card__list">
+          <li>Desk and common area cleaning</li>
+          <li>Restrooms and breakrooms</li>
+          <li>Trash removal and recycling</li>
+          <li>Surface disinfection</li>
+          <li>Scheduled around your hours</li>
+        </ul>
+      </div>
+
+      <div class="card card--tall">
+        <h3 class="card__title">Carpet &amp; upholstery</h3>
+        <p><strong>Rate:</strong> ~$100–$250 per room/chair (placeholder — confirmed at booking)</p>
+        <ul class="card__list">
+          <li>Steam extraction carpet cleaning</li>
+          <li>Upholstery deep cleaning</li>
+          <li>Fabric protection optional</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">How the concierge model works</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step__number">1</span>
+          <h3 class="step__title">Request a cleaning</h3>
+          <p>Fill out the booking form or call us. Tell us about your space, your needs, and your preferred dates.</p>
+        </div>
+        <div class="step">
+          <span class="step__number">2</span>
+          <h3 class="step__title">We schedule your clean</h3>
+          <p>We confirm your booking by email and text, and match you with a consistent cleaner.</p>
+        </div>
+        <div class="step">
+          <span class="step__number">3</span>
+          <h3 class="step__title">We show up and clean</h3>
+          <p>Your cleaner arrives on time, follows your checklist, and reports back with a summary.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--accent">
+    <div class="container">
+      <div class="cta">
+        <h2 class="cta__title">Book your clean</h2>
+        <p class="cta__sub">Everything is priced at the time of booking, based on your space. No hidden fees — we show up on time, every time.</p>
+        <a href="/contact" class="btn btn--primary btn--large">Book your clean</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

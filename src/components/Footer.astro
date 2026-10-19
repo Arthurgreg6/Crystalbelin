@@ -1,0 +1,168 @@
+---
+// Footer component
+// Navigation, newsletter, social, copyright, legal
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__column">
+      <h3 class="footer__heading">Staycee Fluharty</h3>
+      <p class="footer__tagline">Concierge cleaning, scheduled to your doorstep.</p>
+    </div>
+    <div class="footer__column">
+      <h3 class="footer__heading">Quick Links</h3>
+      <ul class="footer__links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer__column">
+      <h3 class="footer__heading">Services</h3>
+      <ul class="footer__links">
+        <li><a href="/services">Residential Cleaning</a></li>
+        <li><a href="/services">Commercial Cleaning</a></li>
+        <li><a href="/services">Move-In / Move-Out</a></li>
+        <li><a href="/services">Deep Cleaning</a></li>
+        <li><a href="/services">Carpet &amp; Upholstery</a></li>
+        <li><a href="/services">Eco-Friendly &amp; Allergy-Friendly</a></li>
+      </ul>
+    </div>
+    <div class="footer__column">
+      <h3 class="footer__heading">Stay in the loop</h3>
+      <p class="footer__subheading">New services, pricing updates, and seasonal tips — straight to your inbox.</p>
+      <form class="footer__newsletter" onsubmit="event.preventDefault(); alert('Subscribed (demo). Add your newsletter provider here.');">
+        <input type="email" placeholder="Enter your email address" required class="input" />
+        <button type="submit" class="btn btn--primary">Subscribe</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copyright">© 2026 Staycee Fluharty Cleaning Services. All rights reserved.</p>
+    <div class="footer__legal">
+      <a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a> · <a href="/disclosures">Disclosures</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-bg);
+    color: var(--color-text-muted);
+    margin-top: var(--space-8);
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-5);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-6);
+  }
+
+  .footer__column {
+    min-width: 0;
+  }
+
+  .footer__heading {
+    font-family: var(--font-display);
+    font-size: var(--font-size-3);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-2);
+  }
+
+  .footer__tagline {
+    font-size: var(--font-size-1);
+    line-height: 1.5;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .footer__links a {
+    font-size: var(--font-size-1);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer__links a:hover {
+    color: var(--color-primary);
+  }
+
+  .footer__subheading {
+    font-size: var(--font-size-1);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+    line-height: 1.5;
+  }
+
+  .footer__newsletter {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .footer__newsletter .input {
+    flex: 1;
+  }
+
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-4) var(--space-6);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--font-size-0);
+  }
+
+  .footer__copyright {
+    color: var(--color-text-muted);
+  }
+
+  .footer__legal {
+    display: flex;
+    gap: var(--space-4);
+    color: var(--color-text-muted);
+  }
+
+  .footer__legal a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer__legal a:hover {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 900px) {
+    .footer__inner {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+    }
+    .footer__bottom {
+      flex-direction: column;
+      gap: var(--space-2);
+      padding: var(--space-4);
+    }
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+// About page — Staycee Fluharty Cleaning Services
+// Uses copy from staycee_fluharty_about_copy.md
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout>
+  <Nav />
+
+  <section class="hero">
+    <div class="hero__content">
+      <h1 class="hero__title">Licensed, bonded, and there when you say you need us.</h1>
+      <p class="hero__subhead">Staycee Fluharty is a Virginia-based, concierge-style cleaning company serving homeowners, renters, and businesses statewide. Every appointment is scheduled around you — no lockboxes, no gowns, no guessing where the team is supposed to be.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">A Home, A Name, A Promise</h2>
+      <p class="section__intro">When Staycee Fluharty first stepped inside a client's home, she didn't see a "cleaning job." She saw a place where someone had just come home to rest. She saw sweaters hanging in the hall, groceries on the counter, a dog sleeping on the rug, a family mid-conversation. She also saw how much work a household carries — and how much of that work gets asked to be squeezed into windows of time that never quite line up.</p>
+      <p>That was the moment it clicked. Most cleaning companies look at a house the way a contractor looks at a filing cabinet: sections to be checked off, a checklist of rooms, a price per unit. You book a window. A driver shows up. If you're not home, or the key is unavailable, or the schedule slips, the job moves on. The home and the person who lives in it are treated as an afterthought.</p>
+      <p>Staycee saw something different. She believed a home deserves better than a checklist. She believed the right cleaning crew shouldn't need a key to get in, shouldn't have to guess at the right door, and shouldn't leave when the appointment ends — it should stay until the job is done right, and the homeowner should know exactly who they are and exactly what they're leaving behind.</p>
+      <p>She founded Staycee Fluharty on that belief: a concierge-style cleaning service in Virginia that schedules on the customer's terms, dispatches to the doorstep, and treats every home as a resident, not a route.</p>
+    </div>
+  </section>
+
+  <section class="section section--light">
+    <div class="container">
+      <h2 class="section__title">Mission, Vision, Values</h2>
+      <div class="grid grid--3">
+        <div class="card card--tall">
+          <h3 class="card__title">Mission</h3>
+          <p>To make a clean home effortless and dependable — to keep homes healthy, families where they belong, and business owners focused on their work — by pairing certified, background-checked crews with hands-on scheduling that treats the people we serve as partners, not appointments.</p>
+        </div>
+        <div class="card card--tall">
+          <h3 class="card__title">Vision</h3>
+          <p>To become the most trusted name in concierge-style home and commercial cleaning in Virginia, so that no homeowner or business operator has to choose between a clean space and a life that fits around it.</p>
+        </div>
+        <div class="card card--tall">
+          <h3 class="card__title">Values</h3>
+          <ul>
+            <li><strong>Reliability</strong> — on time, every time, every visit</li>
+            <li><strong>Discretion</strong> — we treat your home as if it were our own</li>
+            <li><strong>Consistency</strong> — the same trained cleaner, day after day</li>
+            <li><strong>Cleanliness</strong> — a standard you can count on, visibly and measurably</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">How the concierge scheduling model works</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step__number">1</span>
+          <h3 class="step__title">Request a clean</h3>
+          <p>Fill out the booking form or call us. Tell us about your space, your needs, and your preferred dates.</p>
+        </div>
+        <div class="step">
+          <span class="step__number">2</span>
+          <h3 class="step__title">We schedule your clean</h3>
+          <p>We confirm your booking by email and text, and match you with a consistent cleaner.</p>
+        </div>
+        <div class="step">
+          <span class="step__number">3</span>
+          <h3 class="step__title">We show up and clean</h3>
+          <p>Your cleaner arrives on time, follows your checklist, and reports back with a summary.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--accent">
+    <div class="container">
+      <div class="cta">
+        <h2 class="cta__title">Book your clean</h2>
+        <p class="cta__sub">Whether it's a home, an office, or a move-in/move-out, we'll have your space sparkling in no time.</p>
+        <a href="/contact" class="btn btn--primary btn--large">Book your clean</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

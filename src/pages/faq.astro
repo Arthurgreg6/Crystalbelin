@@ -1,0 +1,103 @@
+---
+// FAQ page — Staycee Fluharty Cleaning Services
+// Uses copy from Staycee_Fluharty_FAQ.md
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout>
+  <Nav />
+
+  <section class="hero">
+    <div class="hero__content">
+      <h1 class="hero__title">Frequently asked questions</h1>
+      <p class="hero__subhead">Everything you need to know about scheduling, pricing, safety, and what to expect from your cleaning.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3 class="faq-question">What are your business hours?</h3>
+          <div class="faq-answer">
+            <p>We schedule weekday and weekend appointments to fit your lifestyle. Forward bookings are typically 24–48 hours ahead; same-day availability is evaluated case by case.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">How do you set your pricing?</h3>
+          <div class="faq-answer">
+            <p>Pricing is quote-based, set at the time of booking. The quote reflects the type of space, its size, frequency, and any extras (stairs, extra bathrooms, exterior areas). All figures shown on our site are placeholders to be confirmed at booking.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">Are your cleaners background-checked and insured?</h3>
+          <div class="faq-answer">
+            <p>Yes. Every cleaner is background-checked and trained. We carry liability insurance and workers' compensation, and we'll provide certificates of insurance on request.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">What cleaning products do you use?</h3>
+          <div class="faq-answer">
+            <p>We use professional-grade, non-toxic, biodegradable products by default. If you prefer to provide your own products (for allergies or preferences), just let us know in the special requests field and we'll accommodate.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">What if I need to cancel or reschedule?</h3>
+          <div class="faq-answer">
+            <p>Great news: you can reschedule or cancel up to 24 hours before your appointment with no charge. Need to change on short notice? Reach out and we'll work it out. Please note: no-show appointments or cancellations inside 2 hours of a scheduled time may be subject to a fee.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">How long does a cleaning take?</h3>
+          <div class="faq-answer">
+            <p>A standard residential clean takes 2–4 hours, depending on home size and condition. Commercial cleanings are quoted per engagement, typically 1–8 hours. We'll give you an accurate estimate with your booking quote.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">Do you serve all 50 states?</h3>
+          <div class="faq-answer">
+            <p>Yes. Staycee Fluharty is a nationwide concierge cleaning service. Agents are scheduled to the doorstep of any address in the United States. For properties outside our staffing area, we'll gladly refer you to a trusted local partner.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">Can I see references?</h3>
+          <div class="faq-answer">
+            <p>Absolutely. We're happy to share references from current and past clients. Just reach out and we'll send over a list.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">Do you work with pets and allergies?</h3>
+          <div class="faq-answer">>
+            <p>Yes. Our cleaners are trained in pet-safe cleaning practices and can work around allergies or respiratory sensitivities. Let us know about your pets and any conditions in the notes, and we'll tailor our approach. We can also leave the space while cleaning is in progress for very anxious animals.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">Do you clean specialty items?</h3>
+          <div class="faq-answer">
+            <p>Yes. We handle vintage furniture, collectibles, delicate fabrics, kids' toys, and other items that need extra care. Flag these in the "special requests" field so our cleaners know what they're working with.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-question">What happens after the clean?</h3>
+          <div class="faq-answer">
+            <p>A few hours after the team leaves, we do a quick satisfaction check-in with you. If you're not fully satisfied, we'll re-visit at no extra cost, or refund the balance. We may also ask if you'd like before/after photos (optional, never required).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--accent">
+    <div class="container">
+      <div class="cta">
+        <h2 class="cta__title">Still have questions?</h2>
+        <p class="cta__sub">We're here to answer any other questions you have before you book.</p>
+        <a href="/contact" class="btn btn--primary btn--large">Contact us</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

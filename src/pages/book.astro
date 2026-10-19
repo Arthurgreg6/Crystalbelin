@@ -1,0 +1,120 @@
+---
+// Booking page — Staycee Fluharty Cleaning Services
+// The booking form lives here. Same form as the contact page but with a dedicated /book URL.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout>
+  <Nav />
+
+  <section class="hero">
+    <div class="hero__content">
+      <h1 class="hero__title">Book your clean</h1>
+      <p class="hero__subhead">Tell us about your space and we'll match you with a trained concierge. You'll confirm the date and time within one business day.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <form class="booking-form" action="/api/book" method="POST">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="firstName">First name *</label>
+            <input type="text" id="firstName" name="firstName" required />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last name *</label>
+            <input type="text" id="lastName" name="lastName" required />
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone *</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="serviceType">Service type *</label>
+          <select id="serviceType" name="serviceType" required>
+            <option value="">Select a service</option>
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial</option>
+            <option value="both">Both (residential + commercial)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="propertyAddress">Property address *</label>
+          <input type="text" id="propertyAddress" name="propertyAddress" required />
+          <select class="form-field--secondary" id="addressType" name="addressType">
+            <option value="home">Home</option>
+            <option value="apartment">Apartment / Condo</option>
+            <option value="business">Business / Office</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="propertySize">Property size *</label>
+          <select id="propertySize" name="propertySize" required>
+            <option value="">Select size</option>
+            <option value="1-2">1–2 rooms / occupants</option>
+            <option value="3-4">3–4 rooms</option>
+            <option value="5-7">5–7 rooms</option>
+            <option value="8+">8+ rooms</option>
+            <option value="custom">Custom (specify)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="serviceDate">Service date *</label>
+          <input type="date" id="serviceDate" name="serviceDate" required />
+          <div class="form-radio-group">
+            <label><input type="radio" name="timeOfDay" value="morning" /> Morning</label>
+            <label><input type="radio" name="timeOfDay" value="afternoon" /> Afternoon</label>
+            <label><input type="radio" name="timeOfDay" value="evening" /> Evening</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="preferredDates">Preferred date(s) *</label>
+          <input type="text" id="preferredDates" name="preferredDates" placeholder="e.g., Mon 2026-11-02, Wed 2026-11-04, Fri 2026-11-06" />
+          <div class="form-radio-group">
+            <label><input type="radio" name="frequency" value="one-time" /> One-time</label>
+            <label><input type="radio" name="frequency" value="weekly" /> Weekly</label>
+            <label><input type="radio" name="frequency" value="bi-weekly" /> Bi-weekly</label>
+            <label><input type="radio" name="frequency" value="monthly" /> Monthly</label>
+            <label><input type="radio" name="frequency" value="custom" /> Custom</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="specialRequests">Special requests / notes</label>
+          <textarea id="specialRequests" name="specialRequests" rows="4" placeholder="Move-in/out, pets, allergies, clutter, access needs, etc."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="accessInstructions">Access instructions</label>
+          <textarea id="accessInstructions" name="accessInstructions" rows="3" placeholder="Gate code, parking, security system, doorman, pet care notes"></textarea>
+        </div>
+
+        <div class="form-group form-group--check">
+          <input type="checkbox" id="privacyPolicy" name="privacyPolicy" required />
+          <label for="privacyPolicy">I agree to the <br>privacy &amp; cancellation <br>policy *</label>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--large btn--block">Submit request — we'll confirm your appointment within one business day</button>
+      </form>
+
+      <p class="form-notice">Note: this is a demo form. Connect your own booking provider (Calendly, GoHighLevel, Typeform, etc.) before going live.</p>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

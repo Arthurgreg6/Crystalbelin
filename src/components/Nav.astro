@@ -1,0 +1,107 @@
+---
+// Navigation component
+// Links across the top, mobile-ready
+---
+
+<nav class="nav">
+  <div class="nav__brand">
+    <a href="/" class="brand">
+      <span class="brand__name">Staycee Fluharty</span>
+      <span class="brand__tagline">Concierge Cleaning</span>
+    </a>
+  </div>
+  <ul class="nav__list">
+    <li><a href="/services">Services</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/faq">FAQ</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/book" class="btn btn--primary btn--small">Book your clean</a></li>
+  </ul>
+</nav>
+
+<style>
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4) var(--space-6);
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 100;
+  }
+
+  .nav__brand {
+    display: flex;
+    align-items: center;
+  }
+
+  .brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+  }
+
+  .brand__name {
+    font-family: var(--font-display);
+    font-size: var(--font-size-4);
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .brand__tagline {
+    font-size: var(--font-size-1);
+    color: var(--color-bronze);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  .nav__list {
+    display: flex;
+    list-style: none;
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__list a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: var(--font-size-2);
+    font-weight: 500;
+    transition: color var(--transition-fast);
+  }
+
+  .nav__list a:hover {
+    color: var(--color-primary);
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 8px;
+    background: var(--color-primary);
+    color: white;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-sm);
+    z-index: 200;
+    transition: top var(--transition-fast);
+  }
+
+  .skip-link:focus {
+    top: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+    .nav__list {
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
+</style>

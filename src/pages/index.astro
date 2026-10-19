@@ -1,0 +1,100 @@
+---
+// Homepage — Staycee Fluharty Cleaning Services
+// Uses copy from staycee-fluharty-homepage-copy.md
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout>
+  <Nav />
+
+  <section class="hero">
+    <div class="hero__content">
+      <h1 class="hero__title">Exacting care for the spaces you live and work in.</h1>
+      <p class="hero__subhead">Concierge-style residential and commercial cleaning across the United States. You set the schedule; we execute every cleaning to a precise, repeatable standard.</p>
+      <div class="hero__actions">
+        <a href="/book" class="btn btn--primary btn--large">Book your clean</a>
+        <a href="/services" class="btn btn--secondary btn--large">Request a quote</a>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <!-- Replace with your own photography -->
+      <div class="hero__placeholder">[Hero image: clean, bright living space with a soft glow]</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Services at a glance</h2>
+      <div class="grid grid--3">
+        <div class="card">
+          <h3 class="card__title">Residential cleaning</h3>
+          <p>Single-family homes, condos, and rental properties. Maintenance cleaning between visits, thorough deep cleaning, and turnovers that start clean.</p>
+        </div>
+        <div class="card">
+          <h3 class="card__title">Commercial cleaning</h3>
+          <p>Offices, retail spaces, and shared work areas. Cleaning scheduled around your hours, with consistent staff and a standard that holds.</p>
+        </div>
+        <div class="card">
+          <h3 class="card__title">Deep cleaning &amp; turnovers</h3>
+          <p>A thorough clean before a move, after a renovation, or between tenants. We coordinate with your timeline and leave the space ready for what comes next.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--light">
+    <div class="container">
+      <h2 class="section__title">Why clients choose us</h2>
+      <div class="grid grid--3">
+        <div class="card card--feature">
+          <h3 class="card__title">One point of contact</h3>
+          <p>A single person you know, for scheduling, changes, and questions — no call queues, no handoffs.</p>
+        </div>
+        <div class="card card--feature">
+          <h3 class="card__title">Same cleaner, every visit</h3>
+          <p>Your regular cleaner shows up on time, day after day, holding a standard you can count on.</p>
+        </div>
+        <div class="card card--feature">
+          <h3 class="card__title">Flexible scheduling</h3>
+          <p>Evenings and weekends welcome. Book the time that works for your property.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">What clients say</h2>
+      <div class="grid grid--3">
+        <div class="card card--quote">
+          <p class="card__quote">"A different person used to come each time. Now the same cleaner shows up every week, and I know the standard they'll hold."</p>
+          <cite>— residential client</cite>
+        </div>
+        <div class="card card--quote">
+          <p class="card__quote">"Our office is clean before we arrive, not after. They finish on schedule, every single day."</p>
+          <cite>— office manager</cite>
+        </div>
+        <div class="card card--quote">
+          <p class="card__quote">"We scheduled a deep clean before we moved in. It was done on time, and we walked into a home that was truly ready."</p>
+          <cite>— homeowner who recently moved</cite>
+        </div>
+      </div>
+      <p class="section__note"><em>Quotes are placeholders — swap in real client testimonials before publishing.</em></p>
+    </div>
+  </section>
+
+  <section class="section section--accent">
+    <div class="container">
+      <div class="cta">
+        <h2 class="cta__title">Ready for a clean you can count on?</h2>
+        <p class="cta__sub">Book your cleaning or request a quote today. We'll match you with a consistent cleaner, confirm the details, and show up on time.</p>
+        <a href="/book" class="btn btn--primary btn--large">Book your clean</a>
+        <a href="/services" class="btn btn--secondary btn--large">Prefer to plan it first? Request a quote</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
